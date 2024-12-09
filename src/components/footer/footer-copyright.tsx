@@ -13,11 +13,15 @@ interface FooterCopyrightProps {
 export const FooterCopyright = ({ companyName, developerLink }: FooterCopyrightProps) => (
   <div className="flex justify-normal flex-col gap-4 md:justify-between md:flex-row">
     <p className="text-xs text-white">
-      &copy; <span className="text-secondary-500 font-bold">{companyName}</span> {new Date().getFullYear()}
+      {new Date().getFullYear()} &copy; <span className="font-bold">{companyName}</span>
     </p>
     <p className="text-xs text-white">
       Desenvolvido por{" "}
-      <Link href={developerLink.href} target="blank" className="text-secondary-500">
+      <Link
+        href={developerLink.href}
+        target="blank"
+        className="text-secondary-500 font-bold hover:text-secondary-600 tracking-wide transition duration-200"
+      >
         {developerLink.name}
       </Link>
     </p>
