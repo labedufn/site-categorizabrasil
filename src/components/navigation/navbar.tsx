@@ -14,7 +14,7 @@ export function Navbar() {
     <>
       <NavOverlay isVisible={isOpen} onClose={close} />
       <header className="sticky top-0 w-full flex items-center h-24 shadow-sm z-40 bg-white/60 backdrop-filter backdrop-blur-xl">
-        <nav className="relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center">
+        <nav className="mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center">
           <Link href="/">
             <Logo.default className="w-28 h-28" />
           </Link>

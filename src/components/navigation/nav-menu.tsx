@@ -25,7 +25,7 @@ export function NavMenu({ isOpen }: NavMenuProps) {
   return (
     <div
       className={`
-        absolute top-full mt-2 md:mt-0 left-0 bg-white/60 backdrop-filter backdrop-blur-xl lg:backdrop-blur-none lg:bg-transparent shadow-sm md:shadow-none py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none w-full lg:top-0 lg:relative lg:w-max lg:flex lg:transition-none duration-300 ease-linear gap-x-6
+        absolute top-full md:mt-0 left-0 bg-white/60 backdrop-filter backdrop-blur-xl lg:backdrop-blur-none lg:bg-transparent shadow-sm md:shadow-none py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none w-full lg:top-0 lg:relative lg:w-max lg:flex lg:transition-none duration-300 ease-linear gap-x-6
         ${isOpen ? "visible opacity-100 translate-y-0" : "translate-y-10 opacity-0 invisible lg:visible lg:translate-y-0 lg:opacity-100"}
       `}
     >
