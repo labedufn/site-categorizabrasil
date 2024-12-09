@@ -8,7 +8,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Categoriza Brasil",
+  title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
   description: "",
 };
 
