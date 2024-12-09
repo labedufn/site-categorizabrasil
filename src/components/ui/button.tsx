@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "motion/react";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   children: React.ReactNode;
@@ -17,8 +21,14 @@ export const Button = ({ variant = "primary", children, className = "", ...props
   };
 
   return (
-    <button className={`${baseStyles} ${variantStyles[variant]} ${className}`} {...props}>
-      {children}
-    </button>
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 200, damping: 10 }}
+    >
+      <button className={`${baseStyles} ${variantStyles[variant]} ${className}`} {...props}>
+        {children}
+      </button>
+    </motion.div>
   );
 };

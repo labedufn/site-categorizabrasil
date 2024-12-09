@@ -22,9 +22,9 @@ export const Features = () => {
       description: "Melhorar o perfil sanitário dos estabelecimentos comerciais.",
       theme: {
         background: "bg-secondary-500",
-        icon: "text-secondary-800",
-        title: "text-secondary-800",
-        text: "text-secondary-800",
+        icon: "text-secondary-900",
+        title: "text-secondary-900",
+        text: "text-secondary-900",
       },
     },
     {
