@@ -38,7 +38,7 @@ export const SocialLinks = () => {
             href={social.href}
             rel="noreferrer"
             target="blank"
-            className="text-white tracking-wide transition duration-200 hover:text-gray-200"
+            className="text-white tracking-wide transition duration-200 hover:text-gray-300"
           >
             <span className="sr-only">{social.name}</span>
             {social.icon}

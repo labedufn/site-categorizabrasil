@@ -1,6 +1,7 @@
 import { Footer } from "@/components/footer/footer";
 import { Hero } from "@/components/hero/hero";
 import { Navbar } from "@/components/navigation/navbar";
+import { Software } from "@/components/sections/softwares";
 import { WhatsappFab } from "@/components/ui/whatsapp-fab";
 
 export default function Home() {
@@ -9,9 +10,7 @@ export default function Home() {
       <WhatsappFab />
       <Navbar />
       <Hero />
-      <div className="container mx-auto px-4 py-52">
-        <h2 className="text-2xl font-bold">Hello World!</h2>
-      </div>
+      <Software />
       <Footer />
     </>
   );

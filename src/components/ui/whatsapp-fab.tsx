@@ -7,7 +7,7 @@ import Link from "next/link";
 export const WhatsappFab = () => {
   return (
     <motion.div
-      className="fixed bottom-4 right-4 md:bottom-10 md:right-10 z-20 cursor-pointer"
+      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-20 cursor-pointer"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 200, damping: 10 }}
@@ -15,7 +15,7 @@ export const WhatsappFab = () => {
       <Link
         href="https://api.whatsapp.com/message/A553UPCS3K2MI1?autoload=1&app_absent=0"
         target="blank"
-        className="bg-green-500 rounded-full p-2 w-14 h-14 flex justify-center items-center shadow-sm"
+        className="bg-green-500 rounded-full p-2 w-14 h-14 flex justify-center items-center"
       >
         <Icon.whatsapp className="w-7 h-7 text-white" />
       </Link>

@@ -44,7 +44,7 @@ export function NavMenu({ isOpen }: NavMenuProps) {
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 200, damping: 10 }}
             >
-              <Icon.usFlag className="w-6 h-6 rounded-full" />
+              <Icon.usFlag className="w-6 h-6" />
               <span className="lg:hidden">English</span>
             </motion.div>
           </Link>
