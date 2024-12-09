@@ -7,7 +7,7 @@ import Link from "next/link";
 export const WhatsappFab = () => {
   return (
     <motion.div
-      className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-20 cursor-pointer"
+      className="fixed bottom-4 right-4 md:bottom-10 md:right-10 z-20 cursor-pointer"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 200, damping: 10 }}
