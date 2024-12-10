@@ -5,6 +5,7 @@ import { NavLink } from "./nav-link";
 import { Icon } from "../ui/icons";
 import { motion, AnimatePresence } from "motion/react";
 import { SocialLinks } from "../ui/social-links";
+import { usePathname } from "next/navigation";
 
 interface NavMenuProps {
   isOpen: boolean;
@@ -16,12 +17,14 @@ interface NavItem {
 }
 
 export function NavMenu({ isOpen }: NavMenuProps) {
+  const pathname = usePathname();
+
   const navItems: NavItem[] = [
-    { href: "#", label: "Início" },
-    { href: "#", label: "Sobre" },
-    { href: "#", label: "Notícias" },
-    { href: "#", label: "Artigos" },
-    { href: "#", label: "Georreferenciamento" },
+    { href: "/", label: "Início" },
+    { href: "/sobre", label: "Sobre" },
+    { href: "/noticias", label: "Notícias" },
+    { href: "/artigos", label: "Artigos" },
+    { href: "/georreferenciamento", label: "Georreferenciamento" },
   ];
 
   const menuContent = (
@@ -35,7 +38,9 @@ export function NavMenu({ isOpen }: NavMenuProps) {
       <ul className="flex flex-col lg:flex-row gap-6 lg:items-center text-primary font-medium lg:w-full lg:justify-center">
         {navItems.map((item) => (
           <li key={item.label}>
-            <NavLink href={item.href}>{item.label}</NavLink>
+            <NavLink href={item.href} isActive={pathname === item.href}>
+              {item.label}
+            </NavLink>
           </li>
         ))}
         <div className="h-px w-full lg:w-0.5 lg:h-full self-stretch bg-black/10" />
