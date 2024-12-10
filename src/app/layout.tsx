@@ -1,6 +1,7 @@
 import { Montserrat } from "next/font/google";
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import { CookieConsent } from "@/components/cookie-consent";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }

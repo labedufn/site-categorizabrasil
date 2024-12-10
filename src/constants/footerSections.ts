@@ -18,7 +18,7 @@ export const footerSections: FooterSection[] = [
   {
     title: "Softwares",
     links: [
-      { label: "Categoriza", href: "#" },
+      { label: "Categoriza Brasil", href: "#" },
       { label: "CSA - Cultura de Segurança dos Alimentos", href: "#" },
       { label: "RSA - Resiliência de Serviços de Alimentação", href: "#" },
     ],

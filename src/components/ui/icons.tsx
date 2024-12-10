@@ -1,4 +1,11 @@
-import { ChartNoAxesCombined, LucideIcon, LucideProps, MessageCircleWarning, UserRoundCheck } from "lucide-react";
+import {
+  ChartNoAxesCombined,
+  ChevronRight,
+  LucideIcon,
+  LucideProps,
+  MessageCircleWarning,
+  UserRoundCheck,
+} from "lucide-react";
 
 export type Icon = LucideIcon;
 
@@ -92,4 +99,5 @@ export const Icon = {
   explicacao: MessageCircleWarning,
   objetivo: ChartNoAxesCombined,
   quemPode: UserRoundCheck,
+  chevronRight: ChevronRight,
 };

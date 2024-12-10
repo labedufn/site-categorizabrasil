@@ -1,7 +1,7 @@
 "use client";
 
 import { footerSections } from "@/constants/footerSections";
-import { SocialLinks } from "@/components/footer/social-links";
+import { SocialLinks } from "@/components/ui/social-links";
 import { FooterSection } from "@/components/footer/footer-section";
 import { FooterCopyright } from "@/components/footer/footer-copyright";
 import { Logo } from "@/components/ui/logos";

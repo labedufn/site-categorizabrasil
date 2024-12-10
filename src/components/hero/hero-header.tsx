@@ -4,7 +4,7 @@ import { DecorativePattern } from "../ui/decorative-pattern";
 
 export const HeroHeader = () => (
   <div className="max-w-xl mb-10 md:mx-auto md:text-center md:mb-12">
-    <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-secondary-500 sm:text-4xl md:mx-auto">
+    <h2 className="max-w-lg mb-6 font-bold text-2xl tracking-tight text-secondary-500 sm:text-4xl md:mx-auto">
       <span className="relative inline-block">
         <DecorativePattern />
         <span className="relative">Categorização dos</span>
