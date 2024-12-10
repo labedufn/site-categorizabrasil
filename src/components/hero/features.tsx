@@ -1,5 +1,6 @@
 "use client";
 
+import { LayoutDefault } from "@/layouts/layout-default";
 import { Icon } from "../ui/icons";
 import { FeatureCard, FeatureCardProps } from "./feature-card";
 
@@ -41,12 +42,12 @@ export const Features = () => {
   ];
 
   return (
-    <div className="relative px-4">
-      <div className="relative grid mx-auto overflow-hidden rounded-2xl shadow md:grid-cols-3 max-w-screen-xl h-auto">
+    <LayoutDefault className="mx-auto">
+      <div className="grid  overflow-hidden rounded-2xl shadow md:grid-cols-3 max-w-screen-xl h-auto">
         {features.map((feature, index) => (
           <FeatureCard key={index} {...feature} />
         ))}
       </div>
-    </div>
+    </LayoutDefault>
   );
 };

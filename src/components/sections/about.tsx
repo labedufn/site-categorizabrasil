@@ -4,12 +4,13 @@ import sobreImg from "@/images/sobre.jpg";
 import { Button } from "../ui/button";
 import { DecorativePattern } from "../ui/decorative-pattern";
 import { Icon } from "../ui/icons";
+import { LayoutDefault } from "@/layouts/layout-default";
 
 export const About = () => {
   return (
     <>
       <section className="py-24">
-        <div className="max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5 flex flex-col md:flex-row gap-12">
+        <LayoutDefault className="mx-auto flex flex-col md:flex-row gap-12">
           <div className="flex md:flex-1 relative">
             <div className="absolute -left-[380px] top-20 h-full w-32 rotate-90 z-20 scale-150">
               <DecorativePattern />
@@ -37,7 +38,7 @@ export const About = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </LayoutDefault>
       </section>
     </>
   );

@@ -6,12 +6,13 @@ import { FooterSection } from "@/components/footer/footer-section";
 import { FooterCopyright } from "@/components/footer/footer-copyright";
 import { Logo } from "@/components/ui/logos";
 import Link from "next/link";
+import { LayoutDefault } from "@/layouts/layout-default";
 
 export function Footer() {
   return (
     <footer className="relative bg-[url('/background_footer.svg')] bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-primary/70" />
-      <div className="relative mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+      <LayoutDefault className="relative mx-auto space-y-8 py-16 lg:space-y-16 ">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/">
             <Logo.white className="w-32 h-32 sm:w-40 sm:h-40" />
@@ -32,7 +33,7 @@ export function Footer() {
             href: "https://github.com/mauricioprb",
           }}
         />
-      </div>
+      </LayoutDefault>
     </footer>
   );
 }
