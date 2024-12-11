@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import sobreImg from "@/images/sobre.jpg";
@@ -15,7 +17,6 @@ export const About = () => {
             <div className="absolute -left-[380px] top-20 h-full w-32 rotate-90 z-20 scale-150">
               <DecorativePattern />
             </div>
-
             <Image
               src={sobreImg}
               alt="Sobre nós"

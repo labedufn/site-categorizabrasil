@@ -6,5 +6,5 @@ interface LayoutDefaultProps {
 }
 
 export function LayoutDefault({ children, className = "" }: LayoutDefaultProps) {
-  return <div className={`md:max-w-screen-xl px-6 ${className}`}>{children}</div>;
+  return <div className={`max-w-screen-xl px-6 ${className}`}>{children}</div>;
 }
