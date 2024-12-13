@@ -6,6 +6,7 @@ import { Icon } from "../ui/icons";
 import { motion, AnimatePresence } from "motion/react";
 import { SocialLinks } from "../ui/social-links";
 import { usePathname } from "next/navigation";
+import { Tooltip } from "../ui/tooltip";
 
 interface NavMenuProps {
   isOpen: boolean;
@@ -52,8 +53,12 @@ export function NavMenu({ isOpen }: NavMenuProps) {
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 200, damping: 10 }}
             >
-              <Icon.usFlag className="w-6 h-6" />
-              <span className="lg:hidden">English</span>
+              <Tooltip content="English information" position="bottom">
+                <div className="flex gap-3">
+                  <Icon.usFlag className="w-6 h-6" />
+                  <span className="lg:hidden">English information</span>
+                </div>
+              </Tooltip>
             </motion.div>
           </Link>
         </li>
