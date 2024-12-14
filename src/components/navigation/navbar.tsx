@@ -26,7 +26,7 @@ export function Navbar() {
         <LayoutDefault className="mx-auto w-full">
           <nav className="flex gap-x-5 justify-between items-center">
             <Link href="/">
-              <Logo.default className="w-28 h-28" />
+              <Logo.default className="w-28 h-auto" />
             </Link>
             <NavMenu isOpen={isOpen} />
             <div className="flex items-center lg:hidden">

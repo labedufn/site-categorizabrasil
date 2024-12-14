@@ -13,7 +13,7 @@ interface FooterCopyrightProps {
 export const FooterCopyright = ({ companyName, developerLink }: FooterCopyrightProps) => (
   <div className="flex justify-normal flex-col gap-4 md:justify-between md:flex-row">
     <p className="text-xs text-white">
-      {new Date().getFullYear()} &copy; <span className="font-bold">{companyName}</span>
+      &copy; {new Date().getFullYear()} <span className="font-bold">{companyName}</span>
     </p>
     <p className="text-xs text-white">
       Desenvolvido por{" "}

@@ -15,7 +15,7 @@ export function Footer() {
       <LayoutDefault className="relative mx-auto space-y-8 py-16 lg:space-y-16 ">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/">
-            <Logo.white className="w-32 h-32 sm:w-40 sm:h-40" />
+            <Logo.white className="w-32 h-auto sm:w-40" />
           </Link>
           <SocialLinks />
         </div>
