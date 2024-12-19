@@ -34,7 +34,7 @@ export const About = () => {
             </p>
             <div className="flex">
               <Button variant="ghost">
-                <Link href="/sobre">Ler mais</Link>
+                <Link href="/sobre">Ler mais sobre</Link>
                 <Icon.chevronRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
