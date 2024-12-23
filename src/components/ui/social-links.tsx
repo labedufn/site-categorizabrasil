@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Icon } from "./icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchHomeActions } from "@/app/actions/homeActions";
 
 interface SocialLink {
   name: string;
@@ -16,23 +18,30 @@ interface SocialLinksProps {
 }
 
 export const SocialLinks = ({ iconColor = "text-white" }: SocialLinksProps) => {
-  const socialLinks: SocialLink[] = [
-    {
-      name: "Instagram",
-      href: "#",
-      icon: <Icon.instagram className={cn("w-6 h-6", iconColor)} />,
-    },
-    {
-      name: "WhatsApp",
-      href: "#",
-      icon: <Icon.whatsapp className={cn("w-6 h-6", iconColor)} />,
-    },
-    {
-      name: "YouTube",
-      href: "#",
-      icon: <Icon.youtube className={cn("w-6 h-6", iconColor)} />,
-    },
-  ];
+  const { data } = useQuery({
+    queryKey: ["HomeData"],
+    queryFn: fetchHomeActions,
+  });
+
+  const socialLinks: SocialLink[] = data
+    ? [
+        {
+          name: "Instagram",
+          href: "https://www.instagram.com/" + data.instagram,
+          icon: <Icon.instagram className={cn("w-6 h-6", iconColor)} />,
+        },
+        {
+          name: "WhatsApp",
+          href: data.whatsapp,
+          icon: <Icon.whatsapp className={cn("w-6 h-6", iconColor)} />,
+        },
+        {
+          name: "YouTube",
+          href: data.canal_youtube,
+          icon: <Icon.youtube className={cn("w-6 h-6", iconColor)} />,
+        },
+      ]
+    : [];
 
   return (
     <ul className="flex justify-start gap-5 sm:mt-0 sm:justify-end">

@@ -3,8 +3,15 @@
 import { motion } from "motion/react";
 import { Icon } from "./icons";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { fetchHomeActions } from "@/app/actions/homeActions";
 
 export const WhatsappFab = () => {
+  const { data } = useQuery({
+    queryKey: ["HomeData"],
+    queryFn: fetchHomeActions,
+  });
+
   return (
     <motion.div
       className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-20 cursor-pointer"
@@ -12,13 +19,15 @@ export const WhatsappFab = () => {
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 200, damping: 10 }}
     >
-      <Link
-        href="https://wa.me/message/A553UPCS3K2MI1"
-        target="blank"
-        className="bg-green-500 rounded-full p-2 w-14 h-14 flex justify-center items-center"
-      >
-        <Icon.whatsapp className="w-7 h-7 text-white" />
-      </Link>
+      {data?.whatsapp && (
+        <Link
+          href={data.whatsapp}
+          target="blank"
+          className="bg-green-500 rounded-full p-2 w-14 h-14 flex justify-center items-center"
+        >
+          <Icon.whatsapp className="w-7 h-7 text-white" />
+        </Link>
+      )}
     </motion.div>
   );
 };
