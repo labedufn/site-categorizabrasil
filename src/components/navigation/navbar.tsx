@@ -8,8 +8,9 @@ import { useNavigation } from "@/hooks/useNavigation";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { LayoutDefault } from "@/layouts/layout-default";
+import { SocialData } from "@/types/social-data";
 
-export function Navbar() {
+export function Navbar({ instagram, whatsapp, youtubeChannel }: SocialData) {
   const { isOpen, close, toggle } = useNavigation();
 
   return (
@@ -28,7 +29,7 @@ export function Navbar() {
             <Link href="/">
               <Logo.default className="w-28 h-auto" />
             </Link>
-            <NavMenu isOpen={isOpen} />
+            <NavMenu isOpen={isOpen} instagram={instagram} whatsapp={whatsapp} youtubeChannel={youtubeChannel} />
             <div className="flex items-center lg:hidden">
               <MobileMenuButton isOpen={isOpen} onClick={toggle} />
             </div>

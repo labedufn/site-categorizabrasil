@@ -7,8 +7,9 @@ import { FooterCopyright } from "@/components/footer/footer-copyright";
 import { Logo } from "@/components/ui/logos";
 import Link from "next/link";
 import { LayoutDefault } from "@/layouts/layout-default";
+import { SocialData } from "@/types/social-data";
 
-export function Footer() {
+export function Footer({ instagram, whatsapp, youtubeChannel }: SocialData) {
   return (
     <footer className="relative bg-[url('/background_footer.svg')] bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-primary/70" />
@@ -17,7 +18,7 @@ export function Footer() {
           <Link href="/">
             <Logo.white className="w-32 h-auto sm:w-40 mb-8 sm:mb-0" />
           </Link>
-          <SocialLinks />
+          <SocialLinks instagram={instagram} whatsapp={whatsapp} youtubeChannel={youtubeChannel} />
         </div>
 
         <div className="grid grid-cols-1 gap-8 border-t border-primary-400 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">

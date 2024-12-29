@@ -4,44 +4,30 @@ import Link from "next/link";
 import { Icon } from "./icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchHomeActions } from "@/app/actions/homeActions";
+import { SocialData } from "@/types/social-data";
 
-interface SocialLink {
-  name: string;
-  href: string;
-  icon: React.ReactElement;
-}
-
-interface SocialLinksProps {
+interface SocialLinksProps extends SocialData {
   iconColor?: string;
 }
 
-export const SocialLinks = ({ iconColor = "text-white" }: SocialLinksProps) => {
-  const { data } = useQuery({
-    queryKey: ["HomeData"],
-    queryFn: fetchHomeActions,
-  });
-
-  const socialLinks: SocialLink[] = data
-    ? [
-        {
-          name: "Instagram",
-          href: "https://www.instagram.com/" + data.instagram,
-          icon: <Icon.instagram className={cn("w-6 h-6", iconColor)} />,
-        },
-        {
-          name: "WhatsApp",
-          href: data.whatsapp,
-          icon: <Icon.whatsapp className={cn("w-6 h-6", iconColor)} />,
-        },
-        {
-          name: "YouTube",
-          href: data.canal_youtube,
-          icon: <Icon.youtube className={cn("w-6 h-6", iconColor)} />,
-        },
-      ]
-    : [];
+export const SocialLinks = ({ iconColor = "text-white", instagram, whatsapp, youtubeChannel }: SocialLinksProps) => {
+  const socialLinks = [
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/" + instagram,
+      icon: <Icon.instagram className={cn("w-6 h-6", iconColor)} />,
+    },
+    {
+      name: "WhatsApp",
+      href: whatsapp,
+      icon: <Icon.whatsapp className={cn("w-6 h-6", iconColor)} />,
+    },
+    {
+      name: "YouTube",
+      href: youtubeChannel,
+      icon: <Icon.youtube className={cn("w-6 h-6", iconColor)} />,
+    },
+  ];
 
   return (
     <ul className="flex justify-start gap-5 sm:mt-0 sm:justify-end">

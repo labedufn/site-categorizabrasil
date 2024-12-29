@@ -7,8 +7,9 @@ import { motion, AnimatePresence } from "motion/react";
 import { SocialLinks } from "../ui/social-links";
 import { usePathname } from "next/navigation";
 import { Tooltip } from "../ui/tooltip";
+import { SocialData } from "@/types/social-data";
 
-interface NavMenuProps {
+interface NavMenuProps extends SocialData {
   isOpen: boolean;
 }
 
@@ -17,7 +18,7 @@ interface NavItem {
   label: string;
 }
 
-export function NavMenu({ isOpen }: NavMenuProps) {
+export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenuProps) {
   const pathname = usePathname();
 
   const navItems: NavItem[] = [
@@ -64,7 +65,12 @@ export function NavMenu({ isOpen }: NavMenuProps) {
         </li>
         <div className="h-px w-full lg:w-0.5 lg:h-full self-stretch bg-black/10" />
         <li>
-          <SocialLinks iconColor="text-primary" />
+          <SocialLinks
+            iconColor="text-primary"
+            instagram={instagram}
+            whatsapp={whatsapp}
+            youtubeChannel={youtubeChannel}
+          />
         </li>
       </ul>
     </motion.div>
