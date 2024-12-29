@@ -24,7 +24,7 @@ export function CookieConsent() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-0 w-full bg-white/60 backdrop-filter backdrop-blur-xl z-30 border-t border-black/10"
+          className="fixed bottom-0 w-full bg-white/60 backdrop-filter backdrop-blur-xl z-50 border-t border-black/10"
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           exit={{ y: 100 }}
