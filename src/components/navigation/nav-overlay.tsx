@@ -18,7 +18,7 @@ export function NavOverlay({ isVisible, onClose }: NavOverlayProps) {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           aria-hidden={true}
           onClick={onClose}
-          className="fixed bg-white/40 backdrop-filter backdrop-blur-sm inset-0 z-30 lg:hidden"
+          className="fixed bg-white/40 backdrop-filter backdrop-blur-sm inset-0 z-40 lg:hidden"
         />
       )}
     </AnimatePresence>

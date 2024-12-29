@@ -5,6 +5,7 @@ interface HeaderTitleProps {
   mainTitle?: string;
   topTextColor?: string;
   mainTitleColor?: string;
+  className?: string;
 }
 
 export function HeaderTitle({
@@ -12,9 +13,10 @@ export function HeaderTitle({
   mainTitle = "Página",
   topTextColor = "text-gray-600",
   mainTitleColor = "text-primary",
+  className = "",
 }: HeaderTitleProps) {
   return (
-    <div className="text-center mb-12">
+    <div className={`text-center mb-12 ${className}`}>
       <p className={`text-sm md:text-base mb-1 ${topTextColor}`}>{topText}</p>
       <h1 className={`text-3xl md:text-4xl font-bold ${mainTitleColor}`}>{mainTitle}</h1>
     </div>

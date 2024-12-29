@@ -67,7 +67,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(({ logos, index, curren
       <AnimatePresence mode="wait">
         <motion.div
           key={`${index}-${currentIndex}`}
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center py-2"
           initial={{ y: "10%", opacity: 0, filter: "blur(8px)" }}
           animate={{
             y: "0%",

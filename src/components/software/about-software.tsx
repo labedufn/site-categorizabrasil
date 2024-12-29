@@ -18,7 +18,7 @@ interface AboutSoftwareProps {
 
 export function AboutSoftware({ logos, youtubeLink }: AboutSoftwareProps) {
   return (
-    <LayoutDefault className="mx-auto my-32 lg:relative">
+    <LayoutDefault className="mx-auto mt-24 md:mt-32 lg:relative">
       <div className="absolute hidden lg:block -left-[640px] top-5 h-full w-32 rotate-90 z-20 scale-150">
         <DecorativePattern />
       </div>
