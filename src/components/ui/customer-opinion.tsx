@@ -7,28 +7,28 @@ import { HeaderTitle } from "./header-title";
 
 const reviews = [
   {
-    name: "Jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
+    name: "Carlos",
+    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.",
   },
   {
-    name: "Jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
+    name: "Ana",
+    body: "Suspendisse potenti. Proin consectetur justo a tincidunt laoreet. Donec malesuada feugiat risus, a condimentum ipsum.",
   },
   {
-    name: "John",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "João",
+    body: "Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum, ligula eget feugiat pharetra, ante erat iaculis nibh.",
   },
   {
-    name: "Jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "Marina",
+    body: "Cras ultricies ligula sed magna dictum porta. Nulla quis lorem ut libero malesuada feugiat.",
   },
   {
-    name: "Jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "Lucas",
+    body: "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed.",
   },
   {
-    name: "James",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "Beatriz",
+    body: "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla quis lorem ut libero malesuada feugiat.",
   },
 ];
 
