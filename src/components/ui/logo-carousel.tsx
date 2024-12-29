@@ -22,15 +22,11 @@ const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
   const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
 
   shuffled.forEach((logo, index) => {
-    columns[index % columnCount].push(logo);
-  });
+    const columnIndex = index % columnCount;
+    const currentColumn = columns[columnIndex];
 
-  LogoColumn.displayName = "LogoColumn";
-
-  const maxLength = Math.max(...columns.map((col) => col.length));
-  columns.forEach((col) => {
-    while (col.length < maxLength) {
-      col.push(shuffled[Math.floor(Math.random() * shuffled.length)]);
+    if (currentColumn[currentColumn.length - 1]?.imgSrc !== logo.imgSrc) {
+      currentColumn.push(logo);
     }
   });
 
@@ -51,7 +47,11 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(({ logos, index, curren
   const adjustedTime = (currentTime + columnDelay) % (cycleInterval * logos.length);
   const currentIndex = Math.floor(adjustedTime / cycleInterval);
 
-  const currentLogo = logos[currentIndex];
+  const previousIndex = (currentIndex - 1 + logos.length) % logos.length;
+  const currentLogo =
+    logos[currentIndex].imgSrc === logos[previousIndex].imgSrc
+      ? logos[(currentIndex + 1) % logos.length]
+      : logos[currentIndex];
 
   return (
     <motion.div
@@ -105,6 +105,8 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(({ logos, index, curren
     </motion.div>
   );
 });
+
+LogoColumn.displayName = "LogoColumn";
 
 interface LogoCarouselProps {
   logos: Logo[];
