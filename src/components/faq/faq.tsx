@@ -50,7 +50,7 @@ export function Faq() {
             topText="FAQ"
             mainTitle="Perguntas Frequentes"
             mainTitleColor="text-secondary-900"
-            topTextColor="text-white"
+            topTextColor="text-secondary-100"
           />
           <Accordion type="single" collapsible className="w-full">
             {items.map((item) => (
