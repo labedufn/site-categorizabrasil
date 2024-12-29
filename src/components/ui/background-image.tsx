@@ -1,6 +1,17 @@
+import Image from "next/image";
+
 export const BackgroundImage = () => (
   <>
-    <div className="absolute inset-0 w-full h-full bg-[url('/background_hero.png')] bg-cover bg-center bg-fixed -z-10" />
+    <div className="absolute inset-0 w-full h-full -z-10">
+      <Image
+        src="/background_hero.png"
+        alt="Background Hero"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        priority
+      />
+    </div>
     <div
       className="absolute inset-x-0 bottom-0 h-60"
       style={{

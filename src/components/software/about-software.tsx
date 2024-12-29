@@ -1,30 +1,26 @@
 "use client";
 
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
 import { LayoutDefault } from "@/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { HeroVideoDialog } from "../ui/hero-video-dialog";
 import { FeaturesSection } from "../ui/feature-section";
 import { DecorativePattern } from "../ui/decorative-pattern";
 import { LogoCarousel } from "../ui/logo-carousel";
-import { fetchHomeActions } from "@/app/actions/homeActions";
 import { getImageUrl } from "@/lib/getImageUrl";
 
-export function AboutSoftware() {
-  const { data, error } = useQuery({
-    queryKey: ["HomeData"],
-    queryFn: fetchHomeActions,
-  });
+interface AboutSoftwareProps {
+  data?: {
+    link_video_youtube: string;
+    logos_estabelecimentos?: { directus_files_id: string }[];
+  };
+  error?: string;
+}
 
+export function AboutSoftware({ data }: AboutSoftwareProps) {
   const logos =
     data?.logos_estabelecimentos?.map((logo) => ({
       imgSrc: getImageUrl(logo.directus_files_id) || "",
     })) ?? [];
-
-  if (error) {
-    return <div className="text-center text-red-500">Erro ao carregar os dados.</div>;
-  }
 
   return (
     <LayoutDefault className="mx-auto my-32 lg:relative">

@@ -1,5 +1,3 @@
-"use client";
-
 import { Features } from "@/components/hero/features";
 import { HeroHeader } from "@/components/hero/hero-header";
 import { BackgroundImage } from "@/components/ui/background-image";
