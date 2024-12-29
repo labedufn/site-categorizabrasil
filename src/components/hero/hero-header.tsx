@@ -1,20 +1,19 @@
 "use client";
 
 import { DecorativePattern } from "../ui/decorative-pattern";
-import { GradualSpacing } from "../ui/gradual-spacing";
 
 export const HeroHeader = () => (
   <div className="max-w-xl mb-10 md:mx-auto md:text-center md:mb-12">
     <h2 className="max-w-lg mb-6 font-bold text-2xl tracking-tight text-secondary-500 sm:text-4xl md:mx-auto">
       <span className="relative inline-block">
         <DecorativePattern />
-        <GradualSpacing text="Categorização dos" className="relative" />
+        <span className="relative">Categorização dos</span>
       </span>{" "}
-      <GradualSpacing text="Serviços de Alimentação" className="text-primary-500 whitespace-nowrap" />
+      <span className="text-primary-500 whitespace-nowrap">Serviços de Alimentação</span>
     </h2>
-    <GradualSpacing
-      className="text-base text-gray-600 md:text-lg md:max-w-screen-sm"
-      text="Um sistema de classificação que garante a qualidade sanitária dos estabelecimentos alimentícios."
-    />
+    <p className="text-base text-gray-600 md:text-lg md:max-w-screen-sm">
+      Elevando o padrão dos serviços alimentares através da inovação, pesquisa e compromisso com a excelência em
+      qualidade.
+    </p>
   </div>
 );

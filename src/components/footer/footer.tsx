@@ -26,13 +26,7 @@ export function Footer() {
           ))}
         </div>
 
-        <FooterCopyright
-          companyName="Categoriza Brasil"
-          developerLink={{
-            name: "@mauricioprb",
-            href: "https://github.com/mauricioprb",
-          }}
-        />
+        <FooterCopyright companyName="Categoriza Brasil" />
       </LayoutDefault>
     </footer>
   );
