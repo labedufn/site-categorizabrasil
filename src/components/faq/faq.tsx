@@ -44,7 +44,6 @@ export function Faq() {
         }}
       >
         <div className="absolute inset-0 bg-secondary opacity-90 z-0" />
-
         <LayoutDefault className="relative z-10 mx-auto">
           <HeaderTitle
             topText="FAQ"

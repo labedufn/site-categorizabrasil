@@ -10,6 +10,11 @@ import { Faq } from "@/components/faq/faq";
 export default async function Home() {
   const homePageData = await getHomePageAction();
 
+  const reviews = homePageData.opinioesConsumidores.map((opiniao) => ({
+    name: opiniao.nome,
+    body: opiniao.descricao,
+  }));
+
   return (
     <>
       <WhatsappFab />
@@ -21,7 +26,7 @@ export default async function Home() {
       <Hero />
       <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
       <Faq />
-      <CustomerOpinion />
+      <CustomerOpinion reviews={reviews} />
       <Footer
         instagram={homePageData.instagram}
         whatsapp={homePageData.whatsapp}

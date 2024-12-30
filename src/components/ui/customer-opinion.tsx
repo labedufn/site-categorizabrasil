@@ -1,39 +1,18 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Marquee from "./marquee";
+import { Marquee } from "./marquee";
 import Image from "next/image";
 import { HeaderTitle } from "./header-title";
 
-const reviews = [
-  {
-    name: "Carlos",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.",
-  },
-  {
-    name: "Ana",
-    body: "Suspendisse potenti. Proin consectetur justo a tincidunt laoreet. Donec malesuada feugiat risus, a condimentum ipsum.",
-  },
-  {
-    name: "João",
-    body: "Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum, ligula eget feugiat pharetra, ante erat iaculis nibh.",
-  },
-  {
-    name: "Marina",
-    body: "Cras ultricies ligula sed magna dictum porta. Nulla quis lorem ut libero malesuada feugiat.",
-  },
-  {
-    name: "Lucas",
-    body: "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed.",
-  },
-  {
-    name: "Beatriz",
-    body: "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla quis lorem ut libero malesuada feugiat.",
-  },
-];
+type Review = {
+  name: string;
+  body: string;
+};
 
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
+type CustomerOpinionProps = {
+  reviews: Review[];
+};
 
 const ReviewCard = ({ name, body }: { name: string; body: string }) => {
   return (
@@ -53,7 +32,10 @@ const ReviewCard = ({ name, body }: { name: string; body: string }) => {
   );
 };
 
-export function CustomerOpinion() {
+export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
+  const firstRow = reviews.slice(0, reviews.length / 2);
+  const secondRow = reviews.slice(reviews.length / 2);
+
   return (
     <div className="mt-24 md:mt-32">
       <HeaderTitle topText="Depoimentos" mainTitle="Opinião do Consumidor" className="mb-0 px-6 sm:px-0" />
