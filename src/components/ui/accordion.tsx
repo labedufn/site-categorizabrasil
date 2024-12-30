@@ -1,54 +1,66 @@
 "use client";
 
-import * as React from "react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
+import { motion } from "motion/react";
+import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+export const Accordion: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
+  return <dl className={cn("flex flex-col items-start justify-start", className)}>{children}</dl>;
+};
 
-const Accordion = AccordionPrimitive.Root;
+const TabContext = createContext<{
+  isOpen: boolean;
+  setOpenState: Dispatch<SetStateAction<boolean>>;
+} | null>(null);
 
-const AccordionItem = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item ref={ref} className={cn("border-b border-secondary-300", className)} {...props} />
-));
-AccordionItem.displayName = "AccordionItem";
+export const Tab: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
+  const [isOpen, setOpenState] = useState(false);
 
-const AccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-        className,
-      )}
-      {...props}
+  return (
+    <TabContext.Provider value={{ isOpen, setOpenState }}>
+      <div className={cn("bg-bg w-full p-6", className)}>{children}</div>
+    </TabContext.Provider>
+  );
+};
+
+export const Trigger: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
+  const { setOpenState, isOpen } = useContext(TabContext)!;
+
+  return (
+    <dt>
+      <button
+        aria-expanded={isOpen}
+        onClick={() => setOpenState((e) => !e)}
+        className={cn("flex w-full items-center justify-between gap-2 text-start text-xl font-normal", className)}
+      >
+        <span>{children}</span>
+        <ChevronDown
+          size={"20"}
+          className={twMerge(isOpen ? "rotate-180" : "rotate-0", "min-w-[20px] transition-all duration-300")}
+        />
+      </button>
+    </dt>
+  );
+};
+
+export const Content: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
+  const { isOpen } = useContext(TabContext)!;
+  return (
+    <motion.dd
+      layout
+      aria-hidden={isOpen}
+      className={cn("overflow-hidden text-secondary", className)}
+      initial={{ height: 0, pointerEvents: "none" }}
+      animate={
+        isOpen
+          ? { height: "fit-content", pointerEvents: "auto", marginTop: "1rem" }
+          : { height: 0, pointerEvents: "none" }
+      }
+      transition={{ duration: 0.2 }}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-));
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-
-const AccordionContent = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    {...props}
-  >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
-));
-
-AccordionContent.displayName = AccordionPrimitive.Content.displayName;
-
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+    </motion.dd>
+  );
+};

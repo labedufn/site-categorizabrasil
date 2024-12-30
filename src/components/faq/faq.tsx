@@ -1,8 +1,8 @@
 "use client";
 
 import { LayoutDefault } from "@/layouts/layout-default";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HeaderTitle } from "../ui/header-title";
+import { Accordion, Content, Tab, Trigger } from "../ui/accordion";
 
 const items = [
   {
@@ -33,38 +33,34 @@ const items = [
 
 export function Faq() {
   return (
-    <>
-      <div
-        className="relative py-24 mt-24 md:mt-32"
-        style={{
-          backgroundImage: "url('/background_faq.jpg')",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-secondary opacity-90 z-0" />
-        <LayoutDefault className="relative z-10 mx-auto">
-          <HeaderTitle
-            topText="FAQ"
-            mainTitle="Perguntas Frequentes"
-            mainTitleColor="text-secondary-900"
-            topTextColor="text-secondary-100"
-          />
-          <Accordion type="single" collapsible className="w-full">
-            {items.map((item) => (
-              <AccordionItem value={item.id} key={item.id} className="py-2">
-                <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline">
-                  <span className="flex items-center gap-3 text-secondary-900 font-bold">
-                    <span>{item.title}</span>
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="pb-2 ps-7 text-secondary-900">{item.content}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </LayoutDefault>
-      </div>
-    </>
+    <div
+      className="relative py-24 mt-24 md:mt-32"
+      style={{
+        backgroundImage: "url('/background_faq.jpg')",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-secondary opacity-90 z-0" />
+      <LayoutDefault className="relative z-10 mx-auto">
+        <HeaderTitle
+          topText="FAQ"
+          mainTitle="Perguntas Frequentes"
+          mainTitleColor="text-secondary-900"
+          topTextColor="text-secondary-100"
+        />
+        <Accordion className="w-full">
+          {items.map((item) => (
+            <Tab key={item.id} className="border-b border-secondary-800/30">
+              <Trigger className="text-[18px]">
+                <span className="flex items-center gap-3 text-secondary-900 font-bold">{item.title}</span>
+              </Trigger>
+              <Content className="text-secondary-900">{item.content}</Content>
+            </Tab>
+          ))}
+        </Accordion>
+      </LayoutDefault>
+    </div>
   );
 }
