@@ -36,7 +36,7 @@ export function Faq() {
     <div
       className="relative py-24 mt-24 md:mt-32"
       style={{
-        backgroundImage: "url('/background_faq.jpg')",
+        backgroundImage: "url('/background_faq.webp')",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundPosition: "center",

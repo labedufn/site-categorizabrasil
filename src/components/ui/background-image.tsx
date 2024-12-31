@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 export const BackgroundImage = () => (
   <>
     <motion.div
-      className="absolute inset-0 w-full h-full bg-[url('/background_hero.png')] bg-cover bg-center bg-fixed -z-10"
+      className="absolute inset-0 w-full h-full bg-[url('/background_hero.webp')] bg-cover bg-center bg-fixed -z-10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

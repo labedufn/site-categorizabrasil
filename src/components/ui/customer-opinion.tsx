@@ -41,7 +41,7 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
       <HeaderTitle topText="Depoimentos" mainTitle="Opinião do Consumidor" className="mb-0 px-6 sm:px-0" />
       <div className="relative m-auto overflow-hidden">
         <Image
-          src="/background_testimonial.jpg"
+          src="/background_testimonial.webp"
           fill
           alt="Background"
           className="object-cover object-center"
