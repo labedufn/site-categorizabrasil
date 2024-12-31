@@ -2,6 +2,7 @@ import { Montserrat } from "next/font/google";
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import { CookieConsent } from "@/components/cookie-consent";
+import Head from "next/head";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -20,6 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <Head>
+        <link rel="preconnect" href="https://painel.categorizabrasil.com.br" crossOrigin="anonymous" />
+      </Head>
+
       <body className={montserrat.className}>
         {children}
         <CookieConsent />

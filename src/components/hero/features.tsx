@@ -43,7 +43,7 @@ export const Features = () => {
 
   return (
     <LayoutDefault className="mx-auto">
-      <div className="grid  overflow-hidden rounded-2xl shadow md:grid-cols-3 max-w-screen-xl h-auto">
+      <div className="grid overflow-hidden rounded-2xl shadow md:grid-cols-3 max-w-screen-xl h-auto">
         {features.map((feature, index) => (
           <FeatureCard key={index} {...feature} />
         ))}

@@ -4,7 +4,6 @@ import { LayoutDefault } from "@/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { HeroVideoDialog } from "../ui/hero-video-dialog";
 import { FeaturesSection } from "../ui/feature-section";
-import { DecorativePattern } from "../ui/decorative-pattern";
 import { LogoCarousel } from "../ui/logo-carousel";
 
 interface Logo {
@@ -19,9 +18,6 @@ interface AboutSoftwareProps {
 export function AboutSoftware({ logos, youtubeLink }: AboutSoftwareProps) {
   return (
     <LayoutDefault className="mx-auto mt-24 md:mt-32 lg:relative">
-      <div className="absolute hidden lg:block -left-[640px] top-5 h-full w-32 rotate-90 z-20 scale-150">
-        <DecorativePattern />
-      </div>
       <HeaderTitle topText="Software" mainTitle="Categoriza Brasil" />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] items-center gap-8">
