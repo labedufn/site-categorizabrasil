@@ -40,29 +40,47 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
     <div className="mt-24 md:mt-32">
       <HeaderTitle topText="Depoimentos" mainTitle="Opinião do Consumidor" className="mb-0 px-6 sm:px-0" />
       <div className="relative m-auto overflow-hidden">
-        <Image
-          src="/background_testimonial.webp"
-          fill
-          alt="Background"
-          className="object-cover object-center"
-          priority
-        />
-        <Image src="/dot.svg" fill alt="Dots Overlay" className="absolute z-10 top-0 object-cover" priority />
-        <div className="absolute inset-0 bg-white opacity-70 pointer-events-none z-10" />
-        <div className="relative z-30 pb-32 pt-12">
-          <Marquee pauseOnHover className="[--duration:20s]">
-            {firstRow.map((review, index) => (
-              <ReviewCard key={index} {...review} />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:20s]">
-            {secondRow.map((review, index) => (
-              <ReviewCard key={index} {...review} />
-            ))}
-          </Marquee>
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            clipPath: "inset(0 0 0 0)",
+          }}
+        >
+          <div
+            style={{
+              position: "fixed",
+              height: "100%",
+              width: "100%",
+              left: "0",
+              top: "0",
+            }}
+          >
+            <Image
+              src="/background_testimonial.webp"
+              fill
+              alt="Background"
+              className="object-cover object-center"
+              priority
+            />
+          </div>
+          <Image src="/dot.svg" fill alt="Dots Overlay" className="absolute z-10 top-0 object-cover" priority />
+          <div className="absolute inset-0 bg-white opacity-70 pointer-events-none z-10" />
+          <div className="relative z-30 pb-32 pt-12">
+            <Marquee pauseOnHover className="[--duration:20s]">
+              {firstRow.map((review, index) => (
+                <ReviewCard key={index} {...review} />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover className="[--duration:20s]">
+              {secondRow.map((review, index) => (
+                <ReviewCard key={index} {...review} />
+              ))}
+            </Marquee>
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white z-30"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white z-30"></div>
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white z-30"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white z-30"></div>
       </div>
     </div>
   );
