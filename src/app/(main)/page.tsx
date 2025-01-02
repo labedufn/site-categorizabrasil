@@ -7,6 +7,8 @@ import { getHomePageAction } from "./actions";
 import { CustomerOpinion } from "@/components/ui/customer-opinion";
 import { Faq } from "@/components/faq/faq";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const homePageData = await getHomePageAction();
 

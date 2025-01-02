@@ -10,6 +10,28 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/assets/:path*.svg",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "image/svg+xml; charset=utf-8",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
