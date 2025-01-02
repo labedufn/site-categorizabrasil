@@ -64,7 +64,7 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
               priority
             />
           </div>
-          <Image src="/dot.svg" fill alt="Dots Overlay" className="absolute z-10 top-0 object-cover" priority />
+          <Image src="/dot.webp" fill alt="Dots Overlay" className="absolute z-10 top-0 object-cover" priority />
           <div className="absolute inset-0 bg-white opacity-70 pointer-events-none z-10" />
           <div className="relative z-30 pb-32 pt-12">
             <Marquee pauseOnHover className="[--duration:20s]">
