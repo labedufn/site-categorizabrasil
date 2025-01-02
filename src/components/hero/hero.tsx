@@ -21,7 +21,7 @@ export const Hero = () => {
           top: "0",
         }}
       >
-        <Image src="/background_hero.png" fill objectFit="cover" sizes="100vw" alt="Background" priority unoptimized />
+        <Image src="/background_hero.webp" fill objectFit="cover" sizes="100vw" alt="Background" priority unoptimized />
       </div>
 
       <div
