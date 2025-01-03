@@ -50,7 +50,7 @@ export function Faq() {
           top: "0",
         }}
       >
-        <Image src="/background_faq.webp" layout="fill" objectFit="cover" sizes="100vw" alt="Background" />
+        <Image src="/background_faq.webp" fill sizes="100vw" alt="Background FAQ" className="object-cover" />
       </div>
 
       <div className="absolute inset-0 bg-secondary opacity-90 z-0" />

@@ -1,6 +1,6 @@
 import { Features } from "@/components/hero/features";
 import { HeroHeader } from "@/components/hero/hero-header";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button-custom";
 import Image from "next/image";
 
 export const Hero = () => {
@@ -21,7 +21,15 @@ export const Hero = () => {
           top: "0",
         }}
       >
-        <Image src="/background_hero.webp" fill objectFit="cover" sizes="100vw" alt="Background" priority unoptimized />
+        <Image
+          src="/background_hero.webp"
+          fill
+          sizes="100vw"
+          alt="Background"
+          priority
+          unoptimized
+          className="object-cover"
+        />
       </div>
 
       <div
@@ -34,7 +42,7 @@ export const Hero = () => {
       <div className="relative z-10 pb-1">
         <div className="py-16 mx-auto max-w-screen-xl p-6 lg:p-0 lg:py-20">
           <div className="flex md:justify-center mb-4 z-10">
-            <Image src="/selos.svg" alt="Selos" width={120} height={120} priority />
+            <Image src="/selos.svg" alt="Selos" width={120} height={120} />
           </div>
           <HeroHeader />
           <div className="flex items-center sm:justify-center">
