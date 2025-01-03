@@ -20,10 +20,10 @@ export function GeoMap() {
 
   return (
     <>
-      <LayoutDefault className="mx-auto mt-32">
+      <LayoutDefault className="lg:max-w-screen-xl max-w-none m-auto px-0 mt-32">
         <HeaderTitle topText="Estabelecimentos" mainTitle="Geolocalizados" />
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-4 lg:gap-0 items-center">
-          <div className="flex flex-col gap-4">
+        <div className="grid lg:grid-cols-[1fr_2fr] items-center">
+          <div className="flex flex-col gap-4 mb-8 lg:mb-0 pl-6 lg:pl-0">
             <div className="bg-[#efc33a] rounded-l-full inline-flex items-center">
               <div className="inline-flex gap-8 items-center">
                 <Image
@@ -69,7 +69,7 @@ export function GeoMap() {
               </div>
             </div>
           </div>
-          <div className="h-[400px] lg:h-[600px]">
+          <div className="h-[400px] lg:h-[600px] px-6 lg:p-0">
             <Map centerLat={-29.756} centerLng={-53.768} zoom={8} markers={markers} />
           </div>
         </div>
