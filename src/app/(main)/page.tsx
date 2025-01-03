@@ -6,6 +6,7 @@ import { WhatsappFab } from "@/components/ui/whatsapp-fab";
 import { getHomePageAction } from "./actions";
 import { CustomerOpinion } from "@/components/ui/customer-opinion";
 import { Faq } from "@/components/faq/faq";
+import { GeoMap } from "@/components/ui/geo-map";
 
 export const revalidate = 60;
 
@@ -28,6 +29,7 @@ export default async function Home() {
       <Hero />
       <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
       <Faq />
+      <GeoMap />
       <CustomerOpinion reviews={reviews} />
       <Footer
         instagram={homePageData.instagram}

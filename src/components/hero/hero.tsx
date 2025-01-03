@@ -1,6 +1,6 @@
 import { Features } from "@/components/hero/features";
 import { HeroHeader } from "@/components/hero/hero-header";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button-custom";
 import Image from "next/image";
 
 export const Hero = () => {
