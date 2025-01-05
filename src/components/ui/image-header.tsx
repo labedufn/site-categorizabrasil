@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { LayoutDefault } from "@/layouts/layout-default";
+import { motion } from "motion/react";
 
 interface ImageHeaderProps {
   src: string;
@@ -19,7 +19,11 @@ export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
         clipPath: "inset(0 0 0 0)",
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1.3, ease: "easeInOut" }}
         style={{
           position: "fixed",
           height: "100%",
@@ -29,7 +33,7 @@ export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
         }}
       >
         <Image src={src} fill sizes="100vw" alt={title} className="object-cover grayscale opacity-20" />
-      </div>
+      </motion.div>
       <div className="absolute inset-0 bg-primary z-0 mix-blend-multiply" />
 
       <LayoutDefault className="relative z-10 py-24 sm:py-40 mx-auto text-center">

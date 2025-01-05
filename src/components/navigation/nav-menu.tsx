@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { NavLink } from "./nav-link";
 import { Icon } from "../ui/icons";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SocialLinks } from "../ui/social-links";
 import { usePathname } from "next/navigation";
 import { Tooltip } from "../ui/tooltip";
 import { SocialData } from "@/types/social-data";
+import { useMediaQuery } from "react-responsive";
 
 interface NavMenuProps extends SocialData {
   isOpen: boolean;
@@ -21,20 +22,22 @@ interface NavItem {
 export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenuProps) {
   const pathname = usePathname();
 
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
+
   const navItems: NavItem[] = [
     { href: "/", label: "Início" },
     { href: "/sobre", label: "Sobre" },
     { href: "/noticias", label: "Notícias" },
-    { href: "/artigos", label: "Artigos" },
+    { href: "/publicacoes", label: "Publicações" },
     { href: "/georreferenciamento", label: "Georreferenciamento" },
   ];
 
   const menuContent = (
     <motion.div
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -20, opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      initial={isMobile ? { y: -20, opacity: 0 } : false}
+      animate={isMobile ? { y: 0, opacity: 1 } : false}
+      exit={isMobile ? { y: -20, opacity: 0 } : undefined}
+      transition={isMobile ? { duration: 0.3, ease: "easeOut" } : undefined}
       className="absolute top-full md:mt-0 left-0 bg-white lg:bg-transparent shadow-sm md:shadow-none py-8 lg:py-0 px-6 lg:px-0 lg:border-none w-full lg:top-0 lg:relative lg:w-max lg:flex"
     >
       <ul className="flex flex-col lg:flex-row gap-6 lg:items-center text-primary font-medium lg:w-full lg:justify-center">
@@ -50,9 +53,9 @@ export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenu
           <Link href="#">
             <motion.div
               className="flex items-center gap-4"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              whileHover={isMobile ? { scale: 1.1 } : undefined}
+              whileTap={isMobile ? { scale: 0.9 } : undefined}
+              transition={isMobile ? { type: "spring", stiffness: 200, damping: 10 } : undefined}
             >
               <Tooltip content="English information" position="bottom">
                 <div className="flex gap-3">
