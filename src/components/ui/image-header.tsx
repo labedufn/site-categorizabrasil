@@ -1,0 +1,41 @@
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import { LayoutDefault } from "@/layouts/layout-default";
+
+interface ImageHeaderProps {
+  src: string;
+  title: string;
+  subtitle?: string;
+}
+
+export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        clipPath: "inset(0 0 0 0)",
+      }}
+    >
+      <div
+        style={{
+          position: "fixed",
+          height: "100%",
+          width: "100%",
+          left: "0",
+          top: "0",
+        }}
+      >
+        <Image src={src} fill sizes="100vw" alt={title} className="object-cover grayscale opacity-20" />
+      </div>
+      <div className="absolute inset-0 bg-primary z-0 mix-blend-multiply" />
+
+      <LayoutDefault className="relative z-10 py-24 sm:py-40 mx-auto text-center">
+        <h1 className="text-3xl sm:text-5xl font-bold text-white">{title}</h1>
+        {subtitle && <p className="text-lg leading-5 sm:text-xl mt-3 font-medium text-primary-200">{subtitle}</p>}
+      </LayoutDefault>
+    </div>
+  );
+}

@@ -1,6 +1,5 @@
 "use client";
 
-import { LayoutDefault } from "@/layouts/layout-default";
 import { Map } from "./map";
 import { HeaderTitle } from "./header-title";
 import Image from "next/image";
