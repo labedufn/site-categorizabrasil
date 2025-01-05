@@ -1,6 +1,9 @@
+"use client";
+
 import { Features } from "@/components/hero/features";
 import { HeroHeader } from "@/components/hero/hero-header";
 import { Button } from "@/components/ui/button-custom";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 export const Hero = () => {
@@ -12,7 +15,11 @@ export const Hero = () => {
         clipPath: "inset(0 0 0 0)",
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
         style={{
           position: "fixed",
           height: "100%",
@@ -30,7 +37,7 @@ export const Hero = () => {
           unoptimized
           className="object-cover"
         />
-      </div>
+      </motion.div>
 
       <div
         className="absolute inset-x-0 bottom-0 h-60"

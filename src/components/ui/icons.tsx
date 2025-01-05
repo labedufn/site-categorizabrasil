@@ -1,9 +1,11 @@
 import {
   ChartNoAxesCombined,
+  ChevronLeft,
   ChevronRight,
   LucideIcon,
   LucideProps,
   MessageCircleWarning,
+  Search,
   UserRoundCheck,
 } from "lucide-react";
 
@@ -100,4 +102,6 @@ export const Icon = {
   objetivo: ChartNoAxesCombined,
   quemPode: UserRoundCheck,
   chevronRight: ChevronRight,
+  chevronLeft: ChevronLeft,
+  search: Search,
 };

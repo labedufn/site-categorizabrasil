@@ -4,6 +4,7 @@ import { LayoutDefault } from "@/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { Accordion, Content, Tab, Trigger } from "../ui/accordion";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 const items = [
   {
@@ -41,7 +42,11 @@ export function Faq() {
         clipPath: "inset(0 0 0 0)",
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1.3, ease: "easeInOut" }}
         style={{
           position: "fixed",
           height: "100%",
@@ -50,10 +55,10 @@ export function Faq() {
           top: "0",
         }}
       >
-        <Image src="/background_faq.webp" fill sizes="100vw" alt="Background FAQ" className="object-cover" />
-      </div>
+        <Image src="/background_faq.webp" fill sizes="100vw" alt="Background FAQ" className="object-cover opacity-15" />
+      </motion.div>
 
-      <div className="absolute inset-0 bg-secondary opacity-90 z-0" />
+      <div className="absolute inset-0 bg-secondary z-0 mix-blend-multiply" />
 
       <div className="relative z-10 py-24 mt-24 md:mt-32">
         <LayoutDefault className="mx-auto">

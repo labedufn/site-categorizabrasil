@@ -1,6 +1,4 @@
-import { Footer } from "@/components/footer/footer";
 import { Hero } from "@/components/hero/hero";
-import { Navbar } from "@/components/navigation/navbar";
 import { AboutSoftware } from "@/components/software/about-software";
 import { WhatsappFab } from "@/components/ui/whatsapp-fab";
 import { getHomePageAction } from "./actions";
@@ -21,21 +19,11 @@ export default async function Home() {
   return (
     <>
       <WhatsappFab />
-      <Navbar
-        instagram={homePageData.instagram}
-        whatsapp={homePageData.whatsapp}
-        youtubeChannel={homePageData.youtubeChannel}
-      />
       <Hero />
       <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
       <Faq />
       <GeoMap />
       <CustomerOpinion reviews={reviews} />
-      <Footer
-        instagram={homePageData.instagram}
-        whatsapp={homePageData.whatsapp}
-        youtubeChannel={homePageData.youtubeChannel}
-      />
     </>
   );
 }

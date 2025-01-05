@@ -26,7 +26,7 @@ export const ComboBox: React.FC<ComboBoxProps> = ({ options, placeholder, onChan
   return (
     <div className="relative w-full">
       <div
-        className="flex items-center justify-between border rounded-lg px-3 h-11 py-2 cursor-pointer bg-white"
+        className="flex items-center justify-between border rounded-lg px-3 h-12 py-2 cursor-pointer bg-white"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-2 w-full">

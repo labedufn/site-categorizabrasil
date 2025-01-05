@@ -13,6 +13,7 @@ interface ImageHeaderProps {
 export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
   return (
     <div
+      className="mb-24"
       style={{
         position: "relative",
         width: "100%",
@@ -38,7 +39,7 @@ export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
 
       <LayoutDefault className="relative z-10 py-24 sm:py-40 mx-auto text-center">
         <h1 className="text-3xl sm:text-5xl font-bold text-white">{title}</h1>
-        {subtitle && <p className="text-lg leading-5 sm:text-xl mt-3 font-medium text-primary-200">{subtitle}</p>}
+        {subtitle && <p className="text-base leading-5 sm:text-xl mt-3 font-medium text-primary-200">{subtitle}</p>}
       </LayoutDefault>
     </div>
   );
