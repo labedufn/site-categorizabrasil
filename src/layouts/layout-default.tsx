@@ -1,3 +1,5 @@
+"use client";
+
 interface LayoutDefaultProps {
   children: React.ReactNode;
   className?: string;
