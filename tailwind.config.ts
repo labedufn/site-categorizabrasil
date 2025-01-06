@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -66,7 +67,30 @@ export default {
         marquee: "marquee var(--duration) infinite linear",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
+      typography: (theme: (key: string) => string | number | undefined) => ({
+        DEFAULT: {
+          css: {
+            h1: { color: theme("colors.primary.DEFAULT") },
+            h2: { color: theme("colors.primary.DEFAULT") },
+            h3: { color: theme("colors.primary.DEFAULT") },
+            h4: { color: theme("colors.primary.DEFAULT") },
+            h5: { color: theme("colors.primary.DEFAULT") },
+            h6: { color: theme("colors.primary.DEFAULT") },
+            strong: { color: theme("colors.gray.700") },
+            p: { color: theme("colors.gray.600") },
+            li: { color: theme("colors.gray.600") },
+            a: {
+              color: theme("colors.secondary.600"),
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            },
+            img: {
+              borderRadius: "1rem",
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [typography],
 } satisfies Config;

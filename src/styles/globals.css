@@ -3,5 +3,38 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --radius: 0.5rem}
+    --radius: 0.5rem;
+    --radius-xl: 0.75rem;
+  }
+}
+
+div {
+  line-height: 1.6;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+pre {
+  background-color: #f6f8fa;
+  padding: 1em;
+  overflow-x: auto;
+}
+
+code {
+  font-family: "Courier New", Courier, monospace;
 }

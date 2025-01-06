@@ -22,7 +22,7 @@ export function NewsCard({ src, title, date, url }: NewsCardProps) {
         className="group rounded-2xl border shadow-sm cursor-pointer overflow-hidden bg-white w-full"
       >
         <div className="relative w-full h-52">
-          <Image src={src} alt={title} fill className="object-cover" />
+          <Image src={src} alt={title} fill sizes="100vh" className="object-cover" priority />
         </div>
         <div className="p-4">
           <h2 className="text-lg font-bold text-primary mb-4 transition duration-300 group-hover:text-secondary">

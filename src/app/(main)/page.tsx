@@ -5,6 +5,7 @@ import { getHomePageAction } from "./actions";
 import { CustomerOpinion } from "@/components/ui/customer-opinion";
 import { Faq } from "@/components/faq/faq";
 import { GeoMap } from "@/components/ui/geo-map";
+import { LayoutGeneral } from "@/layouts/layout-general";
 
 export const revalidate = 60;
 
@@ -18,12 +19,14 @@ export default async function Home() {
 
   return (
     <>
-      <WhatsappFab />
-      <Hero />
-      <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
-      <Faq />
-      <GeoMap />
-      <CustomerOpinion reviews={reviews} />
+      <LayoutGeneral>
+        <WhatsappFab />
+        <Hero />
+        <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
+        <Faq />
+        <GeoMap />
+        <CustomerOpinion reviews={reviews} />
+      </LayoutGeneral>
     </>
   );
 }

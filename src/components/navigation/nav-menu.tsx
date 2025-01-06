@@ -53,9 +53,9 @@ export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenu
           <Link href="#">
             <motion.div
               className="flex items-center gap-4"
-              whileHover={isMobile ? { scale: 1.1 } : undefined}
-              whileTap={isMobile ? { scale: 0.9 } : undefined}
-              transition={isMobile ? { type: "spring", stiffness: 200, damping: 10 } : undefined}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
             >
               <Tooltip content="English information" position="bottom">
                 <div className="flex gap-3">

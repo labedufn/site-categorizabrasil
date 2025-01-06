@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
-import { FilterDropdown } from "./filter-dropdown";
-import { TextSearch } from "./text-search";
-import { Pagination } from "./pagination";
+import { useState } from "react";
+import { FilterDropdown } from "../ui/filter-dropdown";
+import { TextSearch } from "../ui/text-search";
+import { Pagination } from "../ui/pagination";
 import { LayoutDefault } from "@/layouts/layout-default";
-import { NewsCard } from "./news-card";
+import { NewsCard } from "../ui/news-card";
+import { Breadcrumb } from "../ui/breadcrumb";
 
-export const Teste: React.FC = () => {
+export function NewsSection() {
   const [sortOrder, setSortOrder] = useState<string | null>(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 50;
+  const totalPages = 1;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -26,7 +27,8 @@ export const Teste: React.FC = () => {
   return (
     <>
       <LayoutDefault className="mx-auto mb-24">
-        <div className="flex gap-6 flex-col md:flex-row">
+        <Breadcrumb items={[{ label: "Início", href: "/" }, { label: "Notícias" }]} />
+        <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr] gap-8">
           <TextSearch
             onSubmit={function (searchTerm: string): void {
               throw new Error("Function not implemented.");
@@ -70,8 +72,9 @@ export const Teste: React.FC = () => {
             url={""}
           />
         </div>
+
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </LayoutDefault>
     </>
   );
-};
+}

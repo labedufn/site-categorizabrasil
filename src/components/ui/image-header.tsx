@@ -33,7 +33,7 @@ export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
           top: "0",
         }}
       >
-        <Image src={src} fill sizes="100vw" alt={title} className="object-cover grayscale opacity-20" />
+        <Image src={src} fill sizes="100vw" alt={title} className="object-cover grayscale opacity-20" priority />
       </motion.div>
       <div className="absolute inset-0 bg-primary z-0 mix-blend-multiply" />
 

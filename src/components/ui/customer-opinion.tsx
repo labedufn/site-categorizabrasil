@@ -59,12 +59,13 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
             <Image
               src="/background_testimonial.webp"
               fill
+              sizes="100vw"
               alt="Background"
               className="object-cover object-center"
               priority
             />
           </div>
-          <Image src="/dot.webp" fill alt="Dots Overlay" className="absolute z-10 top-0 object-cover" />
+          <Image src="/dot.webp" fill sizes="100vh" alt="Dots Overlay" className="absolute z-10 top-0 object-cover" />
           <div className="absolute inset-0 bg-white opacity-70 pointer-events-none z-10" />
           <div className="relative z-30 pb-32 pt-12">
             <Marquee pauseOnHover className="[--duration:20s]">

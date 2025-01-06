@@ -31,6 +31,7 @@ export function GeoMap() {
                   width={150}
                   height={150}
                   className="bg-[#efc33a] p-2 border-white border-4 rounded-full w-24 h-24 lg:w-40 lg:h-40"
+                  priority
                 />
                 <p className="font-bold text-[#663513] pr-8 text-sm lg:text-base">
                   Serviços que cumprem com excelência os requisitos.
@@ -46,6 +47,7 @@ export function GeoMap() {
                   width={150}
                   height={150}
                   className="bg-[#a9a9a8] p-2 border-white border-4 rounded-full w-24 h-24 lg:w-40 lg:h-40"
+                  priority
                 />
                 <p className="font-bold text-[#454547] pr-8 text-sm lg:text-base">
                   Serviços que cumprem muito bem os requisitos.
@@ -61,6 +63,7 @@ export function GeoMap() {
                   width={150}
                   height={150}
                   className="bg-[#af4f29] p-2 border-white border-4 rounded-full w-24 h-24 lg:w-40 lg:h-40"
+                  priority
                 />
                 <p className="font-bold text-white pr-8 text-sm lg:text-base">
                   Serviços que cumprem satisfatoriamente os requisitos.

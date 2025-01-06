@@ -14,6 +14,10 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
   const isSmallScreen = useMediaQuery({ maxWidth: 640 });
   const range = isSmallScreen ? 0 : 1;
 
+  if (totalPages <= 1) {
+    return null;
+  }
+
   const handlePrev = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
@@ -76,7 +80,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
           className={`w-10 h-10 flex items-center justify-center rounded-lg border text-sm font-medium transition-all duration-300 ${
             page === currentPage
               ? "bg-secondary text-white border-secondary"
-              : "bg-white text-black border-secondary hover:bg-primary hover:border-primary hover:text-white"
+              : "bg-white text-gray-700 border-secondary hover:bg-primary hover:border-primary hover:text-white"
           }`}
           onClick={() => handlePageClick(page)}
         >
@@ -94,7 +98,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
     <div className="flex items-center gap-2 sm:gap-4">
       <button
         onClick={handlePrev}
-        className="w-10 h-10 flex items-center justify-center rounded-lg border border-secondary text-black text-sm font-medium transition-all duration-300 hover:bg-primary hover:border-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-10 h-10 flex items-center justify-center rounded-lg border border-secondary text-gray-700 text-sm font-medium transition-all duration-300 hover:bg-primary hover:border-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={currentPage === 1}
       >
         <Icon.chevronLeft className="w-4 h-4" />
@@ -102,7 +106,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
       {renderPageNumbers()}
       <button
         onClick={handleNext}
-        className="w-10 h-10 flex items-center justify-center rounded-lg border border-secondary text-black text-sm font-medium transition-all duration-300 hover:bg-primary hover:border-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-10 h-10 flex items-center justify-center rounded-lg border border-secondary text-gray-700 text-sm font-medium transition-all duration-300 hover:bg-primary hover:border-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={currentPage === totalPages}
       >
         <Icon.chevronRight className="w-4 h-4" />
