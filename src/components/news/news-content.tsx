@@ -3,36 +3,54 @@
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "../ui/breadcrumb";
 import Image from "next/image";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
-interface MarkdownContent {
-  content: string;
-  className: string;
+interface ImagensNoticia {
+  imgSrc: string;
 }
 
-const markdownContent: MarkdownContent["content"] = `
-**Lorem Ipsum** is simply dummy text of the printing and typesetting industry.
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of [Lorem Ipsum](https://github.com/mauricioprb).
-![](https://painel.categorizabrasil.com.br/assets/a1c20994-9157-494e-abad-a5418b8a7818)
-`;
+interface NewsContentProps {
+  title: string;
+  date: string;
+  imageSrc: string;
+  content: string;
+  imagesNews?: ImagensNoticia[];
+}
 
-export const NewsContent: React.FC = () => {
+export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc, content, imagesNews = [] }) => {
   return (
     <>
       <div className="mb-8">
         <Breadcrumb
-          items={[
-            { label: "Início", href: "/" },
-            { label: "Notícias", href: "/noticias" },
-            { label: "Where does it come from?" },
-          ]}
+          items={[{ label: "Início", href: "/" }, { label: "Notícias", href: "/noticias" }, { label: title }]}
         />
-        <h2 className="text-5xl font-bold text-primary mb-2">Where does it come from? </h2>
-        <p className="font-medium text-sm text-gray-500">Publicado em 00/00/0000</p>
+        <h2 className="text-5xl font-bold text-primary mb-2">{title}</h2>
+        <p className="font-medium text-sm text-gray-500">Publicado em {date}</p>
       </div>
+
       <div className="w-full md:h-[400px] h-44 mb-8 relative">
-        <Image src="/background_news.webp" alt="" fill className="object-cover rounded-2xl" sizes="100vh" />
+        <Image src={imageSrc} alt={title} fill className="object-cover rounded-2xl" sizes="100vh" />
       </div>
-      <MarkdownRenderer content={markdownContent} className="max-w-full" />
+      <MarkdownRenderer content={content} className="max-w-full" />
+      {imagesNews.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-3 mt-8 gap-4">
+          <PhotoProvider>
+            {imagesNews.map((img, index) => (
+              <PhotoView key={index} src={img.imgSrc}>
+                <div className="w-full md:h-40 h-44 relative">
+                  <Image
+                    src={img.imgSrc}
+                    alt={`Imagem adicional ${index + 1}`}
+                    fill
+                    className="object-cover rounded-2xl cursor-pointer"
+                    sizes="100vh"
+                  />
+                </div>
+              </PhotoView>
+            ))}
+          </PhotoProvider>
+        </div>
+      )}
     </>
   );
 };

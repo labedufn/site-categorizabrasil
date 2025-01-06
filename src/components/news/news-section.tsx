@@ -8,11 +8,25 @@ import { LayoutDefault } from "@/layouts/layout-default";
 import { NewsCard } from "../ui/news-card";
 import { Breadcrumb } from "../ui/breadcrumb";
 
-export function NewsSection() {
+interface NewsItem {
+  imageSrc: string;
+  title: string;
+  date: string;
+  url: string;
+}
+
+interface NewsSectionProps {
+  breadcrumbItems: { label: string; href?: string }[];
+  initialNewsItems: NewsItem[];
+}
+
+export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionProps) {
+  const itemsPerPage = 9;
+  const [newsItems, setNewsItems] = useState(initialNewsItems);
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState<string | null>(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 1;
+  const totalPages = Math.ceil(newsItems.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -20,61 +34,48 @@ export function NewsSection() {
   };
 
   const handleSortChange = (option: string) => {
-    console.log("Ordenar por:", option);
     setSortOrder(option);
+
+    const sortedNews = [...newsItems].sort((a, b) => {
+      if (option === "Mais recente") {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }
+    });
+
+    setNewsItems(sortedNews);
+    setCurrentPage(1);
+    console.log("Ordenado por:", option);
   };
 
-  return (
-    <>
-      <LayoutDefault className="mx-auto mb-24">
-        <Breadcrumb items={[{ label: "Início", href: "/" }, { label: "Notícias" }]} />
-        <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr] gap-8">
-          <TextSearch
-            onSubmit={function (searchTerm: string): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-          <FilterDropdown
-            options={["Mais recente", "Mais antigo"]}
-            placeholder="Ordenar por"
-            onSortChange={handleSortChange}
-          />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
-          <NewsCard
-            src={"/background_news.webp"}
-            title={"Lorem Ipsum is simply dummy text of the printing and typesetting industry"}
-            date={"00/00/0000"}
-            url={"/publicacoes"}
-          />
-          <NewsCard
-            src={"/background_news.webp"}
-            title={"Lorem Ipsum is simply dummy text of the printing and typesetting industry"}
-            date={"00/00/0000"}
-            url={""}
-          />
-          <NewsCard
-            src={"/background_news.webp"}
-            title={"Lorem Ipsum is simply dummy text of the printing and typesetting industry"}
-            date={"00/00/0000"}
-            url={""}
-          />
-          <NewsCard
-            src={"/background_news.webp"}
-            title={"Lorem Ipsum is simply dummy text of the printing and typesetting industry"}
-            date={"00/00/0000"}
-            url={""}
-          />
-          <NewsCard
-            src={"/background_news.webp"}
-            title={"Lorem Ipsum is simply dummy text of the printing and typesetting industry"}
-            date={"00/00/0000"}
-            url={""}
-          />
-        </div>
+  const handleSearch = (searchTerm: string) => {
+    const filteredNews = initialNewsItems.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-      </LayoutDefault>
-    </>
+    setNewsItems(filteredNews);
+    setCurrentPage(1);
+    console.log("Busca por:", searchTerm);
+  };
+
+  const currentItems = newsItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  return (
+    <LayoutDefault className="mx-auto mb-24">
+      <Breadcrumb items={breadcrumbItems} />
+      <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr] gap-8">
+        <TextSearch onSubmit={handleSearch} />
+        <FilterDropdown
+          options={["Mais recente", "Mais antigo"]}
+          placeholder="Ordenar por"
+          onSortChange={handleSortChange}
+        />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
+        {currentItems.map((news, index) => (
+          <NewsCard key={index} src={news.imageSrc} title={news.title} date={news.date} url={news.url} />
+        ))}
+      </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+    </LayoutDefault>
   );
 }
