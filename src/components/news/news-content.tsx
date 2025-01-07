@@ -24,7 +24,7 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
         <Breadcrumb
           items={[{ label: "Início", href: "/" }, { label: "Notícias", href: "/noticias" }, { label: title }]}
         />
-        <h2 className="text-5xl font-bold text-primary mb-2">{title}</h2>
+        <h2 className="text-2xl md:text-5xl font-bold text-primary mb-2">{title}</h2>
         <p className="font-medium text-sm text-gray-500">Publicado em {date}</p>
       </div>
 

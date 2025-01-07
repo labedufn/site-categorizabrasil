@@ -5,7 +5,7 @@ interface imagensNoticia {
 }
 
 interface NewsPageItem {
-  date_updated: string;
+  date_created: string;
   titulo: string;
   imagem_principal: string;
   texto: string;

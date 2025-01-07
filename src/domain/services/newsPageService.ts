@@ -30,7 +30,7 @@ export async function getNewsPageContent(): Promise<NewsPageContent[]> {
     });
 
     return {
-      criadoEm: formatDate(item.date_updated),
+      criadoEm: formatDate(item.date_created),
       titulo: item.titulo,
       imagemPrincipal: imagemPrincipal,
       texto: normalizeMarkdown(item.texto),

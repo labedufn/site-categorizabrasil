@@ -5,28 +5,29 @@ import { FilterDropdown } from "../ui/filter-dropdown";
 import { TextSearch } from "../ui/text-search";
 import { Pagination } from "../ui/pagination";
 import { LayoutDefault } from "@/layouts/layout-default";
-import { NewsCard } from "../ui/news-card";
 import { Breadcrumb } from "../ui/breadcrumb";
+import { ArticlesCard } from "../ui/articles-card";
 
-interface NewsItem {
-  imageSrc: string;
+interface ArticlesItem {
   title: string;
+  resume: string;
+  authors: string[];
   date: string;
   url: string;
 }
 
-interface NewsSectionProps {
+interface ArticlesSectionProps {
   breadcrumbItems: { label: string; href?: string }[];
-  initialNewsItems: NewsItem[];
+  initialArticlesItems: ArticlesItem[];
 }
 
-export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionProps) {
-  const itemsPerPage = 9;
-  const [newsItems, setNewsItems] = useState(initialNewsItems);
+export function ArticlesSection({ breadcrumbItems, initialArticlesItems }: ArticlesSectionProps) {
+  const itemsPerPage = 8;
+  const [articlesItems, setArticlesItems] = useState(initialArticlesItems);
   const [currentPage, setCurrentPage] = useState(1);
   const [, setSortOrder] = useState<string | null>(null);
 
-  const totalPages = Math.ceil(newsItems.length / itemsPerPage);
+  const totalPages = Math.ceil(articlesItems.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -35,7 +36,7 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
   const handleSortChange = (option: string) => {
     setSortOrder(option);
 
-    const sortedNews = [...newsItems].sort((a, b) => {
+    const sortedArticles = [...articlesItems].sort((a, b) => {
       if (option === "Mais recente") {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       } else {
@@ -43,18 +44,20 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
       }
     });
 
-    setNewsItems(sortedNews);
+    setArticlesItems(sortedArticles);
     setCurrentPage(1);
   };
 
   const handleSearch = (searchTerm: string) => {
-    const filteredNews = initialNewsItems.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredNews = initialArticlesItems.filter((articles) =>
+      articles.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
 
-    setNewsItems(filteredNews);
+    setArticlesItems(filteredNews);
     setCurrentPage(1);
   };
 
-  const currentItems = newsItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const currentItems = articlesItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <LayoutDefault className="mx-auto mb-24">
@@ -67,9 +70,16 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
           onSortChange={handleSortChange}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
-        {currentItems.map((news, index) => (
-          <NewsCard key={index} src={news.imageSrc} title={news.title} date={news.date} url={news.url} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 my-12">
+        {currentItems.map((articles, index) => (
+          <ArticlesCard
+            key={index}
+            title={articles.title}
+            date={articles.date}
+            url={articles.url}
+            resume={articles.resume}
+            authors={articles.authors.join(", ")}
+          />
         ))}
       </div>
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
