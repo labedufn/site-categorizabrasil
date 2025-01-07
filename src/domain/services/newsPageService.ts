@@ -1,5 +1,6 @@
 import { formatDate } from "@/lib/formatDate";
 import { fetchNewsPageData } from "../repositories/newsPageRepository";
+import { normalizeMarkdown } from "@/lib/normalizeMarkdown";
 
 export interface ImagensNoticia {
   imgSrc: string;
@@ -32,7 +33,7 @@ export async function getNewsPageContent(): Promise<NewsPageContent[]> {
       criadoEm: formatDate(item.date_updated),
       titulo: item.titulo,
       imagemPrincipal: imagemPrincipal,
-      texto: item.texto,
+      texto: normalizeMarkdown(item.texto),
       slug: item.slug,
       imagensNoticia,
     };

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Noticia({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const newsPageData = await getNewsPageAction();
   const newsData = newsPageData.find((news) => news.slug === slug);
