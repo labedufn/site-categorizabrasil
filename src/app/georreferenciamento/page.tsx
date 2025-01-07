@@ -5,7 +5,7 @@ import { LayoutGeneral } from "@/layouts/layout-general";
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Georreferenciamento",
-  description: "",
+  description: "Busque os estabelecimentos geolocalizados",
 };
 
 export default async function Georreferenciamento() {

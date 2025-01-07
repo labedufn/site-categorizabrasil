@@ -7,7 +7,7 @@ import { getArticlesPageAction } from "./actions";
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Artigos e Publicações",
-  description: "",
+  description: "Artigos e publicações sobre o Categoriza Brasil",
 };
 
 export default async function Publicacoes() {

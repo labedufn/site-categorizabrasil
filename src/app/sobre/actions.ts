@@ -1,8 +1,8 @@
 "use server";
 
-import { getEnglishPageContent } from "@/domain/services/englishPageService";
+import { getAboutPageContent } from "@/domain/services/aboutPageService";
 
-export async function getEnglishPageAction() {
-  const data = await getEnglishPageContent();
+export async function getAboutPageAction() {
+  const data = await getAboutPageContent();
   return data;
 }

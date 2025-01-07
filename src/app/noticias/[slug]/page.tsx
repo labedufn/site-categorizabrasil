@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Notícia",
-  description: "",
+  description: "Conheça as últimas notícias do projeto Categoriza Brasil",
 };
 
 export default async function Noticia({ params }: { params: Promise<{ slug: string }> }) {

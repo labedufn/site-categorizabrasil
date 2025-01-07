@@ -9,7 +9,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - English Information",
-  description: "",
+  description: "Learn more about the Categoriza Brasil project",
 };
 
 export default async function English() {
