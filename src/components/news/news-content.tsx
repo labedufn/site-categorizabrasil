@@ -3,6 +3,7 @@
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "../ui/breadcrumb";
 import Image from "next/image";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 interface ImagensNoticia {
   imgSrc: string;
@@ -33,17 +34,21 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
       <MarkdownRenderer content={content} className="max-w-full" />
       {imagesNews.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 mt-8 gap-4">
-          {imagesNews.map((img, index) => (
-            <div key={index} className="w-full md:h-40 h-44 relative">
-              <Image
-                src={img.imgSrc}
-                alt={`Imagem adicional ${index + 1}`}
-                fill
-                className="object-cover rounded-2xl cursor-pointer"
-                sizes="100vh"
-              />
-            </div>
-          ))}
+          <PhotoProvider>
+            {imagesNews.map((img, index) => (
+              <PhotoView key={index} src={img.imgSrc}>
+                <div className="w-full md:h-40 h-44 relative">
+                  <Image
+                    src={img.imgSrc}
+                    alt={`Imagem adicional ${index + 1}`}
+                    fill
+                    className="object-cover rounded-2xl cursor-pointer"
+                    sizes="100vh"
+                  />
+                </div>
+              </PhotoView>
+            ))}
+          </PhotoProvider>
         </div>
       )}
     </>
