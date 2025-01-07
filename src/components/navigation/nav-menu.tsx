@@ -50,7 +50,7 @@ export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenu
         ))}
         <div className="h-px w-full lg:w-0.5 lg:h-full self-stretch bg-black/10" />
         <li>
-          <Link href="#">
+          <Link href="/english">
             <motion.div
               className="flex items-center gap-4"
               whileHover={{ scale: 1.1 }}

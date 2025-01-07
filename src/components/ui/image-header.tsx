@@ -13,7 +13,7 @@ interface ImageHeaderProps {
 export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
   return (
     <div
-      className="mb-24"
+      className="mb-16 md:mb-24"
       style={{
         position: "relative",
         width: "100%",

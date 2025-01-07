@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Icon } from "./icons";
 
 interface ArticlesCardProps {
   title: string;
@@ -24,10 +23,9 @@ export function ArticlesCard({ title, resume, authors, date, url }: ArticlesCard
           <h2 className="text-2xl font-bold text-primary mb-2 transition duration-300 group-hover:text-secondary">
             {title}
           </h2>
-          <div className="flex items-center">
-            <p className="text-sm font-medium text-gray-600 flex items-center gap-1">
-              {date} <Icon.chevronRight className="w-3 h-3" /> {authors}
-            </p>
+          <div className="text-sm font-medium text-gray-600">
+            <p className="mb-2">{date}</p>
+            <p>{authors}</p>
           </div>
           <p className="text-sm text-primary font-medium mt-4">{resume}</p>
         </div>
