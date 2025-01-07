@@ -12,8 +12,6 @@ export const revalidate = 60;
 
 export default async function Home() {
   const homePageData = await getHomePageAction();
-  const articlesPageData = await getArticlesPageAction();
-  console.log(articlesPageData);
 
   const reviews = homePageData.opinioesConsumidores.map((opiniao) => ({
     name: opiniao.nome,
