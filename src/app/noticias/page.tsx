@@ -7,7 +7,7 @@ import { getNewsPageAction } from "./actions";
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Notícias",
-  description: "",
+  description: "Fique por dentro das novidades do Categoriza Brasil",
 };
 
 export default async function Noticias() {
