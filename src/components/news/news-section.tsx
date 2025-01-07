@@ -24,13 +24,12 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
   const itemsPerPage = 9;
   const [newsItems, setNewsItems] = useState(initialNewsItems);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState<string | null>(null);
+  const [, setSortOrder] = useState<string | null>(null);
 
   const totalPages = Math.ceil(newsItems.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    console.log("Página atual:", page);
   };
 
   const handleSortChange = (option: string) => {
@@ -46,7 +45,6 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
 
     setNewsItems(sortedNews);
     setCurrentPage(1);
-    console.log("Ordenado por:", option);
   };
 
   const handleSearch = (searchTerm: string) => {
@@ -54,7 +52,6 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
 
     setNewsItems(filteredNews);
     setCurrentPage(1);
-    console.log("Busca por:", searchTerm);
   };
 
   const currentItems = newsItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);

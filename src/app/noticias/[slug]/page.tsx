@@ -2,35 +2,22 @@ import { getNewsPageAction } from "@/app/noticias/actions";
 import { NewsContent } from "@/components/news/news-content";
 import { LayoutGeneral } from "@/layouts/layout-general";
 import { LayoutInterno } from "@/layouts/layout-interno";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-interface NoticiaProps {
-  params: {
-    slug: string;
-  };
-}
+export const metadata: Metadata = {
+  title: "Categoriza Brasil - Notícia",
+  description: "",
+};
 
-export async function generateMetadata(props: NoticiaProps) {
-  const { slug } = await Promise.resolve(props.params);
-
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const newsPageData = await getNewsPageAction();
   const newsData = newsPageData.find((news) => news.slug === slug);
 
-  if (!newsData) notFound();
-
-  return {
-    title: `Categoriza Brasil - ${newsData.titulo}`,
-    description: newsData.texto.slice(0, 150),
-  };
-}
-
-export default async function Noticia(props: NoticiaProps) {
-  const { slug } = await Promise.resolve(props.params);
-
-  const newsPageData = await getNewsPageAction();
-  const newsData = newsPageData.find((news) => news.slug === slug);
-
-  if (!newsData) notFound();
+  if (!newsData) {
+    notFound();
+  }
 
   return (
     <LayoutGeneral>

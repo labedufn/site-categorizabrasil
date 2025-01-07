@@ -6,14 +6,11 @@ import { CustomerOpinion } from "@/components/ui/customer-opinion";
 import { Faq } from "@/components/faq/faq";
 import { GeoMap } from "@/components/ui/geo-map";
 import { LayoutGeneral } from "@/layouts/layout-general";
-import { getNewsPageAction } from "../noticias/actions";
 
 export const revalidate = 60;
 
 export default async function Home() {
   const homePageData = await getHomePageAction();
-  const newsPageData = await getNewsPageAction();
-  console.log(newsPageData);
 
   const reviews = homePageData.opinioesConsumidores.map((opiniao) => ({
     name: opiniao.nome,

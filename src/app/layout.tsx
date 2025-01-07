@@ -24,7 +24,6 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={montserrat.className}>
         <NextTopLoader color="#003963" height={4} showSpinner={false} easing="ease" speed={500} />
-
         {children}
       </body>
       <CookieConsent />
