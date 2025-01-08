@@ -1,5 +1,3 @@
-"use client";
-
 interface HeaderTitleProps {
   topText?: string;
   mainTitle?: string;

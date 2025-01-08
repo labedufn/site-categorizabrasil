@@ -1,5 +1,3 @@
-"use client";
-
 import { DecorativePattern } from "../ui/decorative-pattern";
 
 export const HeroHeader = () => (

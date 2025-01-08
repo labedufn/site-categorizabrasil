@@ -1,4 +1,3 @@
-"use client";
 import { cn } from "@/lib/utils";
 import { BadgeCheck, ChartColumn, NotepadText, SlidersHorizontal } from "lucide-react";
 

@@ -1,5 +1,3 @@
-"use client";
-
 export interface FooterLink {
   label: string;
   href: string;

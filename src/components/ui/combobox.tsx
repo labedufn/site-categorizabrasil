@@ -31,7 +31,7 @@ export const ComboBox: React.FC<ComboBoxProps> = ({ options, placeholder, onChan
       >
         <div className="flex items-center gap-2 w-full">
           <span className="text-sm font-medium text-gray-700">
-            {selectedOption || placeholder || "Select an option"}
+            {selectedOption || placeholder || "Selecione uma opção"}
           </span>
         </div>
         <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isOpen ? "rotate-180" : ""}`} />

@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Button } from "./button-custom";
 import { Icon } from "./icons";
+import Image from "next/image";
 import Link from "next/link";
 
 interface NewsCardProps {

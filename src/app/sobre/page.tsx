@@ -25,7 +25,7 @@ export default async function Sobre() {
             subtitle="Conheça mais sobre o projeto"
           />
           <LayoutDefault className="mx-auto mb-16 md:mb-24">
-            <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Sobre" }]} />
+            <Breadcrumb items={[{ label: "Início", href: "/" }, { label: "Sobre" }]} />
             <MarkdownRenderer content={aboutPageData.text} className="max-w-full" />
           </LayoutDefault>
         </LayoutInterno>

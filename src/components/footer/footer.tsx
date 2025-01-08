@@ -1,13 +1,11 @@
-"use client";
-
 import { footerSections } from "@/constants/footerSections";
 import { SocialLinks } from "@/components/ui/social-links";
 import { FooterSection } from "@/components/footer/footer-section";
 import { FooterCopyright } from "@/components/footer/footer-copyright";
 import { Logo } from "@/components/ui/logos";
-import Link from "next/link";
 import { LayoutDefault } from "@/layouts/layout-default";
 import { SocialData } from "@/types/social-data";
+import Link from "next/link";
 
 export function Footer({ instagram, whatsapp, youtubeChannel }: SocialData) {
   return (

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Icon } from "./icons";
 import { useMediaQuery } from "react-responsive";
 
@@ -10,7 +9,7 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   const isSmallScreen = useMediaQuery({ maxWidth: 640 });
   const range = isSmallScreen ? 0 : 1;
 
@@ -113,4 +112,4 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
       </button>
     </div>
   );
-};
+}

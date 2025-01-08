@@ -1,5 +1,3 @@
-"use client";
-
 interface MobileMenuButtonProps {
   isOpen: boolean;
   onClick: () => void;
