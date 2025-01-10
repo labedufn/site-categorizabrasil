@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import { Marker, MarkerType, Seal } from "@/types";
 import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
 import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
+import Head from "next/head";
 
 export const revalidate = 60;
 
@@ -64,6 +65,16 @@ export default async function Home() {
 
   return (
     <>
+      <Head>
+        <meta property="og:title" content="Categoriza Brasil - Categorização dos Serviços de Alimentação" />
+        <meta property="og:description" content="Site categorização dos serviços de alimentação no Brasil." />
+        <meta property="og:image" content="/teste.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content="https://homologa.categorizabrasil.com" />
+        <meta property="og:type" content="website" />
+      </Head>
       <LayoutGeneral>
         <WhatsappFab />
         <Hero />
