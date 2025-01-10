@@ -34,7 +34,6 @@ export function GeoMap({ centerLat, centerLng, zoom, markers }: GeoMapProps) {
         <div className="flex-1">
           <EstablishmentCard
             name={"Nome do Restaurante"}
-            type={"Pizzaria"}
             address={"Rua das Flores, 123 - Centro, Santa Maria - RS"}
             phone={"(55) 99999-9999"}
             website={"https://www.google.com"}

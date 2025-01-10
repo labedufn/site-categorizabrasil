@@ -66,13 +66,18 @@ export default async function Home() {
     body: opiniao.descricao,
   }));
 
+  const faq = homePageData.faq.map((faq) => ({
+    title: faq.pergunta,
+    content: faq.resposta,
+  }));
+
   return (
     <>
       <LayoutGeneral>
         <WhatsappFab />
         <Hero />
         <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
-        <Faq />
+        <Faq items={faq} />
         <GeoMapInitial
           topText="Estabelecimentos"
           mainTitle="Geolocalizados"

@@ -5,6 +5,7 @@ import { HeroHeader } from "@/components/hero/hero-header";
 import { Button } from "@/components/ui/button-custom";
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Hero = () => {
   return (
@@ -53,7 +54,9 @@ export const Hero = () => {
           </div>
           <HeroHeader />
           <div className="flex items-center sm:justify-center">
-            <Button>Saiba mais</Button>
+            <Link href="/sobre">
+              <Button>Saiba mais</Button>
+            </Link>
           </div>
         </div>
         <Features />

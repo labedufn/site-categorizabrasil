@@ -5,7 +5,6 @@ import Link from "next/link";
 
 interface EstablishmentCardProps {
   name: string;
-  type: string;
   address: string;
   phone: string;
   website: string;
@@ -15,7 +14,6 @@ interface EstablishmentCardProps {
 
 export function EstablishmentCard({
   name,
-  type,
   address,
   phone,
   website,
@@ -40,10 +38,6 @@ export function EstablishmentCard({
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-4">
-        <div>
-          <p className="text-sm mb-1 text-gray-500">Tipo</p>
-          <p className="text-sm font-semibold text-primary">{type}</p>
-        </div>
         <div>
           <p className="text-sm mb-1 text-gray-500">Endereço</p>
           <p className="text-sm font-semibold text-primary">{address}</p>
