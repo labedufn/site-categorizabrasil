@@ -1,5 +1,3 @@
-"use client";
-
 export interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;

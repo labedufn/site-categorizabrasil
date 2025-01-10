@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { Icon } from "./icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { SocialData } from "@/types/social-data";
+import Link from "next/link";
 
 interface SocialLinksProps extends SocialData {
   iconColor?: string;

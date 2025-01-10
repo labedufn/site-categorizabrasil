@@ -1,5 +1,3 @@
-"use client";
-
 import { LayoutDefault } from "@/layouts/layout-default";
 import { Icon } from "../ui/icons";
 import { FeatureCard, FeatureCardProps } from "./feature-card";

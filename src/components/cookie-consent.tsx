@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button-custom";
 import Link from "next/link";
 import { LayoutDefault } from "@/layouts/layout-default";

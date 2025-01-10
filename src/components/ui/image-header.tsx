@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { LayoutDefault } from "@/layouts/layout-default";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 interface ImageHeaderProps {
   src: string;

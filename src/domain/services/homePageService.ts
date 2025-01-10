@@ -9,6 +9,11 @@ export interface OpiniaoConsumidor {
   descricao: string;
 }
 
+export interface Faq {
+  pergunta: string;
+  resposta: string;
+}
+
 export interface HomePageContent {
   instagram: string;
   whatsapp: string;
@@ -16,6 +21,7 @@ export interface HomePageContent {
   youtubeVideoLink: string;
   logos: Logo[];
   opinioesConsumidores: OpiniaoConsumidor[];
+  faq: Faq[];
 }
 
 export async function getHomePageContent(): Promise<HomePageContent> {
@@ -32,6 +38,13 @@ export async function getHomePageContent(): Promise<HomePageContent> {
     };
   });
 
+  const faq = data.faq.map((faq) => {
+    return {
+      pergunta: faq.faq_id.pergunta,
+      resposta: faq.faq_id.resposta,
+    };
+  });
+
   return {
     instagram: data.instagram,
     whatsapp: data.whatsapp,
@@ -39,5 +52,6 @@ export async function getHomePageContent(): Promise<HomePageContent> {
     youtubeVideoLink: data.link_video_youtube,
     logos,
     opinioesConsumidores,
+    faq,
   };
 }

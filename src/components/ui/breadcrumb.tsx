@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronRight } from "lucide-react";
 import clsx from "clsx";
 import Link from "next/link";

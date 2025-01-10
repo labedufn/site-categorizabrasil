@@ -1,9 +1,7 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { Marquee } from "./marquee";
-import Image from "next/image";
 import { HeaderTitle } from "./header-title";
+import Image from "next/image";
 
 type Review = {
   name: string;

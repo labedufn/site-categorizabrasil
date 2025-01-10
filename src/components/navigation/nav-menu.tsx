@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { NavLink } from "./nav-link";
 import { Icon } from "../ui/icons";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { Tooltip } from "../ui/tooltip";
 import { SocialData } from "@/types/social-data";
 import { useMediaQuery } from "react-responsive";
+import Link from "next/link";
 
 interface NavMenuProps extends SocialData {
   isOpen: boolean;

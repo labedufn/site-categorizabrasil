@@ -1,5 +1,3 @@
-"use client";
-
 import { LayoutDefault } from "@/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { HeroVideoDialog } from "../ui/hero-video-dialog";
