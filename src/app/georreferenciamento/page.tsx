@@ -33,6 +33,7 @@ export default async function Georreferenciamento() {
     categoryIconUrl:
       item.categoria === MarkerType.A ? "/selo-a.svg" : item.categoria === MarkerType.B ? "/selo-b.svg" : "/selo-c.svg",
     imageUrl: item.fotoEstabelecimento,
+    city: item.cidadeEstado,
   }));
 
   return (

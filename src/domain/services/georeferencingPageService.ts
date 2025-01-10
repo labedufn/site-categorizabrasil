@@ -10,10 +10,10 @@ export interface GeoreferencingPageContent {
   enderecoCompleto: string;
   contato: string;
   site: string;
-  cidadeEstado: string;
   localizacao: localizacao;
   fotoEstabelecimento: string;
   categoria: string;
+  cidadeEstado: string;
 }
 
 export async function getGeoreferencingPageContent(): Promise<GeoreferencingPageContent[]> {
@@ -24,15 +24,17 @@ export async function getGeoreferencingPageContent(): Promise<GeoreferencingPage
       ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/assets/${item.foto_estabelecimento}.svg`
       : "";
 
-    const cidadeEstado = `${item.cidade_estado.cidade} - ${item.cidade_estado.sigla_estado}`;
+    const enderecoCompleto = `${item.endereco_completo}, ${item.cidade_estado.cidade} - ${item.cidade_estado.sigla_estado}`;
     const [longitude, latitude] = item.localizacao.coordinates;
+
+    const cidadeEstado = `${item.cidade_estado.cidade} - ${item.cidade_estado.sigla_estado}`;
 
     return {
       nomeEstabelecimento: item.nome_estabelecimento,
-      enderecoCompleto: item.endereco_completo,
+      enderecoCompleto,
+      cidadeEstado,
       contato: item.contato,
       site: item.site,
-      cidadeEstado,
       localizacao: {
         longitude,
         latitude,
