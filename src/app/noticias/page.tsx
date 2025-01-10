@@ -5,6 +5,8 @@ import { LayoutGeneral } from "@/layouts/layout-general";
 import { NewsSection } from "@/components/news/news-section";
 import { getNewsPageAction } from "./actions";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Notícias",
   description: "Fique por dentro das novidades do Categoriza Brasil",

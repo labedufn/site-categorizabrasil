@@ -4,6 +4,7 @@ import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "../ui/breadcrumb";
 import Image from "next/image";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { StoryImageGenerator } from "./story-image-generator";
 
 interface ImagensNoticia {
   imgSrc: string;
@@ -27,11 +28,18 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
         <h2 className="text-2xl md:text-5xl font-bold text-primary mb-2">{title}</h2>
         <p className="font-medium text-sm text-gray-500">Publicado em {date}</p>
       </div>
-
       <div className="w-full md:h-[400px] h-44 mb-8 relative">
         <Image src={imageSrc} alt={title} fill className="object-cover rounded-2xl" sizes="100vh" />
       </div>
       <MarkdownRenderer content={content} className="max-w-full" />
+
+      <div className="mt-8">
+        <StoryImageGenerator
+          logoSrc="https://placehold.co/600x400.png"
+          newsCard={{ src: "https://placehold.co/600x400.png", title, date }}
+        />
+      </div>
+
       {imagesNews.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 mt-8 gap-4">
           <PhotoProvider>

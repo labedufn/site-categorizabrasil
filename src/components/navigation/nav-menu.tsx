@@ -29,6 +29,7 @@ export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenu
     { href: "/sobre", label: "Sobre" },
     { href: "/noticias", label: "Notícias" },
     { href: "/artigos-publicacoes", label: "Artigos e Publicações" },
+    { href: "/documentos", label: "Documentos Úteis" },
     { href: "/georreferenciamento", label: "Georreferenciamento" },
   ];
 
