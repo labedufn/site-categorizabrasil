@@ -7,7 +7,8 @@ import { Faq } from "@/components/faq/faq";
 import { LayoutGeneral } from "@/layouts/layout-general";
 import { Metadata } from "next";
 import { Marker, MarkerType, Seal } from "@/types";
-import { GeoMapInitial } from "@/components/georeference/geo-map-initial";
+import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
+import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
 
 export const revalidate = 60;
 
@@ -17,23 +18,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const markers: Marker[] = [
-    {
-      lat: -29.68140806351066,
-      lng: -53.81438297431279,
-      type: MarkerType.A,
-    },
-    {
-      lat: -29.69076350294833,
-      lng: -53.836662147655815,
-      type: MarkerType.B,
-    },
-    {
-      lat: -29.699303768286583,
-      lng: -53.788789920678354,
-      type: MarkerType.C,
-    },
-  ];
+  const homePageData = await getHomePageAction();
+  const georeferencingPageData = await getGeoreferencingPageAction();
+
+  const markers: Marker[] = georeferencingPageData.map((item) => ({
+    lat: item.localizacao.latitude,
+    lng: item.localizacao.longitude,
+    type: item.categoria as MarkerType,
+    label: item.nomeEstabelecimento,
+  }));
 
   const seals: Seal[] = [
     {
@@ -58,8 +51,6 @@ export default async function Home() {
       description: "Serviços que cumprem satisfatoriamente os requisitos.",
     },
   ];
-
-  const homePageData = await getHomePageAction();
 
   const reviews = homePageData.opinioesConsumidores.map((opiniao) => ({
     name: opiniao.nome,

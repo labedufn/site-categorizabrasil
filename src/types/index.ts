@@ -8,6 +8,7 @@ export interface Marker {
   lat: number;
   lng: number;
   type: MarkerType;
+  label: string;
 }
 
 export interface Seal {

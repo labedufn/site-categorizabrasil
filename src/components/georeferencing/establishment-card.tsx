@@ -1,5 +1,7 @@
 "use client";
 
+import { formatPhone } from "@/lib/formatPhone";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +14,13 @@ interface EstablishmentCardProps {
   categoryIconUrl: string;
 }
 
+const formatWebsite = (url: string): string => {
+  if (!/^https?:\/\//i.test(url)) {
+    return `https://${url}`;
+  }
+  return url;
+};
+
 export function EstablishmentCard({
   name,
   address,
@@ -20,13 +29,29 @@ export function EstablishmentCard({
   imageUrl,
   categoryIconUrl,
 }: EstablishmentCardProps) {
+  const formattedWebsite = formatWebsite(website);
+
+  const componentKey = `${name}-${address}-${phone}-${website}-${imageUrl}-${categoryIconUrl}`;
+
   return (
-    <div className="bg-white shadow-sm border rounded-2xl p-4 h-full">
+    <motion.div
+      key={componentKey}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+      className="bg-white shadow-sm border rounded-2xl p-4 h-full"
+    >
       <div className="flex items-center gap-4 mb-4">
         {imageUrl && (
-          <div className="w-20 h-20 relative rounded-xl overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-20 h-20 relative rounded-xl overflow-hidden"
+          >
             <Image src={imageUrl} alt={`Imagem do estabelecimento ${name}`} fill className="object-cover" />
-          </div>
+          </motion.div>
         )}
 
         <div>
@@ -44,17 +69,17 @@ export function EstablishmentCard({
         </div>
         <div>
           <p className="text-sm mb-1 text-gray-500">Contato</p>
-          <p className="text-sm font-semibold text-primary">{phone}</p>
+          <p className="text-sm font-semibold text-primary">{formatPhone(phone)}</p>
         </div>
         <div>
           <p className="text-sm mb-1 text-gray-500">Site</p>
           <p className="text-sm font-semibold text-primary">
-            <Link href={website} target="_blank" rel="noopener noreferrer">
+            <Link href={formattedWebsite} target="_blank" rel="noopener noreferrer">
               {website.replace(/^https?:\/\//, "")}
             </Link>
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

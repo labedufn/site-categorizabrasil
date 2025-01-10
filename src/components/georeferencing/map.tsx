@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import mapboxgl, { Marker as MapboxMarker } from "mapbox-gl";
+import { createRoot } from "react-dom/client";
+import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { Tooltip } from "../ui/tooltip";
 
 type MarkerType = "A" | "B" | "C";
 
@@ -10,6 +12,7 @@ interface Marker {
   lng: number;
   lat: number;
   type: MarkerType;
+  label: string;
 }
 
 interface MapProps {
@@ -17,6 +20,7 @@ interface MapProps {
   centerLng: number;
   zoom: number;
   markers: Marker[];
+  onMarkerClick?: (markerIndex: number) => void;
 }
 
 const markerIcons: Record<MarkerType, string> = {
@@ -25,10 +29,9 @@ const markerIcons: Record<MarkerType, string> = {
   C: "/selo-c.svg",
 };
 
-export function Map({ centerLat, centerLng, zoom, markers }: MapProps) {
+export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapProps) {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const markersRef = useRef<MapboxMarker[]>([]);
 
   useEffect(() => {
     if (!mapRef.current && mapContainerRef.current) {
@@ -55,30 +58,39 @@ export function Map({ centerLat, centerLng, zoom, markers }: MapProps) {
   }, [centerLat, centerLng, zoom]);
 
   useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.setCenter([centerLng, centerLat]);
-      mapRef.current.setZoom(zoom);
-    }
-  }, [centerLat, centerLng, zoom]);
-
-  useEffect(() => {
     if (!mapRef.current) return;
-    markersRef.current.forEach((marker) => marker.remove());
-    markersRef.current = [];
 
-    markers.forEach(({ lat, lng, type }) => {
+    mapRef.current
+      .getCanvas()
+      .parentElement!.querySelectorAll(".map-marker")
+      .forEach((marker) => marker.remove());
+
+    markers.forEach(({ lat, lng, type, label }, index) => {
       const el = document.createElement("div");
-      el.style.backgroundImage = `url(${markerIcons[type]})`;
-      el.style.width = "30px";
-      el.style.height = "30px";
-      el.style.backgroundSize = "contain";
-      el.style.backgroundRepeat = "no-repeat";
+      el.className = "map-marker";
 
-      const newMarker = new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(mapRef.current!);
+      const root = createRoot(el);
+      root.render(
+        <Tooltip content={label}>
+          <div
+            style={{
+              backgroundImage: `url(${markerIcons[type]})`,
+              width: "30px",
+              height: "30px",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              if (onMarkerClick) onMarkerClick(index);
+            }}
+          />
+        </Tooltip>,
+      );
 
-      markersRef.current.push(newMarker);
+      new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(mapRef.current!);
     });
-  }, [markers]);
+  }, [markers, onMarkerClick]);
 
   return <div ref={mapContainerRef} className="h-full w-full rounded-2xl overflow-hidden" />;
 }
