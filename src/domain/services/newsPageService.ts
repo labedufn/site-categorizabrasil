@@ -16,12 +16,12 @@ export async function getNewsPageContent(): Promise<NewsPageContent[]> {
 
   const newsPageContent = data.map((item) => {
     const imagemPrincipal = item.imagem_principal
-      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/assets/${item.imagem_principal.id}.${item.imagem_principal.type}`
+      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/assets/${item.imagem_principal.id}.${item.imagem_principal.type.split("/").pop()}`
       : "";
 
     const imagensNoticia = item.imagens_noticia.map((imagensNoticia) => {
       return {
-        imgSrc: `${process.env.NEXT_PUBLIC_API_BASE_URL}/assets/${imagensNoticia.imagens_noticia_id.imagens}`,
+        imgSrc: `${process.env.NEXT_PUBLIC_API_BASE_URL}/assets/${imagensNoticia.imagens_noticia_id.imagens}.svg`,
       };
     });
 
