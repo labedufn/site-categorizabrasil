@@ -2,6 +2,7 @@ import {
   ChartNoAxesCombined,
   ChevronLeft,
   ChevronRight,
+  FileText,
   LucideIcon,
   LucideProps,
   MessageCircleWarning,
@@ -104,4 +105,5 @@ export const Icon = {
   chevronRight: ChevronRight,
   chevronLeft: ChevronLeft,
   search: Search,
+  fileText: FileText,
 };

@@ -6,28 +6,26 @@ import { TextSearch } from "../ui/text-search";
 import { Pagination } from "../ui/pagination";
 import { LayoutDefault } from "@/layouts/layout-default";
 import { Breadcrumb } from "../ui/breadcrumb";
-import { ArticlesCard } from "../ui/articles-card";
+import { DocumentsCard } from "../ui/documents-card";
 
-interface ArticlesItem {
+interface DocumentsItem {
   title: string;
-  resume: string;
-  authors: string[];
-  date: string;
   url: string;
+  date: string;
 }
 
-interface ArticlesSectionProps {
+interface DocumentsProps {
   breadcrumbItems: { label: string; href?: string }[];
-  initialArticlesItems: ArticlesItem[];
+  initialDocumentsItems: DocumentsItem[];
 }
 
-export function ArticlesSection({ breadcrumbItems, initialArticlesItems }: ArticlesSectionProps) {
+export function DocumentsSection({ breadcrumbItems, initialDocumentsItems }: DocumentsProps) {
   const itemsPerPage = 8;
-  const [articlesItems, setArticlesItems] = useState(initialArticlesItems);
+  const [documentsItems, setDocumentsItems] = useState(initialDocumentsItems);
   const [currentPage, setCurrentPage] = useState(1);
   const [, setSortOrder] = useState<string | null>(null);
 
-  const totalPages = Math.ceil(articlesItems.length / itemsPerPage);
+  const totalPages = Math.ceil(documentsItems.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -36,7 +34,7 @@ export function ArticlesSection({ breadcrumbItems, initialArticlesItems }: Artic
   const handleSortChange = (option: string) => {
     setSortOrder(option);
 
-    const sortedArticles = [...articlesItems].sort((a, b) => {
+    const sortedDocuments = [...documentsItems].sort((a, b) => {
       if (option === "Mais recente") {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       } else {
@@ -44,20 +42,20 @@ export function ArticlesSection({ breadcrumbItems, initialArticlesItems }: Artic
       }
     });
 
-    setArticlesItems(sortedArticles);
+    setDocumentsItems(sortedDocuments);
     setCurrentPage(1);
   };
 
   const handleSearch = (searchTerm: string) => {
-    const filteredArticles = initialArticlesItems.filter((articles) =>
-      articles.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    const filteredDocuments = initialDocumentsItems.filter((document) =>
+      document.title.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
-    setArticlesItems(filteredArticles);
+    setDocumentsItems(filteredDocuments);
     setCurrentPage(1);
   };
 
-  const currentItems = articlesItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const currentItems = documentsItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <LayoutDefault className="mx-auto mb-24">
@@ -70,16 +68,9 @@ export function ArticlesSection({ breadcrumbItems, initialArticlesItems }: Artic
           onSortChange={handleSortChange}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 my-12">
-        {currentItems.map((articles, index) => (
-          <ArticlesCard
-            key={index}
-            title={articles.title}
-            date={articles.date}
-            url={articles.url}
-            resume={articles.resume}
-            authors={articles.authors.join(", ")}
-          />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-12">
+        {currentItems.map((document, index) => (
+          <DocumentsCard key={index} {...document} />
         ))}
       </div>
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
