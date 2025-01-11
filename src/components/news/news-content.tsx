@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useRef } from "react";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "../ui/breadcrumb";
-import Image from "next/image";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { StoryGenerator, StoryGeneratorHandle } from "./story-image-generator";
 import { Icon } from "../ui/icons";
@@ -66,7 +66,7 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
         </div>
       </div>
       <div className="w-full md:h-[400px] h-44 mb-8 relative">
-        <Image src={imageSrc} alt={title} fill className="object-cover rounded-2xl" sizes="100vh" />
+        <img src={imageSrc} alt={title} className="object-cover rounded-2xl" sizes="100vh" />
       </div>
       <MarkdownRenderer content={content} className="max-w-full" />
 
@@ -76,10 +76,9 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
             {imagesNews.map((img, index) => (
               <PhotoView key={index} src={img.imgSrc}>
                 <div className="w-full md:h-40 h-44 relative">
-                  <Image
+                  <img
                     src={img.imgSrc}
                     alt={`Imagem adicional ${index + 1}`}
-                    fill
                     className="object-cover rounded-2xl cursor-pointer"
                     sizes="100vh"
                   />
