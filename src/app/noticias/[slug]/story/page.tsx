@@ -2,8 +2,8 @@ import { getNewsPageAction } from "@/app/noticias/actions";
 import { StoryGenerator } from "@/components/news/story-image-generator";
 import { notFound } from "next/navigation";
 
-export default async function StoryPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function Story({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
   const newsPageData = await getNewsPageAction();
   const newsData = newsPageData.find((news) => news.slug === slug);
