@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "./marquee";
 import { HeaderTitle } from "./header-title";
-import Image from "next/image";
 
 type Review = {
   name: string;
@@ -54,13 +53,11 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
               top: "0",
             }}
           >
-            <Image
+            <img
               src="/background_testimonial.webp"
-              fill
               sizes="100vw"
               alt="Background"
               className="object-cover object-center"
-              priority
             />
           </div>
           <img src="/dot.webp" sizes="100vh" alt="Dots Overlay" className="absolute z-10 top-0 object-cover" />

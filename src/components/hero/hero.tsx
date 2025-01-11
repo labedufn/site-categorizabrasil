@@ -4,7 +4,6 @@ import { Features } from "@/components/hero/features";
 import { HeroHeader } from "@/components/hero/hero-header";
 import { Button } from "@/components/ui/button-custom";
 import { motion } from "motion/react";
-import Image from "next/image";
 import Link from "next/link";
 
 export const Hero = () => {
@@ -29,15 +28,7 @@ export const Hero = () => {
           top: "0",
         }}
       >
-        <Image
-          src="/background_hero.webp"
-          fill
-          sizes="100vw"
-          alt="Background"
-          priority
-          unoptimized
-          className="object-cover"
-        />
+        <img src="/background_hero.webp" sizes="100vw" alt="Background" className="object-cover" />
       </motion.div>
 
       <div
