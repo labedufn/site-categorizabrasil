@@ -62,17 +62,15 @@ export const StoryGenerator = forwardRef<StoryGeneratorHandle, StoryGeneratorPro
           <div
             className="
             absolute
-            top-[300px]
-            w-full
-            scale-300
+            top-[260px]
             flex
             justify-center
           "
           >
-            <Logo.white />
+            <Logo.white className="w-[330px] h-auto" />
           </div>
 
-          <div className="w-[650px] scale-125">
+          <div className="w-[780px]">
             <StoryCard src={imageSrc} title={title} date={date} />
           </div>
         </div>

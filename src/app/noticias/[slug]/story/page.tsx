@@ -1,5 +1,5 @@
 import { getNewsPageAction } from "@/app/noticias/actions";
-import { StoryGenerator } from "@/components/news/story-image-generator";
+import { StoryGenerator } from "@/components/news/story-generator";
 import { notFound } from "next/navigation";
 
 export default async function Story({ params }: { params: Promise<{ slug: string }> }) {

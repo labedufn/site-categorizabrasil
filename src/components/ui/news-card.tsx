@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { Button } from "./button-custom";
 import { Icon } from "./icons";
 import Link from "next/link";
-import Image from "next/image";
 
 interface NewsCardProps {
   src: string;
@@ -21,8 +20,8 @@ export function NewsCard({ src, title, date, url }: NewsCardProps) {
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className="group rounded-2xl border shadow-sm cursor-pointer overflow-hidden bg-white w-full h-full flex flex-col"
       >
-        <div className="relative w-full h-52">
-          <Image src={src} alt={title} sizes="100vh" fill className="object-cover" />
+        <div className="relative">
+          <img src={src} alt={title} className="object-cover h-52 w-full" />
         </div>
         <div className="p-4 flex-1 flex flex-col">
           <h2 className="text-lg font-bold text-primary mb-1 transition duration-300 group-hover:text-secondary">

@@ -47,9 +47,9 @@ export function EstablishmentCard({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="w-20 h-20 relative rounded-xl overflow-hidden"
+            className="relative rounded-xl overflow-hidden"
           >
-            <img src={imageUrl} alt={`Imagem do estabelecimento ${name}`} className="object-cover" />
+            <img src={imageUrl} alt={`Imagem do estabelecimento ${name}`} className="object-cover w-20 h-20" />
           </motion.div>
         )}
 

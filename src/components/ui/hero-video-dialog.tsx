@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { Play, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getYouTubeThumbnail, getYouTubeVideoEmbed } from "@/lib/youtubeUtils";
-import Image from "next/image";
 
 type AnimationStyle =
   | "from-bottom"

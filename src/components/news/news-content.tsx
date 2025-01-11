@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "../ui/breadcrumb";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import { StoryGenerator, StoryGeneratorHandle } from "./story-image-generator";
+import { StoryGenerator, StoryGeneratorHandle } from "./story-generator";
 import { Icon } from "../ui/icons";
 import { motion } from "motion/react";
 
@@ -44,7 +44,7 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
         <h2 className="text-2xl md:text-5xl font-bold text-primary mb-2">{title}</h2>
         <p className="font-medium text-sm text-gray-500 mb-4">Publicado em {date}</p>
         <div>
-          <p className="font-medium text-sm text-primary mb-2">Compartilhar:</p>
+          <p className="font-medium text-sm text-gray-600 mb-2">Compartilhar:</p>
           <motion.button
             onClick={handleDownloadImage}
             whileHover={{ scale: 1.1 }}
@@ -64,8 +64,8 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
           </motion.button>
         </div>
       </div>
-      <div className="w-full md:h-[400px] h-44 mb-8 relative">
-        <img src={imageSrc} alt={title} className="object-cover rounded-2xl" sizes="100vh" />
+      <div className="mb-8 relative">
+        <img src={imageSrc} alt={title} className="object-cover rounded-2xl w-full md:h-[400px] h-44" sizes="100vh" />
       </div>
       <MarkdownRenderer content={content} className="max-w-full" />
 
@@ -74,11 +74,11 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
           <PhotoProvider>
             {imagesNews.map((img, index) => (
               <PhotoView key={index} src={img.imgSrc}>
-                <div className="w-full md:h-40 h-44 relative">
+                <div className="relative">
                   <img
                     src={img.imgSrc}
                     alt={`Imagem adicional ${index + 1}`}
-                    className="object-cover rounded-2xl cursor-pointer"
+                    className="object-cover rounded-2xl cursor-pointer w-full md:h-40 h-44"
                     sizes="100vh"
                   />
                 </div>
