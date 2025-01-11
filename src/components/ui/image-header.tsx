@@ -2,7 +2,6 @@
 
 import { LayoutDefault } from "@/layouts/layout-default";
 import { motion } from "motion/react";
-import Image from "next/image";
 
 interface ImageHeaderProps {
   src: string;
@@ -33,7 +32,7 @@ export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
           top: "0",
         }}
       >
-        <Image src={src} fill sizes="100vw" alt={title} className="object-cover grayscale opacity-20" priority />
+        <img src={src} sizes="100vw" alt={title} className="object-cover grayscale opacity-20" />
       </motion.div>
       <div className="absolute inset-0 bg-primary z-0 mix-blend-multiply" />
 

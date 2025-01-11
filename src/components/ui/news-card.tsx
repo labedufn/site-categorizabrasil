@@ -3,7 +3,6 @@
 import { motion } from "motion/react";
 import { Button } from "./button-custom";
 import { Icon } from "./icons";
-import Image from "next/image";
 import Link from "next/link";
 
 interface NewsCardProps {
@@ -22,7 +21,7 @@ export function NewsCard({ src, title, date, url }: NewsCardProps) {
         className="group rounded-2xl border shadow-sm cursor-pointer overflow-hidden bg-white w-full h-full flex flex-col"
       >
         <div className="relative w-full h-52">
-          <Image src={src} alt={title} fill sizes="100vh" className="object-cover" priority />
+          <img src={src} alt={title} sizes="100vh" className="object-cover" />
         </div>
         <div className="p-4 flex-1 flex flex-col">
           <h2 className="text-lg font-bold text-primary mb-1 transition duration-300 group-hover:text-secondary">

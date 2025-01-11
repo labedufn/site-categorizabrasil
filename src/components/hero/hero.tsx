@@ -50,7 +50,7 @@ export const Hero = () => {
       <div className="relative z-10 pb-1">
         <div className="py-16 mx-auto max-w-screen-xl p-6 lg:p-0 lg:py-20">
           <div className="flex md:justify-center mb-4 z-10">
-            <Image src="/selos.svg" alt="Selos" width={120} height={120} priority />
+            <img src="/selos.svg" alt="Selos" width={120} height={120} />
           </div>
           <HeroHeader />
           <div className="flex items-center sm:justify-center">
