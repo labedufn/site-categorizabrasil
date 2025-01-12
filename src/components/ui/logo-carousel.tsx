@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 
 interface Logo {
   imgSrc: string;
@@ -92,12 +93,14 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(({ logos, index, curren
             },
           }}
         >
-          <img
+          <Image
             src={currentLogo.imgSrc}
             alt="Logo"
             width={128}
             height={128}
             className="w-20 h-20 md:w-32 md:h-32 max-w-[80%] max-h-[80%] object-contain"
+            unoptimized
+            priority
           />
         </motion.div>
       </AnimatePresence>

@@ -7,6 +7,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 import { StoryGenerator, StoryGeneratorHandle } from "./story-generator";
 import { Icon } from "../ui/icons";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 interface ImagensNoticia {
   imgSrc: string;
@@ -64,8 +65,16 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
           </motion.button>
         </div>
       </div>
-      <div className="mb-8 relative">
-        <img src={imageSrc} alt={title} className="object-cover rounded-2xl w-full md:h-[400px] h-44" sizes="100vh" />
+      <div className="mb-8 relative w-full md:h-[400px] h-44">
+        <Image
+          src={imageSrc}
+          alt={title}
+          className="object-cover rounded-2xl"
+          fill
+          sizes="100vh"
+          unoptimized
+          priority
+        />
       </div>
       <MarkdownRenderer content={content} className="max-w-full" />
 
@@ -75,11 +84,14 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
             {imagesNews.map((img, index) => (
               <PhotoView key={index} src={img.imgSrc}>
                 <div className="relative">
-                  <img
+                  <Image
                     src={img.imgSrc}
                     alt={`Imagem adicional ${index + 1}`}
                     className="object-cover rounded-2xl cursor-pointer w-full md:h-40 h-44"
                     sizes="100vh"
+                    fill
+                    unoptimized
+                    priority
                   />
                 </div>
               </PhotoView>

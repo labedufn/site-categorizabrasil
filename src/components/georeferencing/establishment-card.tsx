@@ -3,6 +3,7 @@
 import { formatPhone } from "@/lib/formatPhone";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 interface EstablishmentCardProps {
   name: string;
@@ -47,9 +48,16 @@ export function EstablishmentCard({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="relative rounded-xl overflow-hidden"
+            className="relative rounded-xl overflow-hidden w-20 h-20"
           >
-            <img src={imageUrl} alt={`Imagem do estabelecimento ${name}`} className="object-cover w-20 h-20" />
+            <Image
+              src={imageUrl}
+              alt={`Imagem do estabelecimento ${name}`}
+              className="object-cover"
+              fill
+              unoptimized
+              priority
+            />
           </motion.div>
         )}
 
@@ -57,7 +65,7 @@ export function EstablishmentCard({
           <h2 className="text-xl font-bold text-primary mb-1">{name}</h2>
           <p className="text-sm font-semibold text-gray-600 inline-flex items-center gap-1">
             Categoria
-            <img src={categoryIconUrl} alt={"Ícone da categoria"} width={20} height={20} />
+            <Image src={categoryIconUrl} alt={"Ícone da categoria"} width={20} height={20} unoptimized priority />
           </p>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface StoryCardProps {
   src: string;
   title: string;
@@ -7,8 +9,8 @@ interface StoryCardProps {
 export function StoryCard({ src, title, date }: StoryCardProps) {
   return (
     <div className="shadow-md">
-      <div className="relative">
-        <img src={src} alt={title} className="object-cover rounded-t-3xl w-full h-96" />
+      <div className="relative w-full h-96">
+        <Image src={src} alt={title} className="object-cover rounded-t-3xl" fill unoptimized priority />
       </div>
       <div className="p-8 bg-white rounded-b-3xl">
         <p className="text-gray-500 mb-2 text-lg">{date}</p>

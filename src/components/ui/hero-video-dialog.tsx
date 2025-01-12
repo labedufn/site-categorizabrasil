@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Play, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getYouTubeThumbnail, getYouTubeVideoEmbed } from "@/lib/youtubeUtils";
+import Image from "next/image";
 
 type AnimationStyle =
   | "from-bottom"
@@ -78,12 +79,14 @@ export function HeroVideoDialog({
   return (
     <div className={cn("relative", className)}>
       <div className="relative cursor-pointer group" onClick={() => setIsVideoOpen(true)}>
-        <img
+        <Image
           src={getYouTubeThumbnail(videoSrc).maxres}
           alt={thumbnailAlt}
           width={1920}
           height={1080}
           className="w-full transition-all duration-200 group-hover:brightness-[0.8] ease-out rounded-2xl shadow-lg border"
+          unoptimized
+          priority
         />
         <div className="absolute inset-0 flex items-center justify-center group-hover:scale-100 scale-[0.9] transition-all duration-200 ease-out rounded-2xl">
           <div className="bg-white/40 flex items-center justify-center rounded-full backdrop-blur-md size-28">

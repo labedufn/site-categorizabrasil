@@ -4,6 +4,7 @@ import { LayoutDefault } from "@/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { Accordion, Content, Tab, Trigger } from "../ui/accordion";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 type FaqItem = {
   title: string;
@@ -36,7 +37,15 @@ export function Faq({ items }: FaqProps) {
           top: "0",
         }}
       >
-        <img src="/background_faq.webp" sizes="100vw" alt="Background FAQ" className="object-cover opacity-15" />
+        <Image
+          src="/background_faq.webp"
+          sizes="100vw"
+          fill
+          alt="Background FAQ"
+          className="object-cover opacity-15"
+          unoptimized
+          priority
+        />
       </motion.div>
 
       <div className="absolute inset-0 bg-secondary z-0 mix-blend-multiply" />

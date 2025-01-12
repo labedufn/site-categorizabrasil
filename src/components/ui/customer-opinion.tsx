@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "./marquee";
 import { HeaderTitle } from "./header-title";
+import Image from "next/image";
 
 type Review = {
   name: string;
@@ -53,14 +54,25 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
               top: "0",
             }}
           >
-            <img
+            <Image
               src="/background_testimonial.webp"
               sizes="100vw"
               alt="Background"
+              fill
               className="object-cover object-center"
+              unoptimized
+              priority
             />
           </div>
-          <img src="/dot.webp" sizes="100vh" alt="Dots Overlay" className="absolute z-10 top-0 object-cover" />
+          <Image
+            src="/dot.webp"
+            sizes="100vh"
+            alt="Dots Overlay"
+            fill
+            className="absolute z-10 top-0 object-cover"
+            unoptimized
+            priority
+          />
           <div className="absolute inset-0 bg-white opacity-70 pointer-events-none z-10" />
           <div className="relative z-30 pb-32 pt-12">
             <Marquee pauseOnHover className="[--duration:20s]">
