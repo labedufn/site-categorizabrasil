@@ -46,7 +46,7 @@ export default async function Home() {
     {
       type: MarkerType.C,
       bgColor: "#af4f29",
-      textColor: "#ffffff",
+      textColor: "#feffff",
       imgSrc: "/selo-c.svg",
       description: "Serviços que cumprem satisfatoriamente os requisitos.",
     },
