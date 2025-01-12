@@ -36,7 +36,7 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
 
   return (
     <div className="mt-24 md:mt-32">
-      <HeaderTitle topText="Depoimentos" mainTitle="Opinião do Consumidor" className="mb-0 px-6 sm:px-0" />
+      <HeaderTitle topText="Depoimentos" mainTitle="Opinião do Consumidor" className="px-6 sm:px-0" />
       <div className="relative m-auto overflow-hidden">
         <div
           style={{
@@ -60,7 +60,6 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
               alt="Background"
               fill
               className="object-cover object-center"
-              unoptimized
               priority
             />
           </div>

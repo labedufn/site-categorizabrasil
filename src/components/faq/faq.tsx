@@ -43,7 +43,6 @@ export function Faq({ items }: FaqProps) {
           fill
           alt="Background FAQ"
           className="object-cover opacity-15"
-          unoptimized
           priority
         />
       </motion.div>
@@ -57,6 +56,7 @@ export function Faq({ items }: FaqProps) {
             mainTitle="Perguntas Frequentes"
             mainTitleColor="text-secondary-900"
             topTextColor="text-secondary-100"
+            className="mb-12"
           />
           <Accordion className="w-full">
             {items.map((item, index) => (

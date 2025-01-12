@@ -16,10 +16,10 @@ interface GeoMapInitialProps {
 export function GeoMapInitial({ centerLat, centerLng, zoom, markers, seals, topText, mainTitle }: GeoMapInitialProps) {
   return (
     <div className="lg:max-w-screen-xl max-w-none m-auto px-0 mt-32">
-      <HeaderTitle topText={topText} mainTitle={mainTitle} />
+      <HeaderTitle topText={topText} mainTitle={mainTitle} className="mb-12" />
       <div className="grid lg:grid-cols-[1fr_2fr] items-center gap-8 lg:gap-0">
         <SealList seals={seals} />
-        <div className="h-[400px] lg:h-[600px] px-6 lg:p-0">
+        <div className="h-[400px] lg:h-[600px] mr-0 px-6 lg:px-0 lg:mr-6">
           <Map centerLat={centerLat} centerLng={centerLng} zoom={zoom} markers={markers} />
         </div>
       </div>

@@ -14,7 +14,7 @@ export function HeaderTitle({
   className = "",
 }: HeaderTitleProps) {
   return (
-    <div className={`text-center mb-12 ${className}`}>
+    <div className={`text-center ${className}`}>
       <p className={`text-sm md:text-base mb-1 ${topTextColor}`}>{topText}</p>
       <h1 className={`text-3xl md:text-4xl font-bold ${mainTitleColor}`}>{mainTitle}</h1>
     </div>

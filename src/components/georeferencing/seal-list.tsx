@@ -11,7 +11,7 @@ export function SealList({ seals }: SealListProps) {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 pl-6 pr-0 lg:pr-6">
       {seals.map((seal) => (
         <div
           key={seal.type}

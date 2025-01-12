@@ -20,7 +20,7 @@ export function AboutSoftware({ logos, youtubeLink }: AboutSoftwareProps) {
       <div className="absolute hidden lg:block -left-[640px] top-5 h-full w-32 rotate-90 z-20 scale-150">
         <DecorativePattern />
       </div>
-      <HeaderTitle topText="Software" mainTitle="Categoriza Brasil" />
+      <HeaderTitle topText="Software" mainTitle="Categoriza Brasil" className="mb-12" />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] items-center gap-8">
         <div className="space-y-14">

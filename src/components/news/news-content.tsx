@@ -83,11 +83,11 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
           <PhotoProvider>
             {imagesNews.map((img, index) => (
               <PhotoView key={index} src={img.imgSrc}>
-                <div className="relative">
+                <div className="relative w-full md:h-40 h-44">
                   <Image
                     src={img.imgSrc}
                     alt={`Imagem adicional ${index + 1}`}
-                    className="object-cover rounded-2xl cursor-pointer w-full md:h-40 h-44"
+                    className="object-cover rounded-2xl cursor-pointer"
                     sizes="100vh"
                     fill
                     unoptimized
