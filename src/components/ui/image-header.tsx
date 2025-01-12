@@ -24,7 +24,7 @@ export function ImageHeader({ src, title, subtitle }: ImageHeaderProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 1.3, ease: "easeInOut" }}
+        transition={{ duration: 1.8, ease: "easeInOut" }}
         style={{
           position: "fixed",
           height: "100%",

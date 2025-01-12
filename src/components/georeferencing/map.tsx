@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -32,6 +32,7 @@ const markerIcons: Record<MarkerType, string> = {
 export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapProps) {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   useEffect(() => {
     if (!mapRef.current && mapContainerRef.current) {
@@ -47,6 +48,10 @@ export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapP
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl(), "top-left");
+
+      mapRef.current.on("load", () => {
+        setIsMapLoaded(true); // O mapa carregou
+      });
     }
 
     return () => {
@@ -92,5 +97,14 @@ export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapP
     });
   }, [markers, onMarkerClick]);
 
-  return <div ref={mapContainerRef} className="h-full w-full rounded-2xl overflow-hidden" />;
+  return (
+    <div className="h-full w-full rounded-2xl overflow-hidden relative">
+      {!isMapLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 animate-pulse">
+          <span className="text-gray-500">Carregando mapa...</span>
+        </div>
+      )}
+      <div ref={mapContainerRef} className={`h-full w-full ${!isMapLoaded ? "opacity-0" : ""}`} />
+    </div>
+  );
 }
