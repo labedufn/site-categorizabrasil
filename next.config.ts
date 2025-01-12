@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
         pathname: "/assets/**",
       },
     ],
+    formats: ["image/avif", "image/webp"],
   },
   async headers() {
     return [
@@ -19,14 +20,9 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
-        ],
-      },
-      {
-        source: "/assets/:path*.svg",
-        headers: [
           {
             key: "Content-Type",
-            value: "image/svg+xml; charset=utf-8",
+            value: "image/*",
           },
         ],
       },
