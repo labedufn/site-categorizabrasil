@@ -5,13 +5,16 @@ import { LayoutGeneral } from "@/layouts/layout-general";
 import { ArticlesSection } from "@/components/articles-plublication/articles-section";
 import { getArticlesPageAction } from "./actions";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Artigos e Publicações",
   description: "Artigos e publicações sobre o Categoriza Brasil",
 };
 
-export async function getServerSideProps() {
+export default async function Publicacoes() {
   const articlesPageData = await getArticlesPageAction();
+  const breadcrumbItems = [{ label: "Início", href: "/" }, { label: "Artigos e Publicações" }];
 
   const articlesItems = articlesPageData.map((articles) => ({
     title: articles.title,
@@ -20,17 +23,6 @@ export async function getServerSideProps() {
     date: articles.date,
     url: articles.url,
   }));
-
-  return {
-    props: {
-      articlesItems,
-    },
-  };
-}
-
-export default function Publicacoes({ articlesItems }: { articlesItems: any[] }) {
-  const breadcrumbItems = [{ label: "Início", href: "/" }, { label: "Artigos e Publicações" }];
-
   return (
     <>
       <LayoutGeneral>
@@ -46,3 +38,5 @@ export default function Publicacoes({ articlesItems }: { articlesItems: any[] })
     </>
   );
 }
+
+export const dynamic = "force-dynamic";
