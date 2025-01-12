@@ -13,7 +13,7 @@ export const FooterCopyright = ({ companyName }: FooterCopyrightProps) => (
     <Link href="https://www.labed.com.br" passHref target="blank">
       <Image
         src="/logo_labed.svg"
-        alt="Logo Categoriza Brasil"
+        alt="Logo LABED"
         width={80}
         height={40}
         className="self-center"
