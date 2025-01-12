@@ -17,6 +17,7 @@ export const FooterCopyright = ({ companyName }: FooterCopyrightProps) => (
         width={80}
         height={40}
         className="self-center"
+        unoptimized
         priority
       />
     </Link>
