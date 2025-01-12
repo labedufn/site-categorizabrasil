@@ -5,6 +5,8 @@ import { LayoutGeneral } from "@/layouts/layout-general";
 import { DocumentsSection } from "@/components/documents/documents-section";
 import { getDocumentsPageAction } from "./actions";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Documentos Úteis",
   description: "Documentos úteis para aprimorar o conhecimento sobre a categorização.",
