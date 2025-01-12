@@ -10,7 +10,7 @@ import { Marker, MarkerType, Seal } from "@/types";
 import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
 import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
 
-export const revalidate = 60;
+export const revalidate = 20;
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",

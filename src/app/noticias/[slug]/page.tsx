@@ -5,7 +5,7 @@ import { LayoutInterno } from "@/layouts/layout-interno";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export const revalidate = 60;
+export const revalidate = 20;
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Notícia",

@@ -7,7 +7,7 @@ import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getAboutPageAction } from "./actions";
 
-export const revalidate = 60;
+export const revalidate = 20;
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Sobre",

@@ -8,7 +8,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { LayoutDefault } from "@/layouts/layout-default";
 import { getGeoreferencingPageAction } from "./actions";
 
-export const revalidate = 60;
+export const revalidate = 20;
 
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Georreferenciamento",

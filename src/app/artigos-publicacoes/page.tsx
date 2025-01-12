@@ -5,6 +5,8 @@ import { LayoutGeneral } from "@/layouts/layout-general";
 import { ArticlesSection } from "@/components/articles-plublication/articles-section";
 import { getArticlesPageAction } from "./actions";
 
+export const revalidate = 20;
+
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Artigos e Publicações",
   description: "Artigos e publicações sobre o Categoriza Brasil",
@@ -36,5 +38,3 @@ export default async function Publicacoes() {
     </>
   );
 }
-
-export const dynamic = "force-dynamic";
