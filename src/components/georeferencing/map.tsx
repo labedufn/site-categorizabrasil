@@ -45,6 +45,7 @@ export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapP
         zoom: zoom,
         attributionControl: false,
         interactive: true,
+        projection: "mercator",
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl(), "top-left");
