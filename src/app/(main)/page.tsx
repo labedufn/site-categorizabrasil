@@ -5,12 +5,22 @@ import { getHomePageAction } from "./actions";
 import { CustomerOpinion } from "@/components/ui/customer-opinion";
 import { Faq } from "@/components/faq/faq";
 import { LayoutGeneral } from "@/layouts/layout-general";
+import { Metadata } from "next";
 import { Marker, MarkerType, Seal } from "@/types";
-import Head from "next/head";
 import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
 import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
 
 export const revalidate = 20;
+
+export const metadata: Metadata = {
+  title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
+  description: "Site categorização dos serviços de alimentação no Brasil.",
+  metadataBase: new URL("https://www.categorizabrasil.com.br"),
+  openGraph: {
+    title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
+    description: "Site categorização dos serviços de alimentação no Brasil.",
+  },
+};
 
 export default async function Home() {
   const homePageData = await getHomePageAction();
@@ -59,14 +69,6 @@ export default async function Home() {
 
   return (
     <>
-      <Head>
-        <title>Categoriza Brasil - Categorização dos Serviços de Alimentação</title>
-        <meta property="og:title" content="Categoriza Brasil - Categorização dos Serviços de Alimentação" />
-        <meta property="og:description" content="Site categorização dos serviços de alimentação no Brasil." />
-        <meta property="og:image" content="opengraph-image.webp" />
-        <meta property="og:url" content="https://homologa.categorizabrasil.com.br" />
-        <meta property="og:type" content="website" />
-      </Head>
       <LayoutGeneral>
         <WhatsappFab />
         <Hero />
