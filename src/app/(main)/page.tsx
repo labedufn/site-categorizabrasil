@@ -15,6 +15,7 @@ export const revalidate = 20;
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
   description: "Site categorização dos serviços de alimentação no Brasil.",
+  metadataBase: new URL("https://homologa.categorizabrasil.com.br"),
   openGraph: {
     title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
     description: "Site categorização dos serviços de alimentação no Brasil.",
