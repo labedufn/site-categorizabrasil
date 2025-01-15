@@ -15,6 +15,10 @@ export const revalidate = 20;
 export const metadata: Metadata = {
   title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
   description: "Site categorização dos serviços de alimentação no Brasil.",
+  openGraph: {
+    title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
+    description: "Site categorização dos serviços de alimentação no Brasil.",
+  },
 };
 
 export default async function Home() {
