@@ -2,7 +2,7 @@ import { ImageHeader } from "@/components/ui/image-header";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { LayoutInterno } from "@/layouts/layout-interno";
 import { LayoutGeneral } from "@/layouts/layout-general";
-import { LayoutDefault } from "@/layouts/layout-default";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 import { getEnglishPageAction } from "./actions";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "@/components/ui/breadcrumb";

@@ -1,9 +1,9 @@
 import { ImageHeader } from "@/components/ui/image-header";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
-import { LayoutInterno } from "@/layouts/layout-interno";
-import { LayoutGeneral } from "@/layouts/layout-general";
 import { NewsSection } from "@/components/news/news-section";
 import { getNewsPageAction } from "./actions";
+import { LayoutGeneral } from "@/components/layouts/layout-general";
+import { LayoutInterno } from "@/components/layouts/layout-interno";
 
 export const revalidate = 20;
 

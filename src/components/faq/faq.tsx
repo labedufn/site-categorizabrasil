@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutDefault } from "@/layouts/layout-default";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { Accordion, Content, Tab, Trigger } from "../ui/accordion";
 import { motion } from "motion/react";

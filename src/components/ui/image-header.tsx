@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutDefault } from "@/layouts/layout-default";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 import { motion } from "motion/react";
 import Image from "next/image";
 

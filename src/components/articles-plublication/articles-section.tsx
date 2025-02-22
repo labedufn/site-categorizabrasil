@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FilterDropdown } from "../ui/filter-dropdown";
 import { TextSearch } from "../ui/text-search";
 import { Pagination } from "../ui/pagination";
-import { LayoutDefault } from "@/layouts/layout-default";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 import { Breadcrumb } from "../ui/breadcrumb";
 import { ArticlesCard } from "../ui/articles-card";
 

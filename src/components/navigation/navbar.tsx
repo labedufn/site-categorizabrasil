@@ -7,7 +7,7 @@ import { Logo } from "@/components/ui/logos";
 import { useNavigation } from "@/hooks/useNavigation";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { LayoutDefault } from "@/layouts/layout-default";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 import { SocialData } from "@/types/social-data";
 
 export function Navbar({ instagram, whatsapp, youtubeChannel }: SocialData) {

@@ -1,4 +1,4 @@
-import { LayoutDefault } from "@/layouts/layout-default";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 import { Icon } from "../ui/icons";
 import { FeatureCard, FeatureCardProps } from "./feature-card";
 

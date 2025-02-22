@@ -1,12 +1,12 @@
 import { ImageHeader } from "@/components/ui/image-header";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
-import { LayoutInterno } from "@/layouts/layout-interno";
-import { LayoutGeneral } from "@/layouts/layout-general";
 import { GeoMap } from "@/components/georeferencing/geo-map";
 import { Marker, MarkerType } from "@/types";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { LayoutDefault } from "@/layouts/layout-default";
 import { getGeoreferencingPageAction } from "./actions";
+import { LayoutGeneral } from "@/components/layouts/layout-general";
+import { LayoutInterno } from "@/components/layouts/layout-interno";
+import { LayoutDefault } from "@/components/layouts/layout-default";
 
 export const revalidate = 20;
 

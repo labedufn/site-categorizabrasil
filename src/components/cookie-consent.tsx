@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button-custom";
 import Link from "next/link";
-import { LayoutDefault } from "@/layouts/layout-default";
 import { motion, AnimatePresence } from "motion/react";
+import { LayoutDefault } from "./layouts/layout-default";
 
 export function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);

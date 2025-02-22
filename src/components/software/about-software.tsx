@@ -1,9 +1,9 @@
-import { LayoutDefault } from "@/layouts/layout-default";
 import { HeaderTitle } from "../ui/header-title";
 import { HeroVideoDialog } from "../ui/hero-video-dialog";
 import { FeaturesSection } from "../ui/feature-section";
 import { LogoCarousel } from "../ui/logo-carousel";
 import { DecorativePattern } from "../ui/decorative-pattern";
+import { LayoutDefault } from "../layouts/layout-default";
 
 interface Logo {
   imgSrc: string;

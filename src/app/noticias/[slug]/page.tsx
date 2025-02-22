@@ -1,7 +1,7 @@
 import { getNewsPageAction } from "@/app/noticias/actions";
+import { LayoutGeneral } from "@/components/layouts/layout-general";
+import { LayoutInterno } from "@/components/layouts/layout-interno";
 import { NewsContent } from "@/components/news/news-content";
-import { LayoutGeneral } from "@/layouts/layout-general";
-import { LayoutInterno } from "@/layouts/layout-interno";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

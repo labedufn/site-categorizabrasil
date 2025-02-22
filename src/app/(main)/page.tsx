@@ -4,11 +4,11 @@ import { WhatsappFab } from "@/components/ui/whatsapp-fab";
 import { getHomePageAction } from "./actions";
 import { CustomerOpinion } from "@/components/ui/customer-opinion";
 import { Faq } from "@/components/faq/faq";
-import { LayoutGeneral } from "@/layouts/layout-general";
 import { Metadata } from "next";
 import { Marker, MarkerType, Seal } from "@/types";
 import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
 import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
+import { LayoutGeneral } from "@/components/layouts/layout-general";
 
 export const revalidate = 20;
 
