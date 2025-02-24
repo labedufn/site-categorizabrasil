@@ -1,5 +1,6 @@
 import {
   ChartNoAxesCombined,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   FileText,
@@ -106,4 +107,5 @@ export const Icon = {
   chevronLeft: ChevronLeft,
   search: Search,
   fileText: FileText,
+  chevronDown: ChevronDown,
 };

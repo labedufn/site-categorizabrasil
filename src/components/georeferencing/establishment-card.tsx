@@ -65,7 +65,7 @@ export function EstablishmentCard({
           <h2 className="text-xl font-bold text-primary mb-1">{name}</h2>
           <p className="text-sm font-semibold text-gray-600 inline-flex items-center gap-1">
             Categoria
-            <Image src={categoryIconUrl} alt={"Ícone da categoria"} width={20} height={20} unoptimized priority />
+            <Image src={categoryIconUrl} alt={"Ícone da categoria"} width={20} height={20} priority />
           </p>
         </div>
       </div>

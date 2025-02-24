@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 
 export default async function Documentos() {
   const documentsPageData = await getDocumentsPageAction();
-  const breadcrumbItems = [{ label: "Início", href: "/" }, { label: "Documentos Úteis" }];
+  const breadcrumbItems = [
+    { label: "Início", href: "/" },
+    { label: "Publicações", href: "#" },
+    { label: "Documentos Úteis" },
+  ];
 
   const documentsItems = documentsPageData.map((documents) => ({
     title: documents.title,

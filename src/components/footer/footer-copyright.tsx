@@ -11,15 +11,7 @@ export const FooterCopyright = ({ companyName }: FooterCopyrightProps) => (
       &copy; {new Date().getFullYear()} <span className="font-bold">{companyName}</span>
     </p>
     <Link href="https://www.labed.com.br" passHref target="blank">
-      <Image
-        src="/logo_labed.svg"
-        alt="Logo LABED"
-        width={80}
-        height={40}
-        className="self-center"
-        unoptimized
-        priority
-      />
+      <Image src="/logo_labed.svg" alt="Logo LABED" width={80} height={40} className="self-center" priority />
     </Link>
   </div>
 );

@@ -66,15 +66,7 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
         </div>
       </div>
       <div className="mb-8 relative w-full md:h-[400px] h-44">
-        <Image
-          src={imageSrc}
-          alt={title}
-          className="object-cover rounded-2xl"
-          fill
-          sizes="100vh"
-          unoptimized
-          priority
-        />
+        <Image src={imageSrc} alt={title} className="object-cover rounded-2xl" fill sizes="100vh" priority />
       </div>
       <MarkdownRenderer content={content} className="max-w-full" />
 
@@ -90,7 +82,6 @@ export const NewsContent: React.FC<NewsContentProps> = ({ title, date, imageSrc,
                     className="object-cover rounded-2xl cursor-pointer"
                     sizes="100vh"
                     fill
-                    unoptimized
                     priority
                   />
                 </div>

@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={montserrat.className}>
+      <body className={`${montserrat.className} bg-white`}>
         <NextTopLoader color="#003963" height={4} showSpinner={false} easing="ease" speed={500} />
         {children}
       </body>

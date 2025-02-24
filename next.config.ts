@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "painel.categorizabrasil.com.br",
         pathname: "/assets/**",
       },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/vi/**",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
