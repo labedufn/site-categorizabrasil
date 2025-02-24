@@ -26,6 +26,7 @@ export function SealList({ seals }: SealListProps) {
               height={150}
               className="p-2 border-white border-4 rounded-full w-24 h-24 lg:w-40 lg:h-40"
               style={{ backgroundColor: seal.bgColor }}
+              unoptimized
               priority
             />
             <p className="font-bold pr-8 text-sm lg:text-base" style={{ color: seal.textColor }}>
