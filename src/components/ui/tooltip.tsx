@@ -10,9 +10,17 @@ interface TooltipProps {
   position?: "top" | "bottom" | "left" | "right";
   delay?: number;
   alwaysVisible?: boolean;
+  closable?: boolean;
 }
 
-export function Tooltip({ children, content, position = "top", delay = 300, alwaysVisible = false }: TooltipProps) {
+export function Tooltip({
+  children,
+  content,
+  position = "top",
+  delay = 300,
+  alwaysVisible = false,
+  closable = false,
+}: TooltipProps) {
   const [isVisible, setIsVisible] = useState(alwaysVisible);
   const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null);
 
@@ -88,9 +96,11 @@ export function Tooltip({ children, content, position = "top", delay = 300, alwa
           >
             <div className="flex items-center">
               <span>{content}</span>
-              <button onClick={handleClose} className="ml-2 text-white font-bold focus:outline-none">
-                <Icon.x className="w-4 h-4" />
-              </button>
+              {closable && (
+                <button onClick={handleClose} className="ml-2 text-white font-bold focus:outline-none">
+                  <Icon.x className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </motion.div>
         )}

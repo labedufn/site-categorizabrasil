@@ -44,7 +44,8 @@ export const WhatsappFab = () => {
         <Tooltip
           content="Precisa de mais informações sobre quem pode categorizar? Entre em contato pelo WhatsApp"
           position="left"
-          alwaysVisible={true}
+          closable
+          alwaysVisible
         >
           {whatsappButton}
         </Tooltip>
