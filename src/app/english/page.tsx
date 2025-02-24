@@ -1,11 +1,11 @@
 import { ImageHeader } from "@/components/ui/image-header";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
-import { LayoutInterno } from "@/layouts/layout-interno";
-import { LayoutGeneral } from "@/layouts/layout-general";
 import { LayoutDefault } from "@/components/layouts/layout-default";
 import { getEnglishPageAction } from "./actions";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { LayoutGeneral } from "@/components/layouts/layout-general";
+import { LayoutInterno } from "@/components/layouts/layout-interno";
 
 export const revalidate = 20;
 
