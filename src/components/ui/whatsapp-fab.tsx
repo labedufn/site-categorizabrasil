@@ -27,7 +27,7 @@ export const WhatsappFab = () => {
       transition={{ type: "spring", stiffness: 200, damping: 10 }}
     >
       <Link
-        href="{data.whatsapp}"
+        href="https://wa.me/message/A553UPCS3K2MI1"
         target="_blank"
         className="bg-green-500 rounded-full p-2 w-14 h-14 flex justify-center items-center"
       >
