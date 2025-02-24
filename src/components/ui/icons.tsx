@@ -9,6 +9,7 @@ import {
   MessageCircleWarning,
   Search,
   UserRoundCheck,
+  X,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -108,4 +109,5 @@ export const Icon = {
   search: Search,
   fileText: FileText,
   chevronDown: ChevronDown,
+  x: X,
 };

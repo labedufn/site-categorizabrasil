@@ -2,16 +2,18 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Icon } from "./icons";
 
 interface TooltipProps {
   children: React.ReactNode;
   content: React.ReactNode;
   position?: "top" | "bottom" | "left" | "right";
   delay?: number;
+  alwaysVisible?: boolean;
 }
 
-export function Tooltip({ children, content, position = "top", delay = 300 }: TooltipProps) {
-  const [isVisible, setIsVisible] = useState(false);
+export function Tooltip({ children, content, position = "top", delay = 300, alwaysVisible = false }: TooltipProps) {
+  const [isVisible, setIsVisible] = useState(alwaysVisible);
   const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null);
 
   const positions = {
@@ -41,16 +43,24 @@ export function Tooltip({ children, content, position = "top", delay = 300 }: To
   };
 
   const handleMouseEnter = () => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, delay);
-    setTooltipTimer(timer);
+    if (!alwaysVisible) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, delay);
+      setTooltipTimer(timer);
+    }
   };
 
   const handleMouseLeave = () => {
-    if (tooltipTimer) {
-      clearTimeout(tooltipTimer);
+    if (!alwaysVisible) {
+      if (tooltipTimer) {
+        clearTimeout(tooltipTimer);
+      }
+      setIsVisible(false);
     }
+  };
+
+  const handleClose = () => {
     setIsVisible(false);
   };
 
@@ -72,11 +82,16 @@ export function Tooltip({ children, content, position = "top", delay = 300 }: To
             className={`
               absolute z-50 px-3 py-2
               text-xs text-white bg-gray-900 rounded-lg
-              pointer-events-none whitespace-nowrap
+              whitespace-nowrap
               ${positions[position]}
             `}
           >
-            {content}
+            <div className="flex items-center">
+              <span>{content}</span>
+              <button onClick={handleClose} className="ml-2 text-white font-bold focus:outline-none">
+                <Icon.x className="w-4 h-4" />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

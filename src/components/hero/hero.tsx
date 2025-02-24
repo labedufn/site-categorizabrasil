@@ -46,8 +46,8 @@ export const Hero = () => {
           </div>
           <HeroHeader />
           <div className="flex items-center sm:justify-center">
-            <Link href="/sobre">
-              <Button>Saiba mais</Button>
+            <Link href="https://wa.me/message/A553UPCS3K2MI1" target="_blank">
+              <Button>Entre em contato</Button>
             </Link>
           </div>
         </div>
