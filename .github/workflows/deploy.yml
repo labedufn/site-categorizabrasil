@@ -1,4 +1,4 @@
-name: Deploy Coolify - Site Categoriza
+name: Deploy - Site Categoriza
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout do Código
         uses: actions/checkout@v3
 
-      - name: Deploy para Coolify
+      - name: Deploy
         env:
           COOLIFY_API_KEY: ${{ secrets.COOLIFY_API_KEY }}
           COOLIFY_APP_ID_MAIN: ${{ secrets.COOLIFY_APP_ID_MAIN }}
