@@ -4,6 +4,7 @@ import { CookieConsent } from "@/components/cookie-consent";
 import NextTopLoader from "nextjs-toploader";
 import "../styles/globals.css";
 import "react-photo-view/dist/react-photo-view.css";
+import { GoogleAnalytics } from "@/components/google-analytics";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
         {children}
       </body>
       <CookieConsent />
+      <GoogleAnalytics />
     </html>
   );
 }
