@@ -9,6 +9,7 @@ import { Marker, MarkerType, Seal } from "@/types";
 import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
 import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
 import { LayoutGeneral } from "@/components/layouts/layout-general";
+import ogImage from "./opengraph-image.jpg";
 
 export const revalidate = 20;
 
@@ -18,6 +19,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
     description: "Site categorização dos serviços de alimentação no Brasil.",
+    images: [
+      {
+        url: ogImage.src,
+        width: 800,
+        height: 600,
+        alt: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: ogImage.src,
+        width: 800,
+        height: 600,
+        alt: "Categoriza Brasil - Categorização dos Serviços de Alimentação",
+      },
+    ],
   },
 };
 
