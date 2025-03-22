@@ -13,7 +13,7 @@ export const footerSections: FooterSection[] = [
       { label: "Notícias", href: "/noticias" },
       { label: "Artigos", href: "/publicacoes/artigos" },
       { label: "Documentos Úteis", href: "/publicacoes/documentos" },
-      { label: "Georreferenciamento", href: "/georreferenciamento" },
+      { label: "Georreferenciamento", href: "/mapa" },
     ],
   },
   {

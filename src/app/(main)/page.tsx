@@ -7,7 +7,7 @@ import { Faq } from "@/components/faq/faq";
 import { Metadata } from "next";
 import { Marker, MarkerType, Seal } from "@/types";
 import { GeoMapInitial } from "@/components/georeferencing/geo-map-initial";
-import { getGeoreferencingPageAction } from "../georreferenciamento/actions";
+import { getGeoreferencingPageAction } from "../mapa/actions";
 import { LayoutGeneral } from "@/components/layouts/layout-general";
 import ogImage from "./opengraph-image.jpg";
 

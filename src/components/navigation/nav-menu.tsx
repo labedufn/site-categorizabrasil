@@ -40,7 +40,7 @@ export function NavMenu({ isOpen, instagram, whatsapp, youtubeChannel }: NavMenu
         { href: "/publicacoes/documentos", label: "Documentos Úteis" },
       ],
     },
-    { href: "/georreferenciamento", label: "Georreferenciamento" },
+    { href: "/mapa", label: "Georreferenciamento" },
     {
       label: "Softwares",
       subItems: [
