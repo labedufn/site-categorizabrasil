@@ -26,9 +26,9 @@ export default function RootLayout({
       <body className={`${montserrat.className} bg-white`}>
         <NextTopLoader color="#003963" height={4} showSpinner={false} easing="ease" speed={500} />
         {children}
+        <CookieConsent />
+        <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
       </body>
-      <CookieConsent />
-      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
     </html>
   );
 }
