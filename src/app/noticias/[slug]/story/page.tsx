@@ -16,7 +16,11 @@ export default async function Story({ params }: { params: Promise<{ slug: string
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <StoryGenerator title={newsData.titulo} date={newsData.criadoEm} imageSrc={newsData.imagemPrincipal} />
+      <StoryGenerator
+        title={newsData.title}
+        date={newsData.publishedAtLabel}
+        imageSrc={newsData.heroImage || "/background_news.webp"}
+      />
     </div>
   );
 }

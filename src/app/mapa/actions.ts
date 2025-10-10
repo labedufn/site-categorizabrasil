@@ -1,8 +1,7 @@
 "use server";
 
-import { getGeoreferencingPageContent } from "@/domain/services/georeferencingPageService";
+import { getGeoreferencingPoints } from "@/server/features/georeferencing";
 
 export async function getGeoreferencingPageAction() {
-  const data = await getGeoreferencingPageContent();
-  return data;
+  return getGeoreferencingPoints();
 }

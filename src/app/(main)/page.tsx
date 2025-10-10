@@ -75,23 +75,13 @@ export default async function Home() {
     },
   ];
 
-  const reviews = homePageData.opinioesConsumidores.map((opiniao) => ({
-    name: opiniao.nome,
-    body: opiniao.descricao,
-  }));
-
-  const faq = homePageData.faq.map((faq) => ({
-    title: faq.pergunta,
-    content: faq.resposta,
-  }));
-
   return (
     <>
       <LayoutGeneral>
         <WhatsappFab />
         <Hero />
         <AboutSoftware logos={homePageData.logos} youtubeLink={homePageData.youtubeVideoLink} />
-        <Faq items={faq} />
+        <Faq items={homePageData.faq} />
         <GeoMapInitial
           topText="Estabelecimentos"
           mainTitle="Geolocalizados"
@@ -101,7 +91,7 @@ export default async function Home() {
           markers={markers}
           seals={seals}
         />
-        <CustomerOpinion reviews={reviews} />
+        <CustomerOpinion reviews={homePageData.reviews} />
       </LayoutGeneral>
     </>
   );

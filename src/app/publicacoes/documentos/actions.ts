@@ -1,8 +1,7 @@
 "use server";
 
-import { getDocumentsPageContent } from "@/domain/services/documentsPageService";
+import { getDocuments } from "@/server/features/documents";
 
 export async function getDocumentsPageAction() {
-  const data = await getDocumentsPageContent();
-  return data;
+  return getDocuments();
 }

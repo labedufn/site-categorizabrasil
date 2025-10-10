@@ -1,8 +1,7 @@
 "use server";
 
-import { getNewsPageContent } from "@/domain/services/newsPageService";
+import { getNews } from "@/server/features/news";
 
 export async function getNewsPageAction() {
-  const data = await getNewsPageContent();
-  return data;
+  return getNews();
 }

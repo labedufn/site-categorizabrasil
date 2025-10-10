@@ -11,7 +11,8 @@ import { Breadcrumb } from "../ui/breadcrumb";
 interface NewsItem {
   imageSrc: string;
   title: string;
-  date: string;
+  publishedAt: string;
+  publishedAtLabel: string;
   url: string;
 }
 
@@ -37,9 +38,9 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
 
     const sortedNews = [...newsItems].sort((a, b) => {
       if (option === "Mais recente") {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
+        return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
       } else {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
+        return new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
       }
     });
 
@@ -69,7 +70,7 @@ export function NewsSection({ breadcrumbItems, initialNewsItems }: NewsSectionPr
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
         {currentItems.map((news, index) => (
-          <NewsCard key={index} src={news.imageSrc} title={news.title} date={news.date} url={news.url} />
+          <NewsCard key={index} src={news.imageSrc} title={news.title} date={news.publishedAtLabel} url={news.url} />
         ))}
       </div>
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />

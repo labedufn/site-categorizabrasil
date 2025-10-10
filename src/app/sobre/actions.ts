@@ -1,8 +1,7 @@
 "use server";
 
-import { getAboutPageContent } from "@/domain/services/aboutPageService";
+import { getAboutPageContent } from "@/server/features/about";
 
 export async function getAboutPageAction() {
-  const data = await getAboutPageContent();
-  return data;
+  return getAboutPageContent();
 }

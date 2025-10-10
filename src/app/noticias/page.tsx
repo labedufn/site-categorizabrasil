@@ -17,9 +17,10 @@ export default async function Noticias() {
   const breadcrumbItems = [{ label: "Início", href: "/" }, { label: "Notícias" }];
 
   const newsItems = newsPageData.map((news) => ({
-    imageSrc: news.imagemPrincipal,
-    title: news.titulo,
-    date: news.criadoEm,
+    imageSrc: news.heroImage || "/background_news.webp",
+    title: news.title,
+    publishedAt: news.publishedAt,
+    publishedAtLabel: news.publishedAtLabel,
     url: `/noticias/${news.slug}`,
   }));
 

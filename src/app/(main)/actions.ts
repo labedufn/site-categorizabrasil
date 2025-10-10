@@ -1,8 +1,7 @@
 "use server";
 
-import { getHomePageContent } from "@/domain/services/homePageService";
+import { getHomePageContent } from "@/server/features/home";
 
 export async function getHomePageAction() {
-  const data = await getHomePageContent();
-  return data;
+  return getHomePageContent();
 }

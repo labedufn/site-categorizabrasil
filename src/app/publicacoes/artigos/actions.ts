@@ -1,8 +1,7 @@
 "use server";
 
-import { getArticlesPageContent } from "@/domain/services/articlesPageService";
+import { getArticles } from "@/server/features/articles";
 
 export async function getArticlesPageAction() {
-  const data = await getArticlesPageContent();
-  return data;
+  return getArticles();
 }

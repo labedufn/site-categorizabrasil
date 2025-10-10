@@ -3,14 +3,9 @@ import { Marquee } from "./marquee";
 import { HeaderTitle } from "./header-title";
 import Image from "next/image";
 
-type Review = {
-  name: string;
-  body: string;
-};
+type Review = { name: string; body: string };
 
-type CustomerOpinionProps = {
-  reviews: Review[];
-};
+type CustomerOpinionProps = { reviews: Review[] };
 
 const ReviewCard = ({ name, body }: { name: string; body: string }) => {
   return (
@@ -38,22 +33,8 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
     <div className="mt-24 md:mt-32">
       <HeaderTitle topText="Depoimentos" mainTitle="Opinião do Consumidor" className="px-6 sm:px-0" />
       <div className="relative m-auto overflow-hidden">
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            clipPath: "inset(0 0 0 0)",
-          }}
-        >
-          <div
-            style={{
-              position: "fixed",
-              height: "100%",
-              width: "100%",
-              left: "0",
-              top: "0",
-            }}
-          >
+        <div style={{ position: "relative", width: "100%", clipPath: "inset(0 0 0 0)" }}>
+          <div style={{ position: "fixed", height: "100%", width: "100%", left: "0", top: "0" }}>
             <Image
               src="/background_testimonial.webp"
               sizes="100vw"
