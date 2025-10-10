@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3001:3001"
+      - "3001:3000"
     environment:
       NODE_ENV: production
     container_name: site-categoriza-prod
