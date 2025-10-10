@@ -5,6 +5,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3000"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.categorizabrasil.rule=Host(`categorizarbrasil.com.br`,`www.categorizarbrasil.com.br`)
+      - traefik.http.routers.categorizabrasil.entrypoints=websecure
+      - traefik.http.routers.categorizabrasil.tls=true
+      - traefik.http.services.categorizabrasil.loadbalancer.server.port=3000
     environment:
       NODE_ENV: production
     container_name: site-categoriza-prod
