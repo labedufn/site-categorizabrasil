@@ -2,9 +2,9 @@
   "name": "infra",
   "private": true,
   "scripts": {
-    "dev": "docker compose -f docker-compose.dev.yml up",
-    "dev:down": "docker compose -f docker-compose.dev.yml down -v",
-    "up": "docker compose -f docker-compose.yml up -d",
-    "down": "docker compose -f docker-compose.yml down -v"
+    "dev": "bash -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; docker compose -f docker-compose.dev.yml up'",
+    "dev:down": "bash -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; docker compose -f docker-compose.dev.yml down -v'",
+    "up": "bash -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; docker compose -f docker-compose.yml up -d'",
+    "down": "bash -lc 'set -a; [ -f ../.env ] && . ../.env; set +a; docker compose -f docker-compose.yml down -v'"
   }
 }
