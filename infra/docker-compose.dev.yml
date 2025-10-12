@@ -1,0 +1,61 @@
+services:
+  directus-database:
+    image: postgis/postgis:16-master
+    volumes:
+      - ../cms/data/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER:-directus}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-directus}
+      POSTGRES_DB: ${DB_DATABASE:-directus}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  directus-cache:
+    image: redis:6
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  directus:
+    image: directus/directus:11.12.0
+    ports:
+      - "8055:8055"
+    env_file:
+      - ../cms/.env
+    depends_on:
+      directus-database:
+        condition: service_healthy
+      directus-cache:
+        condition: service_healthy
+    volumes:
+      - ../cms/uploads:/directus/uploads
+      - ../cms/extensions:/directus/extensions
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../:/app
+      - /app/node_modules
+    env_file:
+      - ../.env
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-http://localhost:8055}
+      NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-http://localhost:8055}
+      DIRECTUS_INTERNAL_URL: http://directus:8055
+    command: npm run dev
+    depends_on:
+      directus:
+        condition: service_started
+    container_name: site-categoriza-dev

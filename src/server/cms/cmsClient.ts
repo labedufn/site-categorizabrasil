@@ -5,13 +5,15 @@ let cachedClient: AxiosInstance | null = null;
 
 function createClient(): AxiosInstance {
   if (!isCmsConfigured) {
-    throw new Error(`${ENV_TAG} CMS não configurado. Verifique as variáveis NEXT_PUBLIC_API_BASE_URL e API_TOKEN.`);
+    throw new Error(
+      `${ENV_TAG} CMS não configurado. Verifique as variáveis DIRECTUS_INTERNAL_URL (ou NEXT_PUBLIC_DIRECTUS_URL) e DIRECTUS_STATIC_TOKEN.`,
+    );
   }
 
   if (cachedClient) return cachedClient;
 
   cachedClient = axios.create({
-    baseURL: cmsEnv.baseUrl,
+    baseURL: cmsEnv.baseUrl.replace(/\/+$/, ""),
     timeout: cmsEnv.timeoutMs,
     headers: {
       Authorization: `Bearer ${cmsEnv.token}`,

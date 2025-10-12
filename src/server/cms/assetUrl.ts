@@ -1,9 +1,16 @@
 import { cmsEnv } from "../config/env";
 
-const DEFAULT_ASSET_EXTENSION = "png";
+const SLASH_REGEX = /\/+$/;
 
 export function buildCmsAssetUrl(assetId: string, extension?: string): string {
-  if (!cmsEnv.baseUrl || !assetId) return "";
-  const ext = (extension ?? DEFAULT_ASSET_EXTENSION).replace(/^\./, "");
-  return `${cmsEnv.baseUrl}/assets/${assetId}.${ext}`;
+  const baseUrl = (cmsEnv.publicUrl || cmsEnv.baseUrl).replace(SLASH_REGEX, "");
+
+  if (!baseUrl || !assetId) return "";
+
+  if (!extension) {
+    return `${baseUrl}/assets/${assetId}`;
+  }
+
+  const ext = extension.replace(/^\./, "");
+  return `${baseUrl}/assets/${assetId}.${ext}`;
 }

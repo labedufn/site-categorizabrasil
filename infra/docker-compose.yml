@@ -1,0 +1,66 @@
+services:
+  directus-database:
+    image: postgis/postgis:16-master
+    restart: unless-stopped
+    volumes:
+      - ../cms/data/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER:-directus}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-directus}
+      POSTGRES_DB: ${DB_DATABASE:-directus}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  directus-cache:
+    image: redis:6
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  directus:
+    image: directus/directus:11.12.0
+    restart: unless-stopped
+    ports:
+      - "8055:8055"
+    env_file:
+      - ../cms/.env
+    depends_on:
+      directus-database:
+        condition: service_healthy
+      directus-cache:
+        condition: service_healthy
+    volumes:
+      - ../cms/uploads:/directus/uploads
+      - ../cms/extensions:/directus/extensions
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.categorizabrasil.rule=Host(`categorizarbrasil.com.br`,`www.categorizarbrasil.com.br`)
+      - traefik.http.routers.categorizabrasil.entrypoints=websecure
+      - traefik.http.routers.categorizabrasil.tls=true
+      - traefik.http.services.categorizabrasil.loadbalancer.server.port=3000
+    env_file:
+      - ../.env
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-http://localhost:8055}
+      NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-http://localhost:8055}
+      DIRECTUS_INTERNAL_URL: http://directus:8055
+    depends_on:
+      directus:
+        condition: service_started
+    container_name: site-categoriza-prod

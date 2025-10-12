@@ -37,8 +37,6 @@ function mapFromCms(data: HomeCmsResponse): HomePageContent {
 export async function getHomePageContent(): Promise<HomePageContent> {
   const response = await fetchCmsData<unknown>(HOME_ENDPOINT);
 
-  console.log("Fetched home page data:", response);
-
   if (!response) {
     return homeFallback;
   }
@@ -49,8 +47,6 @@ export async function getHomePageContent(): Promise<HomePageContent> {
     console.error("[cms] Erro ao validar payload da página inicial:", parsed.error.flatten());
     return homeFallback;
   }
-
-  console.log(homeFallback);
 
   const content = mapFromCms(parsed.data);
 

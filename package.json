@@ -2,13 +2,20 @@
   "name": "site-categoriza",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "infra"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "monolith:dev": "npm run dev -w infra",
+    "monolith:dev:down": "npm run dev:down -w infra",
+    "monolith:up": "npm run up -w infra",
+    "monolith:down": "npm run down -w infra"
   },
   "dependencies": {
     "@next/third-parties": "^15.5.4",
