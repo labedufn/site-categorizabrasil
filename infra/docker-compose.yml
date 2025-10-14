@@ -10,6 +10,8 @@ services:
       POSTGRES_DB: ${DB_DATABASE}
     volumes:
       - ../cms/data/database:/var/lib/postgresql/data
+    networks:
+      - categorizanet
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" -h localhost"]
       interval: 10s
@@ -20,6 +22,8 @@ services:
   directus-cache:
     image: redis:6
     restart: unless-stopped
+    networks:
+      - categorizanet
     healthcheck:
       test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
       interval: 10s
@@ -31,6 +35,8 @@ services:
     image: minio/minio:latest
     restart: unless-stopped
     command: server /data --console-address ":9001"
+    networks:
+      - categorizanet
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
@@ -51,6 +57,8 @@ services:
     depends_on:
       directus-minio:
         condition: service_started
+    networks:
+      - categorizanet
     restart: "no"
     entrypoint: >
       /bin/sh -c "
@@ -73,14 +81,14 @@ services:
         condition: service_completed_successfully
     ports:
       - "8055:8055"
+    networks:
+      - categorizanet
     environment:
-      # Segurança / URL
       SECRET: ${DIRECTUS_SECRET}
       PUBLIC_URL: ${PUBLIC_URL}
       TRUST_PROXY: "true"
       WEBSOCKETS_ENABLED: "true"
 
-      # Banco
       DB_CLIENT: "pg"
       DB_HOST: directus-database
       DB_PORT: "5432"
@@ -92,42 +100,12 @@ services:
       CACHE_AUTO_PURGE: ${CACHE_AUTO_PURGE}
       CACHE_STORE: "redis"
       REDIS: "redis://directus-cache:6379"
-
-      # Admin bootstrap (remover depois que criar o usuário)
+      
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
 
-      # CORS
       CORS_ENABLED: "true"
       CORS_ORIGIN: ${CORS_ORIGIN}
-
-      # Cookies (produção)
-      REFRESH_TOKEN_COOKIE_SECURE: "true"
-      REFRESH_TOKEN_COOKIE_SAME_SITE: "lax"
-      REFRESH_TOKEN_COOKIE_DOMAIN: "painel.categorizabrasil.com.br"
-      SESSION_COOKIE_SECURE: "true"
-      SESSION_COOKIE_SAME_SITE: "lax"
-      SESSION_COOKIE_DOMAIN: "painel.categorizabrasil.com.br"
-
-      # Extensões
-      EXTENSIONS_PATH: "./extensions"
-      EXTENSIONS_AUTO_RELOAD: "false"
-
-      # CSP mínima
-      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "https://*.youtube.com,https://*.vimeo.com,https://*.wistia.net,https://*.loom.com"
-
-      # Armazenamento (MinIO)
-      STORAGE_LOCATIONS: "s3"
-      STORAGE_DEFAULT: "s3"
-      STORAGE_S3_DRIVER: "s3"
-      STORAGE_S3_BUCKET: ${STORAGE_S3_BUCKET}
-      STORAGE_S3_KEY: ${STORAGE_S3_KEY}
-      STORAGE_S3_SECRET: ${STORAGE_S3_SECRET}
-      STORAGE_S3_ENDPOINT: "http://directus-minio:9000"
-      STORAGE_S3_REGION: "us-east-1"
-      STORAGE_S3_FORCE_PATH_STYLE: "true"
-      STORAGE_S3_ROOT: "uploads"
-      STORAGE_S3_PUBLIC_URL: ${STORAGE_S3_PUBLIC_URL}
     volumes:
       - ../cms/extensions:/directus/extensions
 
@@ -135,15 +113,6 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-      args:
-        NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL}
-        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
-        DIRECTUS_INTERNAL_URL: ${DIRECTUS_INTERNAL_URL}
-        DIRECTUS_STATIC_TOKEN: ${DIRECTUS_STATIC_TOKEN}
-        API_TOKEN: ${API_TOKEN}
-        API_TIMEOUT_MS: ${API_TIMEOUT_MS}
-        NEXT_PUBLIC_MAPBOX_API_KEY: ${NEXT_PUBLIC_MAPBOX_API_KEY}
-        NEXT_PUBLIC_MAPBOX_STYLE: ${NEXT_PUBLIC_MAPBOX_STYLE}
     environment:
       NODE_ENV: ${NODE_ENV}
       NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL}
@@ -160,3 +129,9 @@ services:
     ports:
       - "3001:3000"
     container_name: site-categoriza-prod
+    networks:
+      - categorizanet
+
+networks:
+  categorizanet:
+    driver: bridge
