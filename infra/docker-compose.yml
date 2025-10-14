@@ -1,18 +1,24 @@
+name: categorizabrasil-stack
+
+env_file:
+  - ../.env
+
 services:
   directus-database:
     image: postgis/postgis:16-master
     restart: unless-stopped
-    volumes:
-      - ../cms/data/database:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DB_USER:-directus}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-directus}
-      POSTGRES_DB: ${DB_DATABASE:-directus}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      # data persistente dentro do CMS
+      - ../cms/data/database:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\" -h localhost"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
       start_period: 30s
 
   directus-cache:
@@ -22,7 +28,7 @@ services:
       test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
       start_period: 30s
 
   directus-minio:
@@ -30,90 +36,39 @@ services:
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     ports:
       - "${MINIO_API_PORT:-9000}:9000"
       - "${MINIO_CONSOLE_PORT:-9001}:9001"
     volumes:
+      # data persistente dentro do CMS
       - ../cms/data/minio:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   directus-minio-setup:
     image: minio/mc:latest
     depends_on:
       directus-minio:
         condition: service_started
+    restart: "no"
     entrypoint: >
       /bin/sh -c "
-        until mc alias set minio http://directus-minio:9000 ${MINIO_ROOT_USER:-minioadmin} ${MINIO_ROOT_PASSWORD:-minioadmin}; do
+        until mc alias set minio http://directus-minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}; do
           sleep 2;
         done;
-        mc mb -p minio/${MINIO_BUCKET:-directus} || true;
+        mc mb -p minio/${MINIO_BUCKET} || true;
         exit 0;
       "
-    restart: "no"
 
   directus:
     image: directus/directus:11.12.0
     restart: unless-stopped
-    ports:
-      - "8055:8055"
-    environment:
-      SECRET: ${DIRECTUS_SECRET:-6116487b-cda1-52c2-b5b5-c8022c45e263}
-
-      DB_CLIENT: "pg"
-      DB_HOST: ${DB_HOST:-directus-database}
-      DB_PORT: ${DB_PORT:-5432}
-      DB_DATABASE: ${DB_DATABASE:-directus}
-      DB_USER: ${DB_USER:-directus}
-      DB_PASSWORD: ${DB_PASSWORD:-directus}
-
-      CACHE_ENABLED: ${CACHE_ENABLED:-true}
-      CACHE_AUTO_PURGE: ${CACHE_AUTO_PURGE:-true}
-      CACHE_STORE: ${CACHE_STORE:-redis}
-      REDIS: ${REDIS_URL:-redis://directus-cache:6379}
-
-      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-d1r3ctu5}
-
-      WEBSOCKETS_ENABLED: ${WEBSOCKETS_ENABLED:-true}
-
-      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8055}
-
-      CORS_ENABLED: ${CORS_ENABLED:-true}
-      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
-
-      REFRESH_TOKEN_COOKIE_SECURE: ${REFRESH_TOKEN_COOKIE_SECURE:-false}
-      REFRESH_TOKEN_COOKIE_SAME_SITE: ${REFRESH_TOKEN_COOKIE_SAME_SITE:-lax}
-      REFRESH_TOKEN_COOKIE_DOMAIN: ${REFRESH_TOKEN_COOKIE_DOMAIN:-localhost}
-
-      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-false}
-      SESSION_COOKIE_SAME_SITE: ${SESSION_COOKIE_SAME_SITE:-lax}
-      SESSION_COOKIE_DOMAIN: ${SESSION_COOKIE_DOMAIN:-localhost}
-
-      EXTENSIONS_PATH: ${EXTENSIONS_PATH:-./extensions}
-      EXTENSIONS_AUTO_RELOAD: ${EXTENSIONS_AUTO_RELOAD:-true}
-
-      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: ${CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC:-http://localhost:3000,http://localhost:4321,http://localhost:5173,https://*.youtube.com,https://*.vimeo.com,https://*.wistia.net,https://*.loom.com}
-
-      EMAIL_TRANSPORT: ${EMAIL_TRANSPORT:-}
-      EMAIL_FROM: ${EMAIL_FROM:-}
-      EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-}
-      EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-}
-      EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-}
-      EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
-
-      STORAGE_LOCATIONS: ${STORAGE_LOCATIONS:-s3}
-      STORAGE_DEFAULT: ${STORAGE_DEFAULT:-s3}
-      STORAGE_S3_DRIVER: ${STORAGE_S3_DRIVER:-s3}
-      STORAGE_S3_BUCKET: ${STORAGE_S3_BUCKET:-directus}
-      STORAGE_S3_KEY: ${STORAGE_S3_KEY:-minioadmin}
-      STORAGE_S3_SECRET: ${STORAGE_S3_SECRET:-minioadmin}
-      STORAGE_S3_ENDPOINT: ${STORAGE_S3_ENDPOINT:-http://directus-minio:9000}
-      STORAGE_S3_REGION: ${STORAGE_S3_REGION:-us-east-1}
-      STORAGE_S3_FORCE_PATH_STYLE: ${STORAGE_S3_FORCE_PATH_STYLE:-true}
-      STORAGE_S3_ROOT: ${STORAGE_S3_ROOT:-uploads}
-      STORAGE_S3_PUBLIC_URL: ${STORAGE_S3_PUBLIC_URL:-http://localhost:8055/assets}
     depends_on:
       directus-database:
         condition: service_healthy
@@ -121,6 +76,10 @@ services:
         condition: service_healthy
       directus-minio-setup:
         condition: service_completed_successfully
+    ports:
+      - "8055:8055"
+    env_file:
+      - ../.env
     volumes:
       - ../cms/extensions:/directus/extensions
 
@@ -129,33 +88,31 @@ services:
       context: ..
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-http://localhost:8055}
-        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8055}
-        DIRECTUS_INTERNAL_URL: ${DIRECTUS_INTERNAL_URL:-http://directus:8055}
-        DIRECTUS_STATIC_TOKEN: ${DIRECTUS_STATIC_TOKEN:-}
-        API_TOKEN: ${API_TOKEN:-}
-        API_TIMEOUT_MS: ${API_TIMEOUT_MS:-10000}
-        NEXT_PUBLIC_MAPBOX_API_KEY: ${NEXT_PUBLIC_MAPBOX_API_KEY:-}
-        NEXT_PUBLIC_MAPBOX_STYLE: ${NEXT_PUBLIC_MAPBOX_STYLE:-}
-    ports:
-      - "3001:3000"
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.categorizabrasil.rule=Host(`categorizarbrasil.com.br`,`www.categorizarbrasil.com.br`)
-      - traefik.http.routers.categorizabrasil.entrypoints=websecure
-      - traefik.http.routers.categorizabrasil.tls=true
-      - traefik.http.services.categorizabrasil.loadbalancer.server.port=3000
+        NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL}
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+        DIRECTUS_INTERNAL_URL: ${DIRECTUS_INTERNAL_URL}
+        DIRECTUS_STATIC_TOKEN: ${DIRECTUS_STATIC_TOKEN}
+        API_TOKEN: ${API_TOKEN}
+        API_TIMEOUT_MS: ${API_TIMEOUT_MS}
+        NEXT_PUBLIC_MAPBOX_API_KEY: ${NEXT_PUBLIC_MAPBOX_API_KEY}
+        NEXT_PUBLIC_MAPBOX_STYLE: ${NEXT_PUBLIC_MAPBOX_STYLE}
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
-      NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-http://localhost:8055}
-      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8055}
-      DIRECTUS_INTERNAL_URL: ${DIRECTUS_INTERNAL_URL:-http://directus:8055}
-      DIRECTUS_STATIC_TOKEN: ${DIRECTUS_STATIC_TOKEN:-}
-      API_TOKEN: ${API_TOKEN:-}
-      API_TIMEOUT_MS: ${API_TIMEOUT_MS:-10000}
-      NEXT_PUBLIC_MAPBOX_API_KEY: ${NEXT_PUBLIC_MAPBOX_API_KEY:-}
-      NEXT_PUBLIC_MAPBOX_STYLE: ${NEXT_PUBLIC_MAPBOX_STYLE:-}
+      NODE_ENV: ${NODE_ENV}
+      NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL}
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+      DIRECTUS_INTERNAL_URL: ${DIRECTUS_INTERNAL_URL}
+      DIRECTUS_STATIC_TOKEN: ${DIRECTUS_STATIC_TOKEN}
+      API_TOKEN: ${API_TOKEN}
+      API_TIMEOUT_MS: ${API_TIMEOUT_MS}
+      NEXT_PUBLIC_MAPBOX_API_KEY: ${NEXT_PUBLIC_MAPBOX_API_KEY}
+      NEXT_PUBLIC_MAPBOX_STYLE: ${NEXT_PUBLIC_MAPBOX_STYLE}
     depends_on:
       directus:
         condition: service_started
+    ports:
+      - "3001:3000"
     container_name: site-categoriza-prod
+
+volumes:
+  directus_db:
+  minio_data:
