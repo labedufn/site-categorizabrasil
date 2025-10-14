@@ -27,18 +27,46 @@ services:
       start_interval: 5s
       start_period: 30s
 
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    ports:
+      - ${MINIO_API_PORT}:9000
+      - ${MINIO_CONSOLE_PORT}:9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./data/minio:/data
+    stop_grace_period: 30s
+
+  minio-setup:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+        until mc alias set minio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}; do
+          sleep 2;
+        done;
+        mc mb -p minio/${MINIO_BUCKET} || true;
+        exit 0;
+      "
+
   directus:
     image: directus/directus:11.12.0
     ports:
       - ${DIRECTUS_PORT}:8055
     volumes:
-      - ./uploads:/directus/uploads
       - ./extensions:/directus/extensions
     depends_on:
       database:
         condition: service_healthy
       cache:
         condition: service_healthy
+      minio-setup:
+        condition: service_completed_successfully
     environment:
       SECRET: ${DIRECTUS_SECRET}
 
@@ -83,3 +111,14 @@ services:
       EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT}
       EMAIL_SMTP_USER: ${EMAIL_SMTP_USER}
       EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD}
+
+      STORAGE_LOCATIONS: ${STORAGE_LOCATIONS}
+      STORAGE_S3_DRIVER: ${STORAGE_S3_DRIVER}
+      STORAGE_S3_BUCKET: ${STORAGE_S3_BUCKET}
+      STORAGE_S3_KEY: ${STORAGE_S3_KEY}
+      STORAGE_S3_SECRET: ${STORAGE_S3_SECRET}
+      STORAGE_S3_ENDPOINT: ${STORAGE_S3_ENDPOINT}
+      STORAGE_S3_REGION: ${STORAGE_S3_REGION}
+      STORAGE_S3_FORCE_PATH_STYLE: ${STORAGE_S3_FORCE_PATH_STYLE}
+      STORAGE_S3_ROOT: ${STORAGE_S3_ROOT}
+      STORAGE_S3_PUBLIC_URL: ${STORAGE_S3_PUBLIC_URL}

@@ -13,6 +13,8 @@
 ## Primeiros Passos
 - Copie os arquivos de exemplo e ajuste as variáveis:
   - `cp .env.example .env`
+- Revise especialmente as variáveis do MinIO (`MINIO_*` e `STORAGE_S3_*`) para garantir que o Directus aponte para o bucket desejado.
+- Os arquivos `.env` dentro de `cms/` servem apenas de referência. Sempre rode o Docker Compose apontando para o `.env` da raiz (ex.: `docker compose --env-file ../.env up` dentro de `cms/`).
 - Gere um Access Token estático no Directus depois que o CMS estiver de pé:
   - Acesse `http://localhost:8055`, logue com `ADMIN_EMAIL`/`ADMIN_PASSWORD`.
   - Vá em **Configurações → Tokens de Acesso** e crie um token com as permissões necessárias.
@@ -41,5 +43,26 @@
 - `DB_USER`, `DB_PASSWORD`, `DB_DATABASE`: credenciais do Postgres usado pelo Directus.
 - `ADMIN_EMAIL`, `ADMIN_PASSWORD`: acesso inicial ao painel Directus.
 - `PUBLIC_URL`: URL pública do Directus (usada para gerar links de assets).
-- `STORAGE_LOCAL_ROOT`: caminho interno onde os uploads serão gravados (default `/directus/uploads`).
+- `STORAGE_LOCATIONS` / `STORAGE_DEFAULT`: mantêm `s3` como driver padrão de arquivos.
+- `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`: credenciais do servidor MinIO (usadas também pelo Directus).
+- `MINIO_BUCKET`: bucket onde os uploads do Directus serão armazenados (default `directus`).
+- `STORAGE_S3_ENDPOINT`: endpoint interno para o MinIO (`http://directus-minio:9000` em Docker).
+- `STORAGE_S3_PUBLIC_URL`: base usada pelo Directus para gerar URLs públicas (default `${PUBLIC_URL}/assets`).
 - Variáveis opcionais (`EMAIL_*`, `CONTENT_SECURITY_POLICY_*`, etc.) também podem ser definidas aqui ou no painel do Dokploy.
+
+## Armazenamento de Arquivos (MinIO)
+- O stack agora sobe um servidor MinIO (`minio/minio`) com persistência em `cms/data/minio`.
+- As credenciais padrão são `minioadmin` / `minioadmin`; ajuste `MINIO_ROOT_USER` e `MINIO_ROOT_PASSWORD` no `.env` se precisar endurecer a segurança (lembre-se de atualizar as variáveis `STORAGE_S3_KEY`/`STORAGE_S3_SECRET` em conjunto).
+- O bucket configurado por padrão é `directus` e é criado automaticamente pelo serviço auxiliar `directus-minio-setup`.
+- A UI de administração do MinIO fica exposta em `http://localhost:9001` (porta configurável via `MINIO_CONSOLE_PORT`); o endpoint compatível com S3 fica em `http://localhost:9000`.
+- Em produção certifique-se de expor apenas o que for necessário (ex.: publicar o console atrás de autenticação ou desabilitá-lo) e, se usar HTTPS externo, ajuste `STORAGE_S3_ENDPOINT` / `STORAGE_S3_PUBLIC_URL` para refletirem o domínio público.
+
+## Automação de Backup e Restauração
+- Faça backup local antes de migrar para a VPS:
+  - `./scripts/backup-directus.sh` usa `infra/docker-compose.dev.yml` e o `.env` da raiz por padrão.
+  - Os artefatos são gravados em `backups/<timestamp>/directus-db.sql` e `backups/<timestamp>/minio-data.tar.gz`.
+- Copie os arquivos gerados e o `.env` para a VPS (`scp -r backups/<timestamp> usuario@servidor:/caminho`).
+- Na VPS, restaure executando:
+  - `./scripts/restore-directus.sh backups/<timestamp>/directus-db.sql backups/<timestamp>/minio-data.tar.gz` (o terceiro argumento opcional permite apontar para outro `.env`).
+  - O script usa `infra/docker-compose.yml`, reinicia o MinIO com o dump restaurado e importa o banco antes de subir Directus + app.
+- Caso não tenha uploads para migrar, passe `-` no segundo argumento da restauração e apenas o banco será importado.

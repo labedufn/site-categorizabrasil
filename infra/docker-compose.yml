@@ -25,6 +25,34 @@ services:
       retries: 5
       start_period: 30s
 
+  directus-minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - ../cms/data/minio:/data
+
+  directus-minio-setup:
+    image: minio/mc:latest
+    depends_on:
+      directus-minio:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+        until mc alias set minio http://directus-minio:9000 ${MINIO_ROOT_USER:-minioadmin} ${MINIO_ROOT_PASSWORD:-minioadmin}; do
+          sleep 2;
+        done;
+        mc mb -p minio/${MINIO_BUCKET:-directus} || true;
+        exit 0;
+      "
+    restart: "no"
+
   directus:
     image: directus/directus:11.12.0
     restart: unless-stopped
@@ -75,18 +103,25 @@ services:
       EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-}
       EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
 
-      STORAGE_LOCATIONS: ${STORAGE_LOCATIONS:-local}
-      STORAGE_DEFAULT: ${STORAGE_DEFAULT:-local}
-      STORAGE_LOCAL_DRIVER: ${STORAGE_LOCAL_DRIVER:-local}
-      STORAGE_LOCAL_ROOT: ${STORAGE_LOCAL_ROOT:-/directus/uploads}
-      STORAGE_LOCAL_PUBLIC_URL: ${STORAGE_LOCAL_PUBLIC_URL:-http://localhost:8055/assets}
+      STORAGE_LOCATIONS: ${STORAGE_LOCATIONS:-s3}
+      STORAGE_DEFAULT: ${STORAGE_DEFAULT:-s3}
+      STORAGE_S3_DRIVER: ${STORAGE_S3_DRIVER:-s3}
+      STORAGE_S3_BUCKET: ${STORAGE_S3_BUCKET:-directus}
+      STORAGE_S3_KEY: ${STORAGE_S3_KEY:-minioadmin}
+      STORAGE_S3_SECRET: ${STORAGE_S3_SECRET:-minioadmin}
+      STORAGE_S3_ENDPOINT: ${STORAGE_S3_ENDPOINT:-http://directus-minio:9000}
+      STORAGE_S3_REGION: ${STORAGE_S3_REGION:-us-east-1}
+      STORAGE_S3_FORCE_PATH_STYLE: ${STORAGE_S3_FORCE_PATH_STYLE:-true}
+      STORAGE_S3_ROOT: ${STORAGE_S3_ROOT:-uploads}
+      STORAGE_S3_PUBLIC_URL: ${STORAGE_S3_PUBLIC_URL:-http://localhost:8055/assets}
     depends_on:
       directus-database:
         condition: service_healthy
       directus-cache:
         condition: service_healthy
+      directus-minio-setup:
+        condition: service_completed_successfully
     volumes:
-      - ../cms/uploads:/directus/uploads
       - ../cms/extensions:/directus/extensions
 
   app:
