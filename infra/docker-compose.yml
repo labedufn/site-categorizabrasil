@@ -3,7 +3,7 @@ name: categorizabrasil-stack
 services:
   directus-database:
     image: postgis/postgis:16-master
-    restart: unless-stopped
+    restart: ${RESTART_POLICY:-unless-stopped}
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -21,7 +21,7 @@ services:
 
   directus-cache:
     image: redis:6
-    restart: unless-stopped
+    restart: ${RESTART_POLICY:-unless-stopped}
     networks:
       - categorizanet
     healthcheck:
@@ -33,7 +33,7 @@ services:
 
   directus-minio:
     image: minio/minio:latest
-    restart: unless-stopped
+    restart: ${RESTART_POLICY:-unless-stopped}
     command: server /data --console-address ":9001"
     networks:
       - categorizanet
@@ -71,7 +71,7 @@ services:
 
   directus:
     image: directus/directus:11.12.0
-    restart: unless-stopped
+    restart: ${RESTART_POLICY:-unless-stopped}
     depends_on:
       directus-database:
         condition: service_healthy
@@ -113,6 +113,7 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
+    restart: ${RESTART_POLICY:-unless-stopped}
     environment:
       NODE_ENV: ${NODE_ENV}
       NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL}
