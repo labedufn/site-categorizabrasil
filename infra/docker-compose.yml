@@ -160,6 +160,7 @@ services:
       - traefik.http.routers.categorizabrasil.entrypoints=websecure
       - traefik.http.routers.categorizabrasil.tls=true
       - traefik.http.services.categorizabrasil.loadbalancer.server.port=3000
+      - traefik.docker.network=dokploy-network
     container_name: site-categoriza-prod
     networks:
       - categorizanet
