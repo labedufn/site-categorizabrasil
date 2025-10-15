@@ -1,0 +1,8 @@
+node_modules
+.next
+.git
+backups
+cms/data/database
+cms/data/minio
+cms/uploads
+*.log
