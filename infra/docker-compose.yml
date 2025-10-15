@@ -86,6 +86,7 @@ services:
     environment:
       SECRET: ${DIRECTUS_SECRET}
       PUBLIC_URL: ${PUBLIC_URL}
+      STORAGE_S3_PUBLIC_URL: ${STORAGE_S3_PUBLIC_URL}
       TRUST_PROXY: "true"
       WEBSOCKETS_ENABLED: "true"
 
