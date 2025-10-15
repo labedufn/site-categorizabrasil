@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE}
     volumes:
-      - ../cms/data/database:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     networks:
       - categorizanet
     healthcheck:
@@ -44,7 +44,7 @@ services:
       - "${MINIO_API_PORT:-9000}:9000"
       - "${MINIO_CONSOLE_PORT:-9001}:9001"
     volumes:
-      - ../cms/data/minio:/data
+      - minio_data:/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
       interval: 10s
@@ -101,7 +101,7 @@ services:
       CACHE_AUTO_PURGE: ${CACHE_AUTO_PURGE}
       CACHE_STORE: "redis"
       REDIS: "redis://directus-cache:6379"
-      
+
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
 
@@ -125,7 +125,7 @@ services:
       STORAGE_S3_FORCE_PATH_STYLE: "true"
 
     volumes:
-      - ../cms/extensions:/directus/extensions
+      - ../cms/extensions:/directus/extensions  
 
   app:
     build:
@@ -154,3 +154,7 @@ services:
 networks:
   categorizanet:
     driver: bridge
+
+volumes:
+  pgdata:
+  minio_data:
