@@ -66,3 +66,13 @@
   - `./scripts/restore-directus.sh backups/<timestamp>/directus-db.sql backups/<timestamp>/minio-data.tar.gz` (o terceiro argumento opcional permite apontar para outro `.env`).
   - O script usa `infra/docker-compose.yml`, reinicia o MinIO com o dump restaurado e importa o banco antes de subir Directus + app.
 - Caso não tenha uploads para migrar, passe `-` no segundo argumento da restauração e apenas o banco será importado.
+- Em ambientes já em produção (por exemplo, stacks gerenciados pelo Dokploy), use `scripts/restore_directus_full.sh`. Ele aceita variáveis para apontar diretamente aos containers que já estão rodando, sem precisar derrubar o stack inteiro. Exemplo real na VPS:
+  ```bash
+  DIRECTUS_C="categorizabrasilsite-web-yt8gc6-directus-1" \
+  DB_C="categorizabrasilsite-web-yt8gc6-directus-database-1" \
+  MINIO_C="categorizabrasilsite-web-yt8gc6-directus-minio-1" \
+  SQL_DUMP="/root/directus-backup/directus-db.sql" \
+  MINIO_TAR="/root/directus-backup/minio-data.tar.gz" \
+  /root/restore_directus_full.sh
+  ```
+  O script pausa o Directus, limpa o schema `public`, importa o dump, restaura os dados do MinIO no volume existente e liga novamente o serviço validando a saúde em seguida. Ajuste os nomes dos containers e caminhos conforme o ambiente.
