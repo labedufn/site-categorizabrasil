@@ -17,7 +17,17 @@ function getClientIp(req: NextRequest) {
     return forwardedFor.split(",")[0]?.trim();
   }
 
-  return req.ip ?? undefined;
+  const realIp = req.headers.get("x-real-ip");
+  if (realIp) {
+    return realIp.trim();
+  }
+
+  const cfConnectingIp = req.headers.get("cf-connecting-ip");
+  if (cfConnectingIp) {
+    return cfConnectingIp.trim();
+  }
+
+  return undefined;
 }
 
 export async function POST(req: NextRequest) {
