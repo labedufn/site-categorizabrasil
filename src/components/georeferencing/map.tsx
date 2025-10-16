@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Tooltip } from "../ui/tooltip";
+import { useRecaptcha } from "@/components/recaptcha/recaptcha-provider";
 
 type MarkerType = "A" | "B" | "C";
 
@@ -33,38 +34,72 @@ export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapP
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const { status: recaptchaStatus, refresh: refreshRecaptcha } = useRecaptcha();
 
-  useEffect(() => {
-    if (!mapRef.current && mapContainerRef.current) {
-      mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY ?? "";
+  const recaptchaReady = recaptchaStatus === "verified";
+  const recaptchaError = recaptchaStatus === "error";
 
-      mapRef.current = new mapboxgl.Map({
-        container: mapContainerRef.current,
-        style: process.env.NEXT_PUBLIC_MAPBOX_STYLE ?? "mapbox://styles/mapbox/streets-v11",
-        center: [centerLng, centerLat],
-        zoom: zoom,
-        attributionControl: false,
-        interactive: true,
-        projection: "mercator",
-      });
+  const overlayContent = useMemo(() => {
+    if (!recaptchaReady) {
+      if (recaptchaError) {
+        return {
+          message: "Não foi possível validar a sessão de segurança.",
+          actionLabel: "Tentar novamente",
+        };
+      }
 
-      mapRef.current.addControl(new mapboxgl.NavigationControl(), "top-left");
-
-      mapRef.current.on("load", () => {
-        setIsMapLoaded(true); // O mapa carregou
-      });
+      return {
+        message: "Validando proteção reCAPTCHA...",
+        actionLabel: null,
+      };
     }
 
+    if (!isMapLoaded) {
+      return {
+        message: "Carregando mapa...",
+        actionLabel: null,
+      };
+    }
+
+    return null;
+  }, [isMapLoaded, recaptchaError, recaptchaReady]);
+
+  useEffect(() => {
+    if (!recaptchaReady || mapRef.current || !mapContainerRef.current) {
+      return;
+    }
+
+    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY ?? "";
+
+    mapRef.current = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: process.env.NEXT_PUBLIC_MAPBOX_STYLE ?? "mapbox://styles/mapbox/streets-v11",
+      center: [centerLng, centerLat],
+      zoom: zoom,
+      attributionControl: false,
+      interactive: true,
+      projection: "mercator",
+    });
+
+    mapRef.current.addControl(new mapboxgl.NavigationControl(), "top-left");
+
+    mapRef.current.on("load", () => {
+      setIsMapLoaded(true);
+    });
+
     return () => {
+      mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY ?? "";
+
       if (mapRef.current) {
         mapRef.current.remove();
         mapRef.current = null;
       }
+      setIsMapLoaded(false);
     };
-  }, [centerLat, centerLng, zoom]);
+  }, [centerLat, centerLng, zoom, recaptchaReady]);
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!recaptchaReady || !mapRef.current) return;
 
     mapRef.current
       .getCanvas()
@@ -96,16 +131,29 @@ export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapP
 
       new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(mapRef.current!);
     });
-  }, [markers, onMarkerClick]);
+  }, [markers, onMarkerClick, recaptchaReady]);
 
   return (
     <div className="h-full w-full rounded-2xl overflow-hidden relative">
-      {!isMapLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 animate-pulse">
-          <span className="text-gray-500">Carregando mapa...</span>
+      {overlayContent && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gray-200/90 text-gray-700 text-center px-6">
+          <span>{overlayContent.message}</span>
+          {overlayContent.actionLabel ? (
+            <button
+              type="button"
+              className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 transition-colors"
+              onClick={() => {
+                refreshRecaptcha().catch((error) => {
+                  console.error("[recaptcha] manual refresh failed", error);
+                });
+              }}
+            >
+              {overlayContent.actionLabel}
+            </button>
+          ) : null}
         </div>
       )}
-      <div ref={mapContainerRef} className={`h-full w-full ${!isMapLoaded ? "opacity-0" : ""}`} />
+      <div ref={mapContainerRef} className={`h-full w-full ${overlayContent ? "opacity-0 pointer-events-none" : ""}`} />
     </div>
   );
 }
