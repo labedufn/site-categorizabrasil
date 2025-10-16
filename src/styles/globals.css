@@ -40,11 +40,5 @@ code {
 }
 
 .grecaptcha-badge {
-  position: fixed;
-  top: auto !important;
-  bottom: 1rem !important;
-  left: 1rem !important;
-  right: auto !important;
-  transform: none !important;
   z-index: 9999 !important;
 }
