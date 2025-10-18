@@ -22,7 +22,7 @@ export default async function English() {
       <LayoutGeneral>
         <LayoutInterno>
           <ImageHeader
-            src="/background_english.webp"
+            src="/images/backgrounds/background_english.webp"
             title="About Categoriza Brasil"
             subtitle="Categorization of Food Services"
           />

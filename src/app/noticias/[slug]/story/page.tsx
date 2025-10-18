@@ -19,7 +19,7 @@ export default async function Story({ params }: { params: Promise<{ slug: string
       <StoryGenerator
         title={newsData.title}
         date={newsData.publishedAtLabel}
-        imageSrc={newsData.heroImage || "/background_news.webp"}
+        imageSrc={newsData.heroImage || "/images/backgrounds/background_news.webp"}
       />
     </div>
   );

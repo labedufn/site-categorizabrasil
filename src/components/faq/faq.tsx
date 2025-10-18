@@ -38,7 +38,7 @@ export function Faq({ items }: FaqProps) {
         }}
       >
         <Image
-          src="/background_faq.webp"
+          src="/images/backgrounds/background_faq.webp"
           sizes="100vw"
           fill
           alt="Background FAQ"

@@ -17,7 +17,7 @@ export default async function Noticias() {
   const breadcrumbItems = [{ label: "Início", href: "/" }, { label: "Notícias" }];
 
   const newsItems = newsPageData.map((news) => ({
-    imageSrc: news.heroImage || "/background_news.webp",
+    imageSrc: news.heroImage || "/images/backgrounds/background_news.webp",
     title: news.title,
     publishedAt: news.publishedAt,
     publishedAtLabel: news.publishedAtLabel,
@@ -28,7 +28,11 @@ export default async function Noticias() {
     <>
       <LayoutGeneral>
         <LayoutInterno>
-          <ImageHeader src="/background_news.webp" title="Notícias" subtitle="Fique por dentro das novidades" />
+          <ImageHeader
+            src="/images/backgrounds/background_news.webp"
+            title="Notícias"
+            subtitle="Fique por dentro das novidades"
+          />
           <NewsSection breadcrumbItems={breadcrumbItems} initialNewsItems={newsItems} />
         </LayoutInterno>
       </LayoutGeneral>

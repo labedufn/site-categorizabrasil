@@ -36,7 +36,7 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
         <div style={{ position: "relative", width: "100%", clipPath: "inset(0 0 0 0)" }}>
           <div style={{ position: "fixed", height: "100%", width: "100%", left: "0", top: "0" }}>
             <Image
-              src="/background_testimonial.webp"
+              src="/images/backgrounds/background_testimonial.webp"
               sizes="100vw"
               alt="Background"
               fill
@@ -45,7 +45,7 @@ export function CustomerOpinion({ reviews }: CustomerOpinionProps) {
             />
           </div>
           <Image
-            src="/dot.webp"
+            src="/images/patterns/dot.webp"
             sizes="100vh"
             alt="Dots Overlay"
             fill

@@ -28,7 +28,7 @@ export default async function Articles() {
       <LayoutGeneral>
         <LayoutInterno>
           <ImageHeader
-            src="/background_publi.webp"
+            src="/images/backgrounds/background_publi.webp"
             title="Artigos"
             subtitle="Aqui você encontra artigos sobre o Categoriza Brasil"
           />

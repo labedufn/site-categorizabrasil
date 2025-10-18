@@ -30,7 +30,7 @@ export default async function Documentos() {
       <LayoutGeneral>
         <LayoutInterno>
           <ImageHeader
-            src="/background_documents.webp"
+            src="/images/backgrounds/background_documents.webp"
             title="Documentos Úteis"
             subtitle="Documentos úteis para aprimorar o conhecimento sobre a categorização."
           />

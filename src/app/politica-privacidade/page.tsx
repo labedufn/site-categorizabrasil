@@ -16,7 +16,7 @@ export default async function PoliticaPrivacidade() {
       <LayoutGeneral>
         <LayoutInterno>
           <ImageHeader
-            src="/privacity.webp"
+            src="/images/backgrounds/privacity.webp"
             title="Política de Privacidade"
             subtitle="Política de Privacidade e informações aos usuários"
           />

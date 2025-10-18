@@ -67,7 +67,7 @@ export const StoryGenerator = forwardRef<StoryGeneratorHandle, StoryGeneratorPro
             justify-center
           "
           >
-            <Logo.white className="w-[330px] h-auto" />
+            <Logo.white className="w-[330px] h-auto" sizes="330px" priority />
           </div>
 
           <div className="w-[780px]">

@@ -27,7 +27,7 @@ export function Navbar({ instagram, whatsapp, youtubeChannel }: SocialData) {
         <LayoutDefault className="mx-auto w-full">
           <nav className="flex gap-x-5 justify-between items-center">
             <Link href="/">
-              <Logo.default className="w-28 h-auto" />
+              <Logo.default className="w-28 h-auto" priority sizes="112px" />
             </Link>
             <NavMenu isOpen={isOpen} instagram={instagram} whatsapp={whatsapp} youtubeChannel={youtubeChannel} />
             <div className="flex items-center lg:hidden">

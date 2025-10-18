@@ -54,7 +54,7 @@ export default async function Noticia({ params }: Props) {
         <NewsContent
           title={news.title}
           date={news.publishedAtLabel}
-          imageSrc={news.heroImage || "/background_news.webp"}
+          imageSrc={news.heroImage || "/images/backgrounds/background_news.webp"}
           content={news.body}
           imagesNews={news.gallery}
         />

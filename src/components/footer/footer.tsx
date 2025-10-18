@@ -9,12 +9,12 @@ import Link from "next/link";
 
 export function Footer({ instagram, whatsapp, youtubeChannel }: SocialData) {
   return (
-    <footer className="relative bg-[url('/background_footer.svg')] bg-cover bg-center bg-no-repeat">
+    <footer className="relative bg-[url('/images/backgrounds/background_footer.svg')] bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-primary/70" />
       <LayoutDefault className="relative mx-auto space-y-8 py-16 lg:space-y-16 ">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/">
-            <Logo.white className="w-32 h-auto sm:w-40 mb-8 sm:mb-0" />
+            <Logo.white className="w-32 h-auto sm:w-40 mb-8 sm:mb-0" sizes="(min-width: 640px) 160px, 128px" />
           </Link>
           <SocialLinks instagram={instagram} whatsapp={whatsapp} youtubeChannel={youtubeChannel} />
         </div>

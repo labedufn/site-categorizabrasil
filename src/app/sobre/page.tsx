@@ -22,7 +22,7 @@ export default async function Sobre() {
       <LayoutGeneral>
         <LayoutInterno>
           <ImageHeader
-            src="/background_about.webp"
+            src="/images/backgrounds/background_about.webp"
             title="Sobre o Categoriza Brasil"
             subtitle="Conheça mais sobre o projeto"
           />

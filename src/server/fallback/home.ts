@@ -5,7 +5,7 @@ export const homeFallback: HomePageContent = {
   whatsapp: "https://api.whatsapp.com/message/A553UPCS3K2MI1?autoload=1&app_absent=0",
   youtubeChannel: "https://www.youtube.com/@categorizabrasil",
   youtubeVideoLink: "https://www.youtube.com/watch?v=jmlwEbOQ5K4",
-  logos: [{ imgSrc: "/logo_labed.svg", name: "Categoriza Brasil" }],
+  logos: [{ imgSrc: "/images/logos/logo_labed.svg", name: "Categoriza Brasil" }],
   reviews: [
     {
       name: "Equipe Técnica Categoriza",

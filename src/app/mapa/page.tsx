@@ -31,7 +31,11 @@ export default async function Georreferenciamento() {
     phone: item.contato,
     website: item.site,
     categoryIconUrl:
-      item.categoria === MarkerType.A ? "/selo-a.svg" : item.categoria === MarkerType.B ? "/selo-b.svg" : "/selo-c.svg",
+      item.categoria === MarkerType.A
+        ? "/images/seals/selo-a.svg"
+        : item.categoria === MarkerType.B
+          ? "/images/seals/selo-b.svg"
+          : "/images/seals/selo-c.svg",
     imageUrl: item.fotoEstabelecimento,
     city: item.cidadeEstado,
   }));
@@ -41,7 +45,7 @@ export default async function Georreferenciamento() {
       <LayoutGeneral>
         <LayoutInterno>
           <ImageHeader
-            src="/background_georef.webp"
+            src="/images/backgrounds/background_georef.webp"
             title="Georreferenciamento"
             subtitle="Busque os estabelecimentos geolocalizados categorizados"
           />

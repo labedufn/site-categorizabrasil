@@ -25,9 +25,9 @@ interface MapProps {
 }
 
 const markerIcons: Record<MarkerType, string> = {
-  A: "/selo-a.svg",
-  B: "/selo-b.svg",
-  C: "/selo-c.svg",
+  A: "/images/seals/selo-a.svg",
+  B: "/images/seals/selo-b.svg",
+  C: "/images/seals/selo-c.svg",
 };
 
 export function Map({ centerLat, centerLng, zoom, markers, onMarkerClick }: MapProps) {

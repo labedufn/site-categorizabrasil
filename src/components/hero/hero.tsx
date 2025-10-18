@@ -17,7 +17,14 @@ export const Hero = () => {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="absolute inset-0"
       >
-        <Image src="/background_hero.webp" sizes="100vw" fill alt="Background" className="object-cover" priority />
+        <Image
+          src="/images/backgrounds/background_hero.webp"
+          sizes="100vw"
+          fill
+          alt="Background"
+          className="object-cover"
+          priority
+        />
       </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-white/60" />
@@ -26,7 +33,7 @@ export const Hero = () => {
       <div className="relative z-10 pb-1">
         <div className="py-16 mx-auto max-w-screen-xl px-6 lg:px-0 lg:py-20">
           <div className="flex md:justify-center mb-4 z-10">
-            <Image src="/selos.svg" alt="Selos" width={120} height={120} unoptimized priority />
+            <Image src="/images/seals/selos.svg" alt="Selos" width={120} height={120} unoptimized priority />
           </div>
           <HeroHeader />
           <div className="flex items-center sm:justify-center">
