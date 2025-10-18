@@ -15,17 +15,8 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="absolute inset-0"
-      >
-        <Image
-          src="/images/backgrounds/background_hero.webp"
-          sizes="100vw"
-          fill
-          alt="Background"
-          className="object-cover"
-          priority
-        />
-      </motion.div>
+        className="absolute inset-0 bg-[url('/images/backgrounds/background_hero.webp')] bg-cover bg-center bg-no-repeat bg-fixed"
+      />
 
       <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-white/60" />
       <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-b from-transparent to-white" />
